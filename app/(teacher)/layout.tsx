@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { LogOut } from 'lucide-react';
+import { LogOut, UserRound } from 'lucide-react';
 import { requireCompletedTeacherContext } from '@/lib/auth';
 import { getCurriculumContext } from '@/lib/v1';
 import { TeacherNav } from '@/components/teacher/TeacherNav';
@@ -33,9 +33,9 @@ export default async function TeacherLayout({ children }: Readonly<{ children: R
         </Link>
 
         <div className="sidebar-teacher">
-          <div className="avatar">👨🏻‍🏫</div>
+          <div className="avatar" aria-hidden="true"><UserRound size={18} /></div>
           <div>
-            <strong>{teacherName}</strong>
+            <strong><bdi>{teacherName}</bdi></strong>
             <span>{context.class_name || gradeName}</span>
           </div>
         </div>
@@ -47,7 +47,7 @@ export default async function TeacherLayout({ children }: Readonly<{ children: R
           <div>{gradeName}</div>
           <div>السنة الدراسية <bdi dir="ltr" className="ltr-isolate">{academicYear}</bdi></div>
           <form action="/auth/signout" method="post">
-            <button className="signout-button" type="submit"><LogOut size={16} /> تسجيل الخروج</button>
+            <button className="signout-button" type="submit"><LogOut size={15} /> تسجيل الخروج</button>
           </form>
         </div>
       </aside>
