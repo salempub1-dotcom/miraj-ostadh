@@ -7,6 +7,7 @@ import './lesson-v2.css';
 import './v2-polish.css';
 import './v2-2.css';
 import './planning-v2.css';
+import './planning-progress.css';
 
 export const metadata: Metadata = {
   title: 'معراج الأستاذ',
