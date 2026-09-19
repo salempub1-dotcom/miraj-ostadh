@@ -11,6 +11,7 @@ import './planning-progress.css';
 import './today-v3.css';
 import './today-v3-1.css';
 import './quick-access-v4.css';
+import './quick-access-assets-v4.css';
 
 export const metadata: Metadata = {
   title: 'معراج الأستاذ',
