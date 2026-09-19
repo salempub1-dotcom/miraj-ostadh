@@ -4,6 +4,7 @@ import './flow.css';
 import './teacher-pages.css';
 import './v2.css';
 import './lesson-v2.css';
+import './v2-polish.css';
 
 export const metadata: Metadata = {
   title: 'معراج الأستاذ',
