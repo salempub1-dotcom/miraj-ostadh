@@ -1,0 +1,119 @@
+/* Today V2.2 — screenshot-led finishing pass. Visual only. */
+
+@media (min-width: 981px) {
+  /* Put teacher identity nearest the right sidebar, then notifications, then search. */
+  .today-topbar .teacher-chip:last-child { order: -2; }
+  .today-topbar .icon-chip { order: -1; }
+  .today-topbar .search { order: 0; }
+
+  .today-topbar .teacher-chip:last-child {
+    min-width: 205px;
+    justify-content: flex-start;
+  }
+}
+
+/* Slightly stronger typography and visual hierarchy */
+.today-topbar .search {
+  font-size: 14px;
+  color: #60776d;
+}
+
+.today-topbar .search svg {
+  color: #315f4d;
+}
+
+.today-hero h2 {
+  font-size: clamp(34px, 2.85vw, 46px);
+  line-height: 1.32;
+}
+
+.today-hero p {
+  font-size: 16px;
+}
+
+.card-title h3,
+.progress-card-v2 h3,
+.preparation-preview h3 {
+  font-size: 23px;
+}
+
+.section-kicker {
+  font-size: 11.5px;
+}
+
+/* Give empty states enough presence while keeping the page compact. */
+.lesson-empty,
+.schedule-card .empty-state {
+  background: linear-gradient(180deg, #ffffff, #fbfdfc);
+}
+
+.lesson-empty {
+  min-height: 190px;
+}
+
+.schedule-card .empty-state {
+  min-height: 132px;
+}
+
+/* Quick cards closer to the visual reference. */
+.today-dashboard .quick-card {
+  min-height: 150px;
+}
+
+.today-dashboard .quick-card strong {
+  font-size: 18.5px;
+}
+
+.today-dashboard .quick-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(31,80,58,.08);
+}
+
+/* Lower section balance. */
+.today-lower-grid {
+  grid-template-columns: minmax(0, 1.55fr) minmax(360px, .65fr);
+}
+
+.progress-card-v2,
+.preparation-preview {
+  min-height: 235px;
+}
+
+/* Prevent mixed Arabic/Latin values from looking reversed in RTL. */
+.ltr-isolate {
+  direction: ltr;
+  unicode-bidi: isolate;
+  display: inline-block;
+}
+
+.teacher-meta strong,
+.sidebar-teacher strong {
+  unicode-bidi: plaintext;
+}
+
+@media (max-width: 1100px) {
+  .today-lower-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 980px) {
+  .today-topbar .teacher-chip:last-child,
+  .today-topbar .icon-chip,
+  .today-topbar .search {
+    order: initial;
+  }
+
+  .today-topbar .teacher-chip:last-child {
+    min-width: 0;
+  }
+
+  .today-hero h2 {
+    font-size: clamp(27px, 5vw, 34px);
+  }
+
+  .progress-card-v2,
+  .preparation-preview {
+    min-height: 0;
+  }
+}
