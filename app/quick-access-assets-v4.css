@@ -1,0 +1,93 @@
+/* QUICK ACCESS V4 — OFFICIAL EDUCATIONAL ASSETS
+   Uses the approved Al Miraj Teacher design-kit illustrations.
+   Visual-only: no routes, data flow, auth or business logic changes. */
+
+.today-v3-action-card::after {
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: .97;
+  filter: drop-shadow(0 10px 18px rgba(42, 73, 61, .08)) saturate(.96) contrast(.99);
+}
+
+.today-v3-action-card[data-tone="amber"]::after {
+  background-image: url('/illustrations/quick-access/daily-notebook.png');
+}
+
+.today-v3-action-card[data-tone="blue"]::after {
+  background-image: url('/illustrations/quick-access/resources.png');
+}
+
+.today-v3-action-card[data-tone="green"]::after {
+  background-image: url('/illustrations/quick-access/program.png');
+}
+
+.today-v3-action-card[data-tone="violet"]::after {
+  background-image: url('/illustrations/quick-access/library.png');
+}
+
+.today-v3-action-card:hover::after {
+  transform: translateY(-2px) scale(1.028);
+  filter: drop-shadow(0 13px 22px rgba(42, 73, 61, .11)) saturate(1) contrast(1);
+}
+
+/* Slightly tune each visual zone so the four different source compositions feel equally weighted. */
+.today-v3-action-card[data-tone="amber"]::after,
+.today-v3-action-card[data-tone="blue"]::after {
+  width: 154px;
+  height: 128px;
+}
+
+.today-v3-action-card[data-tone="green"]::after,
+.today-v3-action-card[data-tone="violet"]::after {
+  width: 150px;
+  height: 116px;
+}
+
+@media (min-width: 1700px) {
+  .today-v3-action-card[data-tone="amber"]::after,
+  .today-v3-action-card[data-tone="blue"]::after {
+    width: 122px;
+    height: 101px;
+  }
+
+  .today-v3-action-card[data-tone="green"]::after,
+  .today-v3-action-card[data-tone="violet"]::after {
+    width: 118px;
+    height: 92px;
+  }
+}
+
+@media (max-width: 1180px) {
+  .today-v3-action-card[data-tone="amber"]::after,
+  .today-v3-action-card[data-tone="blue"]::after {
+    width: 136px;
+    height: 112px;
+  }
+
+  .today-v3-action-card[data-tone="green"]::after,
+  .today-v3-action-card[data-tone="violet"]::after {
+    width: 132px;
+    height: 102px;
+  }
+}
+
+@media (max-width: 760px) {
+  .today-v3-action-card[data-tone="amber"]::after,
+  .today-v3-action-card[data-tone="blue"]::after,
+  .today-v3-action-card[data-tone="green"]::after,
+  .today-v3-action-card[data-tone="violet"]::after {
+    width: 128px;
+    height: 104px;
+  }
+}
+
+@media (max-width: 440px) {
+  .today-v3-action-card[data-tone="amber"]::after,
+  .today-v3-action-card[data-tone="blue"]::after,
+  .today-v3-action-card[data-tone="green"]::after,
+  .today-v3-action-card[data-tone="violet"]::after {
+    width: 104px;
+    height: 84px;
+  }
+}
