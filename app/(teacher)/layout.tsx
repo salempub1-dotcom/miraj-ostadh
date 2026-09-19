@@ -43,9 +43,9 @@ export default async function TeacherLayout({ children }: Readonly<{ children: R
         <TeacherNav />
 
         <div className="sidebar-footer">
-          <strong>{gradeCode} • {subjectName}</strong>
+          <strong><bdi dir="ltr">{gradeCode}</bdi> • {subjectName}</strong>
           <div>{gradeName}</div>
-          <div>السنة الدراسية {academicYear}</div>
+          <div>السنة الدراسية <bdi dir="ltr" className="ltr-isolate">{academicYear}</bdi></div>
           <form action="/auth/signout" method="post">
             <button className="signout-button" type="submit"><LogOut size={16} /> تسجيل الخروج</button>
           </form>
