@@ -76,8 +76,13 @@ If any identity check fails, stop before making changes.
 
 - GitHub repository initialized with Next.js/TypeScript project structure.
 - Supabase identity verified: `Miraj Ostadh` / `ltcchvjxgdcdsvgrmtjb`.
-- Database migrations 001–005 applied successfully.
+- Database migrations **001–007** applied successfully.
+- Seed data exists for `2026–2027`, `3AP`, Arabic, 8 Arabic domains, and one published V1 curriculum.
 - Core curriculum, lesson content, resources, teacher workspace, progress, library, and daily journal tables exist with RLS.
 - Latest Supabase security advisor check: **0 security warnings**.
-- Vercel project reference supplied for `elmiraj1/miraj-ostadh` and recorded here.
-- Current Vercel connector session cannot enumerate this deployment yet (permission response), so deployment health is not being inferred from the dashboard URL alone.
+- First real user flow implemented: Register → Login/Confirm → Profile → 3AP Arabic context → Timetable → Progress step → Complete → Today.
+- `/today` now reads the signed-in teacher profile and timetable from Supabase instead of demo data.
+- Teacher routes are protected and redirect incomplete accounts back to onboarding.
+- Placeholder routes exist for Planning, Resources, Library, Journal, and Account so the initial navigation is complete.
+- GitHub/Vercel deployment status for the current flow commit reported **success**.
+- Supabase email-confirmation URL/template configuration still needs to be finalized against the exact production domain before end-to-end signup testing.
