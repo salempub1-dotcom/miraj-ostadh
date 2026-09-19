@@ -1,5 +1,6 @@
 import Link from 'next/link';
-import { BookOpen, CalendarDays, Home, Library, NotebookTabs, UserRound } from 'lucide-react';
+import { BookOpen, CalendarDays, Home, Library, LogOut, NotebookTabs, UserRound } from 'lucide-react';
+import { requireCompletedTeacherContext } from '@/lib/auth';
 
 const navItems = [
   { href: '/today', label: 'يومي', icon: Home },
@@ -9,16 +10,30 @@ const navItems = [
   { href: '/journal', label: 'دفتري', icon: NotebookTabs },
 ];
 
-export default function TeacherLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+export default async function TeacherLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  const { supabase, userId, context } = await requireCompletedTeacherContext();
+  const { data: profile } = await supabase
+    .from('profiles')
+    .select('display_name, full_name')
+    .eq('id', userId)
+    .single();
+
+  const teacherName = profile?.display_name ?? profile?.full_name ?? 'الأستاذ';
+
   return (
     <div className="app-shell">
       <aside className="sidebar">
-        <div className="brand">
+        <Link href="/today" className="brand">
           <div className="brand-mark">م</div>
           <div>
             <h1>معراج الأستاذ</h1>
             <p>مكتب الأستاذ الرقمي</p>
           </div>
+        </Link>
+
+        <div className="sidebar-teacher">
+          <div className="avatar">👩🏻‍🏫</div>
+          <div><strong>{teacherName}</strong><span>{context.class_name || 'السنة الثالثة ابتدائي'}</span></div>
         </div>
 
         <nav className="nav" aria-label="التنقل الرئيسي">
@@ -37,6 +52,9 @@ export default function TeacherLayout({ children }: Readonly<{ children: React.R
         <div className="sidebar-footer">
           <strong>3AP • اللغة العربية</strong>
           <div>السنة الدراسية 2026–2027</div>
+          <form action="/auth/signout" method="post">
+            <button className="signout-button" type="submit"><LogOut size={16} /> تسجيل الخروج</button>
+          </form>
         </div>
       </aside>
 
