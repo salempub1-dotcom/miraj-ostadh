@@ -14,6 +14,7 @@
 - **Vercel Team Slug:** `elmiraj1`
 - **Vercel Team ID:** `team_IhCrW2DUZHDJHOxFDMIGVjL6`
 - **Vercel Project Slug:** `miraj-ostadh`
+- **Current Main App URL:** `https://miraj-ostadh-git-main-elmiraj1.vercel.app`
 - **Vercel Dashboard/Deployment Reference:** `https://vercel.com/elmiraj1/miraj-ostadh/6k2ZpPiHbnexiGbfUqQ7DqUbnvJo`
 - **Frontend:** Next.js + TypeScript
 - **Backend:** Supabase (PostgreSQL, Auth, Storage, RLS)
@@ -85,4 +86,5 @@ If any identity check fails, stop before making changes.
 - Teacher routes are protected and redirect incomplete accounts back to onboarding.
 - Placeholder routes exist for Planning, Resources, Library, Journal, and Account so the initial navigation is complete.
 - GitHub/Vercel deployment status for the current flow commit reported **success**.
-- Supabase email-confirmation URL/template configuration still needs to be finalized against the exact production domain before end-to-end signup testing.
+- Current main app URL for Auth configuration: `https://miraj-ostadh-git-main-elmiraj1.vercel.app`.
+- Supabase email-confirmation URL/template configuration still needs to be finalized against this app URL before end-to-end signup testing.
