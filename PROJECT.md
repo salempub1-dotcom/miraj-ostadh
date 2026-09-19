@@ -13,7 +13,8 @@
 - **Vercel Team:** `EL-miraj`
 - **Vercel Team Slug:** `elmiraj1`
 - **Vercel Team ID:** `team_IhCrW2DUZHDJHOxFDMIGVjL6`
-- **Vercel Project:** Not created yet — must be created specifically for Miraj Ostadh.
+- **Vercel Project Slug:** `miraj-ostadh`
+- **Vercel Dashboard/Deployment Reference:** `https://vercel.com/elmiraj1/miraj-ostadh/6k2ZpPiHbnexiGbfUqQ7DqUbnvJo`
 - **Frontend:** Next.js + TypeScript
 - **Backend:** Supabase (PostgreSQL, Auth, Storage, RLS)
 - **Primary UI:** Arabic RTL, responsive web/PWA
@@ -33,7 +34,7 @@ Before any sensitive operation such as database migration, reset, deploy, build,
 1. GitHub repository is `salempub1-dotcom/miraj-ostadh`.
 2. Supabase project ref is exactly `ltcchvjxgdcdsvgrmtjb`.
 3. Vercel team is `EL-miraj` / `team_IhCrW2DUZHDJHOxFDMIGVjL6` when deploying.
-4. Any Vercel project used is explicitly created for Miraj Ostadh.
+4. Vercel project slug is exactly `miraj-ostadh`.
 5. Environment is the intended environment.
 6. No `.env` or secret file belongs to another project.
 
@@ -78,4 +79,5 @@ If any identity check fails, stop before making changes.
 - Database migrations 001–005 applied successfully.
 - Core curriculum, lesson content, resources, teacher workspace, progress, library, and daily journal tables exist with RLS.
 - Latest Supabase security advisor check: **0 security warnings**.
-- Vercel connector verified for team `EL-miraj`; Miraj Ostadh Vercel project is intentionally not created/deployed yet.
+- Vercel project reference supplied for `elmiraj1/miraj-ostadh` and recorded here.
+- Current Vercel connector session cannot enumerate this deployment yet (permission response), so deployment health is not being inferred from the dashboard URL alone.
