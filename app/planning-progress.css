@@ -1,0 +1,245 @@
+/* Planning progress editor */
+
+.progress-editor-shell {
+  display: grid;
+  gap: 18px;
+  padding-bottom: 28px;
+}
+
+.progress-editor-head {
+  display: grid;
+  gap: 14px;
+}
+
+.progress-back-link {
+  width: fit-content;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #35634f;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.progress-editor-title-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.progress-editor-icon {
+  width: 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  border-radius: 16px;
+  background: #e7f4ed;
+  color: #247a58;
+}
+
+.progress-editor-title-row h1 {
+  margin: 7px 0 4px;
+  color: #173b2e;
+  font-size: clamp(28px, 3vw, 38px);
+}
+
+.progress-editor-title-row p {
+  margin: 0;
+  color: #708078;
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.progress-editor-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(280px, .7fr);
+  gap: 16px;
+  align-items: start;
+}
+
+.progress-editor-card,
+.progress-editor-aside,
+.progress-editor-empty {
+  border: 1px solid #dde8e2;
+  border-radius: 20px;
+  background: white;
+  box-shadow: 0 8px 26px rgba(31, 80, 58, .055);
+}
+
+.progress-editor-card {
+  padding: 22px;
+}
+
+.progress-editor-card-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.progress-editor-card-head h2,
+.progress-editor-aside h2,
+.progress-editor-empty h2 {
+  margin: 0;
+  color: #183d30;
+  font-size: 19px;
+}
+
+.progress-editor-card-head p,
+.progress-editor-aside p,
+.progress-editor-empty p {
+  margin: 4px 0 0;
+  color: #73847c;
+  font-size: 11.5px;
+  line-height: 1.75;
+}
+
+.progress-select-label {
+  display: grid;
+  gap: 8px;
+  color: #3f5d50;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.progress-select-label select {
+  width: 100%;
+  min-height: 50px;
+  padding: 10px 13px;
+  border: 1px solid #d6e3dc;
+  border-radius: 13px;
+  outline: none;
+  background: #fbfdfc;
+  color: #25483a;
+}
+
+.progress-select-label select:focus {
+  border-color: #7bb89a;
+  box-shadow: 0 0 0 4px rgba(36,122,88,.08);
+}
+
+.progress-reset-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  margin-top: 15px;
+  padding: 13px;
+  border: 1px solid #e4e9d7;
+  border-radius: 13px;
+  background: #fffdf4;
+  color: #715f31;
+}
+
+.progress-reset-note svg { flex: 0 0 auto; margin-top: 1px; }
+
+.progress-reset-note p {
+  margin: 0;
+  font-size: 11px;
+  line-height: 1.8;
+}
+
+.progress-confirm-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  margin-top: 16px;
+  color: #536c61;
+  font-size: 11.5px;
+  line-height: 1.7;
+  cursor: pointer;
+}
+
+.progress-confirm-row input {
+  width: 17px;
+  height: 17px;
+  margin-top: 1px;
+  accent-color: #247a58;
+}
+
+.progress-save-btn {
+  width: 100%;
+  margin-top: 18px;
+  border: 0;
+  cursor: pointer;
+}
+
+.progress-editor-aside {
+  padding: 20px;
+  display: grid;
+  gap: 11px;
+  position: sticky;
+  top: 20px;
+}
+
+.progress-editor-aside h2 { margin-top: 2px; }
+
+.progress-aside-stat {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 11px 0;
+  border-top: 1px solid #edf1ef;
+}
+
+.progress-aside-stat span {
+  color: #708078;
+  font-size: 11px;
+}
+
+.progress-aside-stat strong {
+  color: #1f6549;
+  font-size: 18px;
+}
+
+.progress-editor-empty {
+  min-height: 330px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 28px;
+  text-align: center;
+  color: #247a58;
+}
+
+.progress-editor-empty p {
+  max-width: 620px;
+}
+
+.progress-editor-empty .planning-primary-link {
+  margin-top: 8px;
+}
+
+@media (max-width: 900px) {
+  .progress-editor-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .progress-editor-aside {
+    position: static;
+  }
+}
+
+@media (max-width: 560px) {
+  .progress-editor-title-row {
+    gap: 10px;
+  }
+
+  .progress-editor-icon {
+    width: 44px;
+    height: 44px;
+  }
+
+  .progress-editor-title-row h1 {
+    font-size: 25px;
+  }
+
+  .progress-editor-card,
+  .progress-editor-aside {
+    padding: 16px;
+    border-radius: 17px;
+  }
+}
