@@ -1,23 +1,6 @@
 -- Miraj Ostadh — Migration 004
 -- Teacher academic context, timetable, progress, library, and daily journal
 
-create or replace function private.owns_teacher_context(context_id uuid)
-returns boolean
-language sql
-stable
-security definer
-set search_path = public, pg_temp
-as $$
-  select exists (
-    select 1
-    from public.teacher_academic_contexts tac
-    where tac.id = context_id
-      and tac.user_id = auth.uid()
-  );
-$$;
-
--- Tables are created before granting EXECUTE on helper functions that depend on them.
-
 create table public.teacher_academic_contexts (
   id uuid primary key default gen_random_uuid(),
   user_id uuid not null references public.profiles(id) on delete cascade,
@@ -166,9 +149,20 @@ create trigger daily_journal_entries_set_updated_at
 before update on public.daily_journal_entries
 for each row execute function private.set_updated_at();
 
--- Now that the owning table exists, expose helper only to signed-in users for RLS evaluation.
-revoke all on function private.owns_teacher_context(uuid) from public, anon, authenticated;
-grant execute on function private.owns_teacher_context(uuid) to authenticated;
+create or replace function private.owns_teacher_context(context_id uuid)
+returns boolean
+language sql
+stable
+security definer
+set search_path = public, pg_temp
+as $$
+  select exists (
+    select 1
+    from public.teacher_academic_contexts tac
+    where tac.id = context_id
+      and tac.user_id = auth.uid()
+  );
+$$;
 
 create or replace function private.owns_timetable(timetable uuid)
 returns boolean
@@ -202,8 +196,10 @@ as $$
   );
 $$;
 
+revoke all on function private.owns_teacher_context(uuid) from public, anon, authenticated;
 revoke all on function private.owns_timetable(uuid) from public, anon, authenticated;
 revoke all on function private.owns_journal(uuid) from public, anon, authenticated;
+grant execute on function private.owns_teacher_context(uuid) to authenticated;
 grant execute on function private.owns_timetable(uuid) to authenticated;
 grant execute on function private.owns_journal(uuid) to authenticated;
 
