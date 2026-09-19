@@ -2,15 +2,21 @@
 
 import { redirect } from 'next/navigation';
 import { requireUser } from '@/lib/auth';
-import { getV1Curriculum } from '@/lib/v1';
+import { getV1Curriculum, PRIMARY_GRADE_CODES } from '@/lib/v1';
 
 export async function saveGradeAction(formData: FormData) {
   const { supabase, userId } = await requireUser();
   const className = String(formData.get('class_name') ?? '').trim();
-  const v1 = await getV1Curriculum(supabase);
+  const gradeCode = String(formData.get('grade_code') ?? '').trim();
 
-  if (!v1) {
-    redirect('/onboarding/grade?error=' + encodeURIComponent('لم يتم العثور على برنامج 3AP للغة العربية.'));
+  if (!PRIMARY_GRADE_CODES.includes(gradeCode as (typeof PRIMARY_GRADE_CODES)[number])) {
+    redirect('/onboarding/grade?error=' + encodeURIComponent('اختر السنة الدراسية من السنة الأولى إلى السنة الخامسة.'));
+  }
+
+  const selected = await getV1Curriculum(supabase, gradeCode);
+
+  if (!selected) {
+    redirect('/onboarding/grade?error=' + encodeURIComponent('برنامج اللغة العربية لهذا المستوى غير متاح حاليًا.'));
   }
 
   const { data: existing } = await supabase
@@ -23,14 +29,14 @@ export async function saveGradeAction(formData: FormData) {
   if (existing) {
     const { error } = await supabase
       .from('teacher_academic_contexts')
-      .update({ curriculum_id: v1.curriculum.id, class_name: className || null })
+      .update({ curriculum_id: selected.curriculum.id, class_name: className || null })
       .eq('id', existing.id);
 
     if (error) redirect('/onboarding/grade?error=' + encodeURIComponent('تعذر حفظ المستوى والقسم.'));
   } else {
     const { error } = await supabase.from('teacher_academic_contexts').insert({
       user_id: userId,
-      curriculum_id: v1.curriculum.id,
+      curriculum_id: selected.curriculum.id,
       class_name: className || null,
       is_current: true,
     });
