@@ -9,6 +9,7 @@ import './v2-2.css';
 import './planning-v2.css';
 import './planning-progress.css';
 import './today-v3.css';
+import './today-v3-1.css';
 
 export const metadata: Metadata = {
   title: 'معراج الأستاذ',
