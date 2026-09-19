@@ -8,7 +8,7 @@ const nextConfig: NextConfig = {
   env: {
     NEXT_PUBLIC_SUPABASE_URL: 'https://ltcchvjxgdcdsvgrmtjb.supabase.co',
     NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: 'sb_publishable_FwhdxJ9Bci35KHTNiqcqlA_Wx-saQqz',
-    NEXT_PUBLIC_SITE_URL: 'https://miraj-ostadh-elmiraj1.vercel.app',
+    NEXT_PUBLIC_SITE_URL: 'https://miraj-ostadh.vercel.app',
   },
 };
 
