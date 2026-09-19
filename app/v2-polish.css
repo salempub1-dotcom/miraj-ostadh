@@ -1,0 +1,581 @@
+/* Today V2.1 — visual polish only. No data-flow changes. */
+
+:root {
+  --polish-sidebar: 292px;
+  --polish-card-radius: 20px;
+  --polish-card-shadow: 0 10px 30px rgba(30, 77, 56, .075);
+}
+
+/* Wider workspace */
+.app-shell {
+  grid-template-columns: var(--polish-sidebar) minmax(0, 1fr);
+}
+
+.main {
+  width: 100%;
+  max-width: none;
+  margin-inline: 0;
+  padding: 22px clamp(22px, 2.2vw, 38px) 110px;
+}
+
+.sidebar {
+  padding: 28px 22px;
+  background: rgba(255, 255, 255, .96);
+  box-shadow: -8px 0 26px rgba(31, 80, 58, .035);
+}
+
+.brand {
+  gap: 14px;
+  margin-bottom: 28px;
+}
+
+.brand-mark {
+  width: 52px;
+  height: 52px;
+  border-radius: 17px;
+  font-size: 22px;
+  box-shadow: 0 10px 24px rgba(31, 138, 91, .2);
+}
+
+.brand h1 {
+  font-size: 25px;
+  letter-spacing: -.02em;
+}
+
+.brand p {
+  font-size: 12.5px;
+  line-height: 1.65;
+}
+
+.sidebar-teacher {
+  padding: 13px;
+  margin-bottom: 22px;
+  border-radius: 16px;
+}
+
+.sidebar-teacher .avatar {
+  width: 42px;
+  height: 42px;
+  font-size: 19px;
+}
+
+.sidebar-teacher strong {
+  font-size: 14px;
+}
+
+.sidebar-teacher span {
+  font-size: 11px;
+  margin-top: 1px;
+}
+
+.nav {
+  gap: 7px;
+}
+
+.nav a {
+  min-height: 48px;
+  padding: 12px 15px;
+  border-radius: 13px;
+  font-size: 14px;
+}
+
+.nav a svg {
+  width: 20px;
+  height: 20px;
+}
+
+.sidebar-footer {
+  padding-top: 20px;
+  font-size: 12.5px;
+}
+
+/* Page rhythm */
+.today-dashboard {
+  gap: 20px;
+}
+
+.today-topbar {
+  gap: 12px;
+}
+
+.today-topbar .search {
+  min-height: 52px;
+  padding-inline: 18px;
+  border-radius: 16px;
+  font-size: 13.5px;
+  box-shadow: 0 5px 18px rgba(30, 77, 56, .035);
+}
+
+.today-topbar .teacher-chip {
+  min-height: 52px;
+  border-radius: 16px;
+}
+
+.today-topbar .teacher-chip:not(.icon-chip) {
+  padding-inline: 13px 16px;
+}
+
+.today-topbar .teacher-chip .avatar {
+  width: 38px;
+  height: 38px;
+}
+
+.today-topbar .teacher-meta strong {
+  font-size: 13.5px;
+}
+
+.today-topbar .teacher-meta .small {
+  font-size: 11px;
+}
+
+.icon-chip {
+  width: 52px;
+  min-width: 52px;
+}
+
+/* Hero */
+.today-hero {
+  position: relative;
+  isolation: isolate;
+  min-height: 214px;
+  padding: 28px 32px;
+  border-radius: 24px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 9% 18%, rgba(255,255,255,.95), transparent 24%),
+    radial-gradient(circle at 76% 105%, rgba(242,205,151,.22), transparent 34%),
+    linear-gradient(110deg, #fffdf8 0%, #fff6e8 58%, #ffeed8 100%);
+  box-shadow: 0 12px 34px rgba(121, 81, 38, .08);
+}
+
+.today-hero::before {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 28px;
+  background: linear-gradient(180deg, rgba(211, 159, 104, 0), rgba(211, 159, 104, .09));
+  z-index: -1;
+}
+
+.today-hero::after {
+  content: "";
+  position: absolute;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  inset: -118px auto auto -82px;
+  background: rgba(255,255,255,.42);
+  z-index: -1;
+}
+
+.hero-copy {
+  max-width: 62%;
+}
+
+.hero-date {
+  margin-bottom: 10px;
+  font-size: 13px;
+  color: #6b766f;
+}
+
+.today-hero h2 {
+  margin-bottom: 9px;
+  font-size: clamp(30px, 2.55vw, 43px);
+  line-height: 1.35;
+  letter-spacing: -.025em;
+  unicode-bidi: plaintext;
+}
+
+.today-hero p {
+  max-width: 650px;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.hero-tags {
+  gap: 9px;
+  margin-top: 18px;
+}
+
+.hero-tags span {
+  padding: 7px 12px;
+  font-size: 11.5px;
+  border-color: rgba(42,108,78,.15);
+  box-shadow: 0 3px 10px rgba(39, 93, 73, .035);
+}
+
+.hero-classroom {
+  width: min(40%, 450px);
+  min-width: 360px;
+  height: 152px;
+  grid-template-columns: 82px 1fr 72px;
+  gap: 12px;
+}
+
+.hero-board {
+  border-width: 9px;
+  border-radius: 10px;
+  box-shadow: 0 14px 24px rgba(87,55,32,.18);
+}
+
+.hero-board strong {
+  font-size: 20px;
+}
+
+.hero-board span {
+  font-size: 12px;
+}
+
+.hero-books span {
+  height: 16px;
+}
+
+.hero-pencil-pot {
+  height: 78px;
+  font-size: 31px;
+}
+
+/* Main cards */
+.card {
+  border-radius: var(--polish-card-radius);
+  padding: 24px;
+  box-shadow: var(--polish-card-shadow);
+}
+
+.today-primary-grid {
+  gap: 20px;
+  grid-template-columns: minmax(0, 1.48fr) minmax(350px, .82fr);
+}
+
+.next-card,
+.schedule-card {
+  min-height: 286px;
+}
+
+.card-title {
+  margin-bottom: 19px;
+}
+
+.card-title h3,
+.progress-card-v2 h3 {
+  font-size: 22px;
+  line-height: 1.4;
+}
+
+.section-kicker {
+  margin-bottom: 6px;
+  font-size: 11px;
+}
+
+.time-pill {
+  padding: 8px 12px;
+  font-size: 13px;
+}
+
+.next-lesson-v2 {
+  min-height: 180px;
+  padding: 21px;
+  gap: 18px;
+  border-radius: 18px;
+}
+
+.next-lesson-v2 .lesson-icon {
+  width: 66px;
+  height: 66px;
+  border-radius: 18px;
+}
+
+.lesson-domain {
+  margin-bottom: 5px;
+  font-size: 13px;
+}
+
+.lesson-copy h4 {
+  margin-bottom: 7px;
+  font-size: 24px;
+}
+
+.lesson-copy p {
+  font-size: 13.5px;
+  line-height: 1.7;
+}
+
+.lesson-cta {
+  min-width: 150px;
+  min-height: 50px;
+  padding-inline: 20px;
+  font-size: 14px;
+  border-radius: 13px;
+}
+
+.lesson-empty {
+  min-height: 181px;
+  gap: 10px;
+  padding: 26px;
+}
+
+.lesson-empty strong {
+  font-size: 16px;
+}
+
+.lesson-empty > span {
+  font-size: 13px;
+  line-height: 1.75;
+}
+
+.empty-state-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 15px;
+}
+
+.secondary-link,
+.text-link {
+  font-size: 13px;
+}
+
+/* Schedule */
+.schedule-v2 {
+  gap: 6px;
+}
+
+.schedule-v2 .schedule-row {
+  min-height: 44px;
+  grid-template-columns: 32px 64px 1fr;
+  gap: 11px;
+  padding: 9px 11px;
+  border-radius: 12px;
+}
+
+.schedule-v2 .dot {
+  width: 28px;
+  height: 28px;
+  font-size: 12px;
+}
+
+.schedule-v2 .time {
+  font-size: 13px;
+}
+
+.schedule-copy strong {
+  font-size: 14px;
+}
+
+.schedule-copy .small {
+  margin-top: 2px;
+  font-size: 10.5px;
+}
+
+/* Quick access */
+.today-dashboard .quick-grid {
+  gap: 16px;
+}
+
+.today-dashboard .quick-card {
+  min-height: 144px;
+  padding: 20px;
+  border-radius: 19px;
+  box-shadow: 0 7px 22px rgba(31,80,58,.045);
+}
+
+.today-dashboard .quick-card strong {
+  font-size: 18px;
+}
+
+.today-dashboard .quick-card span {
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.quick-icon {
+  width: 54px;
+  height: 54px;
+  border-radius: 16px;
+}
+
+.quick-icon svg {
+  width: 28px;
+  height: 28px;
+}
+
+/* Lower section */
+.today-lower-grid {
+  gap: 20px;
+  grid-template-columns: minmax(0, 1.4fr) minmax(390px, .6fr);
+}
+
+.progress-card-v2,
+.preparation-preview {
+  min-height: 220px;
+}
+
+.progress-number {
+  font-size: 30px;
+}
+
+.progress-line {
+  height: 12px;
+  margin: 18px 0 12px;
+}
+
+.progress-details,
+.empty-inline {
+  font-size: 13px;
+  line-height: 1.75;
+}
+
+.preparation-preview .preview-title {
+  margin-bottom: 15px;
+  font-size: 19px;
+}
+
+.prep-tabs {
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.prep-tabs span {
+  padding: 8px 11px;
+  font-size: 12px;
+}
+
+/* Keep Arabic level primary; Latin code visually secondary */
+.hero-tags span:first-child,
+.sidebar-footer strong {
+  font-weight: 800;
+}
+
+/* Responsive */
+@media (max-width: 1280px) {
+  :root { --polish-sidebar: 270px; }
+  .main { padding-inline: 22px; }
+  .hero-copy { max-width: 58%; }
+  .hero-classroom { min-width: 320px; }
+  .today-primary-grid { grid-template-columns: minmax(0, 1.35fr) minmax(320px, .85fr); }
+  .today-lower-grid { grid-template-columns: minmax(0, 1.2fr) minmax(340px, .8fr); }
+}
+
+@media (max-width: 1100px) {
+  .hero-copy { max-width: 65%; }
+  .hero-classroom { min-width: 270px; width: 32%; }
+  .today-primary-grid,
+  .today-lower-grid { grid-template-columns: 1fr; }
+  .next-card,
+  .schedule-card { min-height: 0; }
+}
+
+@media (max-width: 980px) {
+  .main {
+    padding: 16px 16px 98px;
+  }
+
+  .today-dashboard {
+    gap: 14px;
+  }
+
+  .today-hero {
+    min-height: 175px;
+    padding: 22px;
+  }
+
+  .hero-copy {
+    max-width: 100%;
+  }
+
+  .today-hero h2 {
+    font-size: clamp(27px, 5vw, 34px);
+  }
+
+  .card {
+    padding: 20px;
+  }
+
+  .today-dashboard .quick-card {
+    min-height: 126px;
+  }
+}
+
+@media (max-width: 640px) {
+  .main {
+    padding: 11px 11px 88px;
+  }
+
+  .today-topbar .teacher-chip:not(.icon-chip) {
+    min-width: 0;
+  }
+
+  .today-hero {
+    min-height: 168px;
+    padding: 19px 17px;
+    border-radius: 19px;
+  }
+
+  .today-hero h2 {
+    font-size: 24px;
+  }
+
+  .today-hero p {
+    font-size: 13px;
+  }
+
+  .hero-tags span {
+    padding: 6px 9px;
+    font-size: 10px;
+  }
+
+  .card {
+    padding: 17px;
+    border-radius: 17px;
+  }
+
+  .card-title h3,
+  .progress-card-v2 h3 {
+    font-size: 19px;
+  }
+
+  .next-lesson-v2 {
+    min-height: 0;
+    padding: 15px;
+  }
+
+  .next-lesson-v2 .lesson-icon {
+    width: 54px;
+    height: 54px;
+  }
+
+  .lesson-copy h4 {
+    font-size: 20px;
+  }
+
+  .today-dashboard .quick-grid {
+    gap: 9px;
+  }
+
+  .today-dashboard .quick-card {
+    min-height: 115px;
+    padding: 14px;
+  }
+
+  .today-dashboard .quick-card strong {
+    font-size: 15px;
+  }
+
+  .today-dashboard .quick-card span {
+    font-size: 11px;
+  }
+
+  .quick-icon {
+    width: 43px;
+    height: 43px;
+  }
+
+  .quick-icon svg {
+    width: 23px;
+    height: 23px;
+  }
+
+  .progress-card-v2,
+  .preparation-preview {
+    min-height: 0;
+  }
+}
