@@ -86,7 +86,10 @@ If any identity check fails, stop before making changes.
 - `/today` V2 is implemented as an Arabic RTL dashboard with dynamic teacher/grade/subject/year data, timetable, next lesson logic, quick actions, curriculum progress, and lesson preparation preview.
 - The teacher shell/sidebar and Account page are grade-aware instead of hardcoded to 3AP.
 - Onboarding now supports choosing any grade from **1AP to 5AP**, with Arabic as the V1 subject.
+- `/planning` is now a real database-backed planning workspace: curriculum context, global progress, current position, unit/week/lesson hierarchy, lesson-status filters, and proper empty states are implemented.
+- `/planning/progress` allows a teacher who joins mid-year to manually choose the first unfinished lesson; earlier lessons are marked completed and the chosen lesson onward is reset to not-started for that teacher context only.
 - A first `/lessons/[lessonId]` preparation workspace scaffold exists with tabs for memo, text, resources, activities, assessment, and remediation.
-- Current curriculum units/weeks/lessons are still empty; the next implementation stage is importing the official Arabic curriculum content for the five grades.
-- Vercel deployment for the V2 interface build reported success.
+- Current curriculum units/weeks/lessons are intentionally still empty for all five grades; official program files will be imported later without changing the platform structure.
+- Current platform-first implementation order: Planning → Prepare Lesson → Daily Journal → Resources/My Library → Account/academic-year history → Admin → PWA polish, then official curriculum import.
+- Vercel deployment for the latest planning build reported success.
 - Supabase Security Advisor currently has one Auth-level warning: leaked-password protection is disabled; this does not block the application flow and can be enabled separately.
