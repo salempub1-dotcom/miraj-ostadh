@@ -1,0 +1,355 @@
+/* TODAY V3.1 — PREMIUM VISUAL POLISH PASS
+   Visual-only overrides based on desktop review. */
+
+:root {
+  --today-v31-bg: #f8f8f5;
+  --today-v31-surface: #ffffff;
+  --today-v31-line: #e2e8e4;
+  --today-v31-line-strong: #d2ddd6;
+  --today-v31-primary: #1f7052;
+  --today-v31-primary-strong: #15563e;
+}
+
+.app-shell {
+  grid-template-columns: 264px minmax(0, 1fr);
+  background: var(--today-v31-bg);
+}
+
+.main {
+  padding: 24px clamp(24px, 2.2vw, 38px) 100px;
+  background: var(--today-v31-bg);
+}
+
+.today-v3 {
+  max-width: 1450px;
+}
+
+/* Top utility bar: the sidebar already owns the teacher identity, so avoid duplication. */
+.today-v3-toolbar {
+  grid-template-columns: minmax(420px, 1fr) 44px;
+  grid-template-areas: "search alerts";
+  gap: 10px;
+  margin-bottom: 26px;
+}
+
+.today-v3-user {
+  display: none;
+}
+
+.today-v3-search {
+  min-height: 44px;
+  max-width: 980px;
+  justify-self: stretch;
+  background: rgba(255, 255, 255, .74);
+  border-color: #e2e8e4;
+  box-shadow: none;
+}
+
+.today-v3-search:hover {
+  box-shadow: 0 6px 18px rgba(34, 72, 56, .035);
+}
+
+/* Page header: tighter, clearer, and less like an empty hero. */
+.today-v3-page-header {
+  align-items: center;
+  gap: 28px;
+  margin-bottom: 28px;
+  padding: 4px 2px 2px;
+}
+
+.today-v3-page-heading h1 {
+  margin-top: 5px;
+  font-size: clamp(31px, 2.2vw, 35px);
+  line-height: 1.25;
+}
+
+.today-v3-page-heading > p {
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.today-v3-context-row {
+  margin-top: 13px;
+}
+
+.today-v3-primary-action {
+  min-height: 44px;
+  padding-inline: 17px;
+  box-shadow: 0 7px 16px rgba(33, 114, 83, .12);
+}
+
+/* Level 1 — next lesson stays the strongest visual anchor. */
+.today-v3-next {
+  margin-bottom: 32px;
+  padding: 26px 28px;
+  background:
+    radial-gradient(circle at 8% 0%, rgba(255,255,255,.92), transparent 28%),
+    linear-gradient(118deg, #f8fbf8 0%, #edf5f0 100%);
+  border-color: #d9e4dd;
+  box-shadow: 0 10px 28px rgba(31, 69, 53, .045);
+}
+
+.today-v3-next-header {
+  margin-bottom: 20px;
+}
+
+.today-v3-next:has(.today-v3-next-empty) .today-v3-next-header {
+  margin-bottom: 12px;
+}
+
+/* Remove the nested-box look in the empty next-lesson state. */
+.today-v3-next-empty {
+  min-height: 78px;
+  padding: 8px 2px 2px;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+}
+
+.today-v3-next-empty .today-v3-empty-icon {
+  background: rgba(255,255,255,.76);
+}
+
+.today-v3-next-empty strong {
+  font-size: 14.5px;
+}
+
+.today-v3-next-empty p {
+  max-width: 720px;
+  font-size: 12.5px;
+}
+
+.today-v3-ghost-action {
+  background: rgba(255,255,255,.78);
+}
+
+/* Level 2 — academic progress should read like a serious workspace section, not tiny cards. */
+.today-v3-progress {
+  margin-bottom: 32px;
+  padding: 28px 0 30px;
+}
+
+.today-v3-progress-grid {
+  grid-template-columns: minmax(0, 1fr) 330px;
+  gap: 44px;
+  align-items: stretch;
+}
+
+.today-v3-progress-main {
+  align-self: center;
+}
+
+.today-v3-progress-number {
+  margin-bottom: 10px;
+  font-size: 40px;
+  letter-spacing: -.03em;
+}
+
+.today-v3-progress-track {
+  height: 11px;
+}
+
+.today-v3-progress-main p {
+  margin-top: 11px;
+  font-size: 13px;
+}
+
+.today-v3-progress-context {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  padding-inline-start: 28px;
+  border-inline-start: 1px solid #e1e7e3;
+}
+
+.today-v3-progress-context > div {
+  min-height: auto;
+  padding: 8px 0 13px;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+}
+
+.today-v3-progress-context > div + div {
+  padding-top: 14px;
+  border-top: 1px solid #e7ece9;
+}
+
+.today-v3-progress-context span,
+.today-v3-progress-context small {
+  font-size: 11px;
+}
+
+.today-v3-progress-context strong {
+  margin: 5px 0 3px;
+  font-size: 14px;
+}
+
+/* Level 3 — supporting work areas. */
+.today-v3-support-grid {
+  grid-template-columns: minmax(0, 1.08fr) minmax(340px, .92fr);
+  gap: 18px;
+  margin-bottom: 34px;
+}
+
+.today-v3-support-card {
+  padding: 22px 24px;
+  border-color: #e1e7e3;
+  box-shadow: 0 7px 20px rgba(32, 71, 54, .025);
+}
+
+.today-v3-compact-empty,
+.today-v3-preparation-empty {
+  min-height: 84px;
+  padding: 12px 4px;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+}
+
+.today-v3-compact-empty .today-v3-empty-icon,
+.today-v3-preparation-mark {
+  background: #f2f6f3;
+}
+
+.today-v3-compact-empty p,
+.today-v3-preparation-empty p {
+  max-width: 520px;
+}
+
+/* Level 4 — quick access: quieter at rest, premium on interaction. */
+.today-v3-quick-section {
+  padding-top: 2px;
+}
+
+.today-v3-section-heading.open {
+  margin-bottom: 17px;
+}
+
+.today-v3-quick-grid {
+  gap: 12px;
+}
+
+.today-v3-action-card {
+  min-height: 108px;
+  padding: 16px 17px;
+  border-color: #e2e8e4;
+  box-shadow: none;
+}
+
+.today-v3-action-card:hover {
+  transform: translateY(-2px);
+  border-color: #cbd8d0;
+  box-shadow: 0 12px 28px rgba(31, 69, 53, .07);
+}
+
+.today-v3-action-copy strong {
+  font-size: 14.5px;
+}
+
+.today-v3-action-copy small {
+  font-size: 10.75px;
+}
+
+/* Sidebar refinement after full-page review. */
+.sidebar {
+  padding: 26px 18px 20px;
+}
+
+.brand {
+  margin-bottom: 22px;
+}
+
+.sidebar-teacher {
+  margin-bottom: 22px;
+}
+
+.nav a {
+  min-height: 50px;
+  font-weight: 640;
+}
+
+.nav a.active {
+  background: #edf5f0;
+  border-color: #e0ebe4;
+  box-shadow: inset -2px 0 0 #3f8568;
+}
+
+.sidebar-footer {
+  color: #859089;
+}
+
+/* Desktop balance for very wide screens. */
+@media (min-width: 1600px) {
+  .main {
+    padding-inline: 42px;
+  }
+
+  .today-v3-support-grid {
+    grid-template-columns: minmax(0, 1.15fr) minmax(380px, .85fr);
+  }
+}
+
+@media (max-width: 1180px) {
+  .app-shell {
+    grid-template-columns: 250px minmax(0, 1fr);
+  }
+
+  .today-v3-progress-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .today-v3-progress-context {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    padding-inline-start: 0;
+    border-inline-start: 0;
+  }
+
+  .today-v3-progress-context > div + div {
+    padding-top: 8px;
+    border-top: 0;
+  }
+}
+
+@media (max-width: 980px) {
+  .today-v3-toolbar {
+    grid-template-columns: 1fr 44px;
+    grid-template-areas: "search alerts";
+  }
+
+  .today-v3-search {
+    max-width: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .today-v3-toolbar {
+    margin-bottom: 18px;
+  }
+
+  .today-v3-page-header {
+    gap: 16px;
+  }
+
+  .today-v3-next-empty,
+  .today-v3-compact-empty,
+  .today-v3-preparation-empty {
+    padding-block: 8px;
+  }
+
+  .today-v3-progress-context {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .today-v3-progress-context > div + div {
+    padding-top: 12px;
+    border-top: 1px solid #e7ece9;
+  }
+
+  .today-v3-action-card {
+    min-height: 92px;
+  }
+}
