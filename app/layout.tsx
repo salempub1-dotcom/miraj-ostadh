@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 import './flow.css';
 import './teacher-pages.css';
+import './v2.css';
 
 export const metadata: Metadata = {
   title: 'معراج الأستاذ',
