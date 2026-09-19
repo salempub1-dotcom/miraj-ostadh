@@ -1,93 +1,433 @@
-/* QUICK ACCESS V4 — OFFICIAL EDUCATIONAL ASSETS
-   Uses the approved Al Miraj Teacher design-kit illustrations.
-   Visual-only: no routes, data flow, auth or business logic changes. */
+/* QUICK ACCESS V4 — APPROVED REFERENCE MATCH
+   Visual-only overrides. Uses the official Al Miraj Teacher illustrations.
+   Existing routes, data flow, auth and business logic remain untouched. */
+
+/* Section header: quieter and closer to the approved educational reference. */
+.today-v3-quick-section {
+  margin-top: 4px;
+  padding: 2px 0 10px;
+}
+
+.today-v3-quick-section .today-v3-section-heading.open {
+  align-items: end;
+  margin-bottom: 16px;
+  padding-bottom: 0;
+}
+
+.today-v3-quick-section .today-v3-section-heading.open::after {
+  display: none;
+}
+
+.today-v3-quick-section .today-v3-section-heading.open h2 {
+  margin-top: 3px;
+  font-size: 22px;
+  line-height: 1.35;
+}
+
+.today-v3-quick-section .today-v3-section-heading.open > p {
+  max-width: 430px;
+  color: #7c8982;
+  font-size: 12.25px;
+  line-height: 1.65;
+}
+
+/* Default desktop/tablet composition: generous 2 × 2 cards. */
+.today-v3-quick-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.today-v3-action-card {
+  --qa-card-bg: #f8faf8;
+  --qa-card-bg-2: #ffffff;
+  --qa-border: #dfe7e2;
+  --qa-accent: #657c70;
+  --qa-accent-soft: #edf2ef;
+  --qa-art: none;
+
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: block;
+  min-height: 154px;
+  padding: 19px 22px 18px;
+  color: #2a4439;
+  background:
+    radial-gradient(circle at 9% 48%, rgba(255,255,255,.72) 0 12%, transparent 34%),
+    linear-gradient(122deg, var(--qa-card-bg) 0%, var(--qa-card-bg-2) 68%, #ffffff 100%);
+  border: 1px solid var(--qa-border);
+  border-radius: 20px;
+  box-shadow: 0 8px 22px rgba(31, 69, 53, .035);
+  transition: transform .22s ease, border-color .22s ease, box-shadow .22s ease;
+}
+
+.today-v3-action-card::before {
+  content: "";
+  position: absolute;
+  left: -14px;
+  top: -18px;
+  width: 178px;
+  height: 178px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,.58), transparent 66%);
+  opacity: .9;
+  z-index: 0;
+  pointer-events: none;
+}
 
 .today-v3-action-card::after {
+  content: "";
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  width: 132px;
+  height: 108px;
+  background-image: var(--qa-art);
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
-  opacity: .97;
-  filter: drop-shadow(0 10px 18px rgba(42, 73, 61, .08)) saturate(.96) contrast(.99);
+  opacity: .98;
+  filter: drop-shadow(0 8px 15px rgba(41, 71, 60, .08)) saturate(.98) contrast(1);
+  transform: translateY(-50%);
+  transform-origin: center;
+  transition: transform .24s ease, filter .24s ease;
+  z-index: 1;
+  pointer-events: none;
 }
 
-.today-v3-action-card[data-tone="amber"]::after {
-  background-image: url('/illustrations/quick-access/daily-notebook.png');
-}
-
-.today-v3-action-card[data-tone="blue"]::after {
-  background-image: url('/illustrations/quick-access/resources.png');
-}
-
-.today-v3-action-card[data-tone="green"]::after {
-  background-image: url('/illustrations/quick-access/program.png');
-}
-
-.today-v3-action-card[data-tone="violet"]::after {
-  background-image: url('/illustrations/quick-access/library.png');
+.today-v3-action-card:hover {
+  transform: translateY(-3px);
+  border-color: #cbd8d1;
+  box-shadow: 0 15px 32px rgba(31, 69, 53, .075);
 }
 
 .today-v3-action-card:hover::after {
-  transform: translateY(-2px) scale(1.028);
-  filter: drop-shadow(0 13px 22px rgba(42, 73, 61, .11)) saturate(1) contrast(1);
+  transform: translateY(calc(-50% - 2px)) scale(1.025);
+  filter: drop-shadow(0 11px 20px rgba(41, 71, 60, .11)) saturate(1) contrast(1);
 }
 
-/* Slightly tune each visual zone so the four different source compositions feel equally weighted. */
-.today-v3-action-card[data-tone="amber"]::after,
-.today-v3-action-card[data-tone="blue"]::after {
-  width: 154px;
-  height: 128px;
+.today-v3-action-card:focus-visible {
+  outline: 3px solid rgba(48, 126, 91, .18);
+  outline-offset: 3px;
 }
 
-.today-v3-action-card[data-tone="green"]::after,
-.today-v3-action-card[data-tone="violet"]::after {
-  width: 150px;
-  height: 116px;
+/* Official illustration + tone mapping. */
+.today-v3-action-card[data-tone="amber"] {
+  --qa-card-bg: #fff5df;
+  --qa-card-bg-2: #fffaf0;
+  --qa-border: #efdfbf;
+  --qa-accent: #a46d1e;
+  --qa-accent-soft: #fff0d2;
+  --qa-art: url('/illustrations/quick-access/daily-notebook.png');
 }
 
+.today-v3-action-card[data-tone="blue"] {
+  --qa-card-bg: #eaf5ff;
+  --qa-card-bg-2: #f5faff;
+  --qa-border: #d3e5f1;
+  --qa-accent: #376f91;
+  --qa-accent-soft: #dceefa;
+  --qa-art: url('/illustrations/quick-access/resources.png');
+}
+
+.today-v3-action-card[data-tone="green"] {
+  --qa-card-bg: #eaf8ef;
+  --qa-card-bg-2: #f5fbf7;
+  --qa-border: #d2e8d9;
+  --qa-accent: #2f7658;
+  --qa-accent-soft: #dbf0e3;
+  --qa-art: url('/illustrations/quick-access/program.png');
+}
+
+.today-v3-action-card[data-tone="violet"] {
+  --qa-card-bg: #f3ecfb;
+  --qa-card-bg-2: #faf7fe;
+  --qa-border: #e2d8ef;
+  --qa-accent: #6d5b88;
+  --qa-accent-soft: #ece3f7;
+  --qa-art: url('/illustrations/quick-access/library.png');
+}
+
+/* Right-side title icon, matching the reference cards. */
+.today-v3-action-icon {
+  position: absolute;
+  inset-inline-start: 18px;
+  top: 17px;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  color: var(--qa-accent);
+  background: var(--qa-accent-soft);
+  border: 1px solid rgba(255,255,255,.72);
+  border-radius: 12px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.82);
+  z-index: 3;
+}
+
+.today-v3-action-icon svg {
+  width: 21px;
+  height: 21px;
+  stroke-width: 1.9;
+}
+
+/* Text zone stays visually independent from the illustration zone. */
+.today-v3-action-copy {
+  position: relative;
+  z-index: 2;
+  display: block;
+  max-width: calc(100% - 150px);
+  min-width: 0;
+  padding: 3px 50px 0 0;
+}
+
+.today-v3-action-copy::before {
+  display: none;
+}
+
+.today-v3-action-copy strong {
+  display: block;
+  margin: 0;
+  color: #203d32;
+  font-size: 19px;
+  font-weight: 780;
+  line-height: 1.4;
+}
+
+.today-v3-action-copy small {
+  display: block;
+  max-width: 250px;
+  margin-top: 6px;
+  color: #61736a;
+  font-size: 12.6px;
+  font-weight: 500;
+  line-height: 1.65;
+}
+
+.today-v3-action-copy::after {
+  display: block;
+  margin-top: 12px;
+  color: var(--qa-accent);
+  font-size: 10.5px;
+  font-weight: 650;
+  line-height: 1.45;
+  opacity: .86;
+}
+
+.today-v3-action-card[data-tone="amber"] .today-v3-action-copy::after { content: "تنظيم أفضل ليومك"; }
+.today-v3-action-card[data-tone="blue"] .today-v3-action-copy::after { content: "مكتبة موارد تعليمية"; }
+.today-v3-action-card[data-tone="green"] .today-v3-action-copy::after { content: "مخطط زمني منظم"; }
+.today-v3-action-card[data-tone="violet"] .today-v3-action-copy::after { content: "كل محفوظاتك في مكان واحد"; }
+
+/* Rounded navigation cue in the visual zone, like the approved reference. */
+.today-v3-action-arrow {
+  position: absolute;
+  inset-inline-end: 16px;
+  bottom: 14px;
+  width: 36px;
+  height: 36px;
+  padding: 9px;
+  color: var(--qa-accent);
+  background: rgba(255,255,255,.92);
+  border: 1px solid rgba(67, 99, 84, .12);
+  border-radius: 11px;
+  box-shadow: 0 7px 16px rgba(31, 69, 53, .06);
+  transition: transform .22s ease, box-shadow .22s ease, background-color .22s ease;
+  z-index: 4;
+}
+
+.today-v3-action-card:hover .today-v3-action-arrow {
+  color: var(--qa-accent);
+  background: #fff;
+  border-color: rgba(67, 99, 84, .18);
+  transform: translateX(-3px);
+  box-shadow: 0 9px 18px rgba(31, 69, 53, .09);
+}
+
+/* At the approved desktop proportions, four cards form one premium feature row. */
+@media (min-width: 1400px) {
+  .today-v3-quick-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .today-v3-action-card {
+    min-height: 148px;
+    padding: 17px 16px 16px;
+    border-radius: 18px;
+  }
+
+  .today-v3-action-card::after {
+    left: 12px;
+    width: 106px;
+    height: 92px;
+  }
+
+  .today-v3-action-icon {
+    inset-inline-start: 14px;
+    top: 14px;
+    width: 36px;
+    height: 36px;
+  }
+
+  .today-v3-action-icon svg {
+    width: 19px;
+    height: 19px;
+  }
+
+  .today-v3-action-copy {
+    max-width: calc(100% - 108px);
+    padding-inline-start: 44px;
+  }
+
+  .today-v3-action-copy strong {
+    font-size: 17.5px;
+  }
+
+  .today-v3-action-copy small {
+    margin-top: 5px;
+    font-size: 11.35px;
+    line-height: 1.55;
+  }
+
+  .today-v3-action-copy::after {
+    margin-top: 9px;
+    font-size: 9.6px;
+  }
+
+  .today-v3-action-arrow {
+    inset-inline-end: 12px;
+    bottom: 12px;
+    width: 34px;
+    height: 34px;
+    padding: 8px;
+  }
+}
+
+/* Extra-wide screens can afford slightly larger illustrations without sacrificing text. */
 @media (min-width: 1700px) {
-  .today-v3-action-card[data-tone="amber"]::after,
-  .today-v3-action-card[data-tone="blue"]::after {
-    width: 122px;
+  .today-v3-action-card {
+    min-height: 152px;
+    padding: 18px 18px 17px;
+  }
+
+  .today-v3-action-card::after {
+    left: 16px;
+    width: 118px;
     height: 101px;
   }
 
-  .today-v3-action-card[data-tone="green"]::after,
-  .today-v3-action-card[data-tone="violet"]::after {
-    width: 118px;
-    height: 92px;
+  .today-v3-action-copy {
+    max-width: calc(100% - 120px);
+  }
+
+  .today-v3-action-copy strong {
+    font-size: 18px;
+  }
+
+  .today-v3-action-copy small {
+    font-size: 11.75px;
   }
 }
 
 @media (max-width: 1180px) {
-  .today-v3-action-card[data-tone="amber"]::after,
-  .today-v3-action-card[data-tone="blue"]::after {
-    width: 136px;
-    height: 112px;
+  .today-v3-action-card {
+    min-height: 152px;
   }
 
-  .today-v3-action-card[data-tone="green"]::after,
-  .today-v3-action-card[data-tone="violet"]::after {
-    width: 132px;
+  .today-v3-action-card::after {
+    width: 124px;
     height: 102px;
+  }
+
+  .today-v3-action-copy {
+    max-width: calc(100% - 138px);
   }
 }
 
 @media (max-width: 760px) {
-  .today-v3-action-card[data-tone="amber"]::after,
-  .today-v3-action-card[data-tone="blue"]::after,
-  .today-v3-action-card[data-tone="green"]::after,
-  .today-v3-action-card[data-tone="violet"]::after {
-    width: 128px;
-    height: 104px;
+  .today-v3-quick-section .today-v3-section-heading.open {
+    display: block;
+  }
+
+  .today-v3-quick-section .today-v3-section-heading.open > p {
+    margin-top: 5px;
+  }
+
+  .today-v3-quick-grid {
+    grid-template-columns: 1fr;
+    gap: 11px;
+  }
+
+  .today-v3-action-card {
+    min-height: 148px;
+    padding: 18px 17px 16px;
+    border-radius: 18px;
+  }
+
+  .today-v3-action-card::after {
+    left: 15px;
+    width: 118px;
+    height: 98px;
+  }
+
+  .today-v3-action-copy {
+    max-width: calc(100% - 130px);
+    padding-inline-start: 46px;
+  }
+
+  .today-v3-action-copy strong {
+    font-size: 18px;
+  }
+
+  .today-v3-action-copy small {
+    font-size: 12px;
   }
 }
 
 @media (max-width: 440px) {
-  .today-v3-action-card[data-tone="amber"]::after,
-  .today-v3-action-card[data-tone="blue"]::after,
-  .today-v3-action-card[data-tone="green"]::after,
-  .today-v3-action-card[data-tone="violet"]::after {
-    width: 104px;
-    height: 84px;
+  .today-v3-action-card {
+    min-height: 142px;
+    padding: 16px 14px 14px;
+  }
+
+  .today-v3-action-card::after {
+    left: 8px;
+    width: 98px;
+    height: 82px;
+  }
+
+  .today-v3-action-icon {
+    inset-inline-start: 12px;
+    top: 13px;
+    width: 34px;
+    height: 34px;
+  }
+
+  .today-v3-action-copy {
+    max-width: calc(100% - 103px);
+    padding-inline-start: 42px;
+  }
+
+  .today-v3-action-copy strong {
+    font-size: 16.5px;
+  }
+
+  .today-v3-action-copy small {
+    font-size: 11.25px;
+  }
+
+  .today-v3-action-copy::after {
+    margin-top: 8px;
+    font-size: 9.25px;
+  }
+
+  .today-v3-action-arrow {
+    inset-inline-end: 9px;
+    bottom: 10px;
+    width: 31px;
+    height: 31px;
+    padding: 7px;
   }
 }
