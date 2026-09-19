@@ -26,7 +26,7 @@ export async function registerAction(formData: FormData) {
         full_name: fullName,
         display_name: fullName,
       },
-      emailRedirectTo: `${getSiteUrl()}/onboarding/profile`,
+      emailRedirectTo: `${getSiteUrl()}/auth/callback?next=/onboarding/profile`,
     },
   });
 
