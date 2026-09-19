@@ -1,0 +1,15 @@
+.lesson-workspace { display: grid; gap: 16px; }
+.lesson-workspace-head { padding: 22px 24px; border: 1px solid var(--v2-border); border-radius: 22px; background: linear-gradient(120deg, #fffaf0, #f8fcfa); box-shadow: var(--v2-shadow); }
+.lesson-workspace-head h1 { margin: 8px 0 6px; color: #173c2f; font-size: clamp(26px, 4vw, 38px); }
+.lesson-workspace-head p { margin: 0; color: var(--v2-muted); }
+.lesson-breadcrumb { margin-top: 14px; color: var(--v2-primary); font-size: 12px; font-weight: 800; }
+.lesson-tabs { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 8px; }
+.lesson-tabs a { min-height: 48px; display: flex; align-items: center; justify-content: center; gap: 7px; border: 1px solid var(--v2-border); border-radius: 12px; background: white; color: #4f665c; font-size: 12px; font-weight: 800; }
+.lesson-tabs a.active { color: var(--v2-primary-dark); background: var(--v2-primary-soft); border-color: #c7e0d3; }
+.lesson-tab-panel h2 { margin: 4px 0 18px; }
+.lesson-plan-summary { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.lesson-plan-summary > div { min-height: 150px; padding: 16px; border-radius: 16px; border: 1px solid #e4ece8; background: #fbfdfc; }
+.lesson-plan-summary strong { color: #244d3d; }
+.lesson-plan-summary p { color: var(--v2-muted); line-height: 1.8; font-size: 13px; }
+@media (max-width: 900px) { .lesson-tabs { grid-template-columns: repeat(3, 1fr); } .lesson-plan-summary { grid-template-columns: 1fr; } }
+@media (max-width: 560px) { .lesson-tabs { display: flex; overflow-x: auto; padding-bottom: 4px; } .lesson-tabs a { min-width: 104px; } .lesson-workspace-head { padding: 18px; } }
