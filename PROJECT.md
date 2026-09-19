@@ -6,8 +6,14 @@
 - **Purpose:** منصة رقمية لأساتذة التعليم الابتدائي في الجزائر، تبدأ باللغة العربية للسنة الثالثة ابتدائي (3AP).
 - **Repository:** `salempub1-dotcom/miraj-ostadh`
 - **Default Branch:** `main`
+- **Supabase Project Name:** `Miraj Ostadh`
 - **Supabase Project Ref:** `ltcchvjxgdcdsvgrmtjb`
+- **Supabase Region:** `eu-central-1` (Frankfurt)
 - **Supabase Environment:** Development
+- **Vercel Team:** `EL-miraj`
+- **Vercel Team Slug:** `elmiraj1`
+- **Vercel Team ID:** `team_IhCrW2DUZHDJHOxFDMIGVjL6`
+- **Vercel Project:** Not created yet — must be created specifically for Miraj Ostadh.
 - **Frontend:** Next.js + TypeScript
 - **Backend:** Supabase (PostgreSQL, Auth, Storage, RLS)
 - **Primary UI:** Arabic RTL, responsive web/PWA
@@ -26,8 +32,10 @@ Before any sensitive operation such as database migration, reset, deploy, build,
 
 1. GitHub repository is `salempub1-dotcom/miraj-ostadh`.
 2. Supabase project ref is exactly `ltcchvjxgdcdsvgrmtjb`.
-3. Environment is the intended environment.
-4. No `.env` or secret file belongs to another project.
+3. Vercel team is `EL-miraj` / `team_IhCrW2DUZHDJHOxFDMIGVjL6` when deploying.
+4. Any Vercel project used is explicitly created for Miraj Ostadh.
+5. Environment is the intended environment.
+6. No `.env` or secret file belongs to another project.
 
 If any identity check fails, stop before making changes.
 
@@ -65,6 +73,9 @@ If any identity check fails, stop before making changes.
 
 ## Current Status
 
-- GitHub repository created.
-- Supabase target ref recorded.
-- Database migrations are **not yet approved to run** until Supabase project identity is verified against the intended account/project.
+- GitHub repository initialized with Next.js/TypeScript project structure.
+- Supabase identity verified: `Miraj Ostadh` / `ltcchvjxgdcdsvgrmtjb`.
+- Database migrations 001–005 applied successfully.
+- Core curriculum, lesson content, resources, teacher workspace, progress, library, and daily journal tables exist with RLS.
+- Latest Supabase security advisor check: **0 security warnings**.
+- Vercel connector verified for team `EL-miraj`; Miraj Ostadh Vercel project is intentionally not created/deployed yet.
