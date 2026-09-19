@@ -7,10 +7,13 @@ import {
   CalendarDays,
   Clock3,
   FileText,
+  GraduationCap,
   Library,
   NotebookTabs,
+  Plus,
   Search,
-  Sparkles,
+  Settings2,
+  UserRound,
 } from 'lucide-react';
 import { requireCompletedTeacherContext } from '@/lib/auth';
 import { getCurriculumContext } from '@/lib/v1';
@@ -183,176 +186,225 @@ export default async function TodayPage() {
   const nextUnit = nextWeek ? unitById.get(nextWeek.unit_id) : null;
   const nextDomainName = nextCardLesson?.domain_id ? domainById.get(nextCardLesson.domain_id) : null;
   const dayIsOver = schedule.length > 0 && !nextScheduleItem;
+  const preparationHref = nextCardLesson ? `/lessons/${nextCardLesson.id}` : '/planning';
 
   return (
-    <div className="today-dashboard">
-      <header className="topbar today-topbar">
-        <div className="search">
-          <Search size={17} />
-          <span>ابحث عن درس، نشاط أو مورد...</span>
-        </div>
-        <button className="teacher-chip icon-chip" type="button" aria-label="الإشعارات"><Bell size={18} /></button>
-        <div className="teacher-chip">
-          <div className="avatar">👨🏻‍🏫</div>
-          <div className="teacher-meta">
-            <strong>{teacherName}</strong>
-            <div className="small">{gradeName}</div>
-          </div>
-        </div>
-      </header>
-
-      <section className="hero today-hero">
-        <div className="hero-copy">
-          <div className="hero-date">{dateLabel}</div>
-          <h2>{greeting} {teacherName} <span aria-hidden="true">👋</span></h2>
-          <p>بالعلم نرتقي، وتحضيرك اليومي يبدأ من مكان واحد مرتب وواضح.</p>
-          <div className="hero-tags">
-            <span>{gradeCode}</span>
-            <span>{subjectName}</span>
-            <span>{academicYear}</span>
-          </div>
-        </div>
-        <div className="hero-classroom" aria-hidden="true">
-          <div className="hero-books"><span /><span /><span /></div>
-          <div className="hero-board">
-            <BookOpenText size={30} />
-            <strong>{subjectName}</strong>
+    <div className="today-v3">
+      <header className="today-v3-toolbar" aria-label="أدوات الصفحة">
+        <div className="today-v3-user">
+          <span className="today-v3-avatar" aria-hidden="true"><UserRound size={19} /></span>
+          <div>
+            <strong><bdi>{teacherName}</bdi></strong>
             <span>{gradeName}</span>
           </div>
-          <div className="hero-pencil-pot">✏️</div>
+        </div>
+
+        <div className="today-v3-search" role="search">
+          <Search size={18} />
+          <span>ابحث عن درس، نشاط أو مورد...</span>
+        </div>
+
+        <button className="today-v3-icon-button" type="button" aria-label="الإشعارات">
+          <Bell size={19} />
+        </button>
+      </header>
+
+      <section className="today-v3-page-header">
+        <div className="today-v3-page-heading">
+          <span className="today-v3-date">{dateLabel}</span>
+          <h1>{greeting}، <bdi>{teacherName}</bdi></h1>
+          <p>هذا ملخص يومك الدراسي وما تحتاجه للانتقال إلى خطوتك التالية بوضوح.</p>
+          <div className="today-v3-context-row" aria-label="السياق الدراسي الحالي">
+            <span><GraduationCap size={16} /> {gradeName}</span>
+            <span><BookOpen size={16} /> {subjectName}</span>
+            <span><CalendarDays size={16} /> <bdi dir="ltr">{academicYear}</bdi></span>
+            {context.class_name ? <span><UserRound size={16} /> {context.class_name}</span> : null}
+          </div>
+        </div>
+
+        <Link href={preparationHref} className="today-v3-primary-action">
+          <Plus size={18} />
+          تحضير حصة
+        </Link>
+      </section>
+
+      <section className="today-v3-next" aria-labelledby="next-lesson-title">
+        <div className="today-v3-next-accent" aria-hidden="true" />
+        <div className="today-v3-next-header">
+          <div>
+            <span className="today-v3-eyebrow">خطوتك الأهم الآن</span>
+            <h2 id="next-lesson-title">{dayIsOver ? 'حضّر حصة الغد' : 'حصتك القادمة'}</h2>
+          </div>
+          {nextScheduleItem ? (
+            <span className="today-v3-time-pill"><Clock3 size={16} /> <bdi dir="ltr">{nextScheduleItem.start} – {nextScheduleItem.end}</bdi></span>
+          ) : null}
+        </div>
+
+        {nextCardLesson ? (
+          <div className="today-v3-next-content">
+            <div className="today-v3-next-icon" aria-hidden="true"><BookOpenText size={30} /></div>
+            <div className="today-v3-next-copy">
+              <div className="today-v3-lesson-meta">
+                <span>{subjectName}</span>
+                <span>{gradeName}</span>
+                {nextUnit ? <span>{nextUnit.title}</span> : null}
+                {nextWeek ? <span>الأسبوع {nextWeek.number}</span> : null}
+              </div>
+              {nextDomainName ? <span className="today-v3-domain">{nextDomainName}</span> : null}
+              <h3>{nextCardLesson.title}</h3>
+              <p>افتح مساحة التحضير للوصول إلى المذكرة والنص والوسائل والأنشطة والتقويم.</p>
+            </div>
+            <Link href={`/lessons/${nextCardLesson.id}`} className="today-v3-next-cta">
+              حضّر حصتي <ArrowLeft size={18} />
+            </Link>
+          </div>
+        ) : (
+          <div className="today-v3-next-empty">
+            <div className="today-v3-empty-icon" aria-hidden="true"><BookOpenText size={24} /></div>
+            <div>
+              <strong>{totalLessons ? 'أكملت الدروس المنشورة لهذا المستوى' : 'برنامج هذا المستوى قيد الإعداد'}</strong>
+              <p>{totalLessons ? 'يمكنك مراجعة التخطيط الكامل أو العودة إلى مواردك المحفوظة.' : 'ستظهر حصتك القادمة هنا فور نشر البرنامج والدروس الرسمية.'}</p>
+              {nextScheduleItem ? <span className="today-v3-empty-note">لديك حصة مسجلة في الجدول عند <bdi dir="ltr">{nextScheduleItem.start}</bdi>.</span> : null}
+            </div>
+            <Link href="/planning" className="today-v3-ghost-action">عرض التخطيط <ArrowLeft size={16} /></Link>
+          </div>
+        )}
+      </section>
+
+      <section className="today-v3-progress" aria-labelledby="academic-progress-title">
+        <div className="today-v3-section-heading">
+          <div>
+            <span className="today-v3-eyebrow">المتابعة الأكاديمية</span>
+            <h2 id="academic-progress-title">تقدمك الدراسي</h2>
+          </div>
+          <Link href="/planning" className="today-v3-text-action">عرض التخطيط الكامل <ArrowLeft size={16} /></Link>
+        </div>
+
+        <div className="today-v3-progress-grid">
+          <div className="today-v3-progress-main">
+            <div className="today-v3-progress-number">{progressPercent}%</div>
+            <div className="today-v3-progress-track" aria-label={`نسبة التقدم ${progressPercent}%`}>
+              <span style={{ width: `${Math.max(progressPercent, totalLessons ? 2 : 0)}%` }} />
+            </div>
+            {totalLessons ? (
+              <p>تم إنجاز <strong>{completedLessons}</strong> من <strong>{totalLessons}</strong> درسًا منشورًا.</p>
+            ) : (
+              <p>سيبدأ احتساب التقدم تلقائيًا بعد نشر المقاطع والدروس الرسمية لهذا المستوى.</p>
+            )}
+          </div>
+
+          <div className="today-v3-progress-context">
+            <div>
+              <span>المستوى الحالي</span>
+              <strong>{gradeName}</strong>
+              <small><bdi dir="ltr">{gradeCode}</bdi> • {subjectName}</small>
+            </div>
+            <div>
+              <span>{nextUnit ? 'المقطع الحالي' : 'المحتوى الحالي'}</span>
+              <strong>{nextUnit?.title ?? (totalLessons ? 'البرنامج مكتمل' : 'بانتظار نشر البرنامج')}</strong>
+              <small>{nextCardLesson ? `الحصة التالية: ${nextCardLesson.title}` : 'لا توجد حصة منشورة حاليًا'}</small>
+            </div>
+          </div>
         </div>
       </section>
 
-      <section className="grid-2 today-primary-grid">
-        <div className="card next-card">
-          <div className="card-title">
+      <section className="today-v3-support-grid">
+        <article className="today-v3-support-card today-v3-schedule" aria-labelledby="today-schedule-title">
+          <div className="today-v3-section-heading compact">
             <div>
-              <span className="section-kicker">خطوتك التالية</span>
-              <h3>{dayIsOver ? 'حضّر حصة الغد' : 'حصتك القادمة'}</h3>
-            </div>
-            {nextScheduleItem ? (
-              <span className="time-pill"><Clock3 size={14} />{nextScheduleItem.start} – {nextScheduleItem.end}</span>
-            ) : null}
-          </div>
-
-          {nextCardLesson ? (
-            <div className="next-lesson next-lesson-v2">
-              <div className="lesson-icon"><BookOpenText size={30} /></div>
-              <div className="lesson-copy">
-                {nextDomainName ? <span className="lesson-domain">{nextDomainName}</span> : null}
-                <h4>{nextCardLesson.title}</h4>
-                <p>{gradeName}{nextUnit ? ` • ${nextUnit.title}` : ''}{nextWeek ? ` • الأسبوع ${nextWeek.number}` : ''}</p>
-              </div>
-              <Link href={`/lessons/${nextCardLesson.id}`} className="primary-btn lesson-cta">
-                حضّر حصتي <ArrowLeft size={17} />
-              </Link>
-            </div>
-          ) : (
-            <div className="empty-state lesson-empty">
-              <div className="empty-state-icon"><Sparkles size={22} /></div>
-              <strong>{totalLessons ? 'أكملت الدروس المنشورة لهذا المستوى.' : 'برنامج هذا المستوى قيد الإعداد.'}</strong>
-              <span>{totalLessons ? 'يمكنك مراجعة التخطيط أو مواردك المحفوظة.' : 'سنظهر الحصة التالية هنا فور نشر الدروس الرسمية.'}</span>
-              <Link href="/planning" className="secondary-link">عرض التخطيط</Link>
-            </div>
-          )}
-        </div>
-
-        <div className="card schedule-card">
-          <div className="card-title">
-            <div>
-              <span className="section-kicker">{dateLabel}</span>
-              <h3>جدول اليوم</h3>
+              <span className="today-v3-eyebrow">{dateLabel}</span>
+              <h2 id="today-schedule-title">جدول اليوم</h2>
             </div>
             <CalendarDays size={20} />
           </div>
 
           {schedule.length ? (
-            <div className="schedule schedule-v2">
+            <div className="today-v3-schedule-list">
               {schedule.map((item, index) => {
                 const itemDomain = item.lesson?.domain_id ? domainById.get(item.lesson.domain_id) : null;
                 const label = item.note || itemDomain || item.lesson?.title || subjectName;
                 return (
-                  <div className={`schedule-row schedule-${item.state}`} key={item.id}>
-                    <div className={`dot dot-${(index % 5) + 1}`}>{index + 1}</div>
-                    <div className="time">{item.start}</div>
-                    <div className="schedule-copy">
+                  <div className={`today-v3-schedule-row is-${item.state}`} key={item.id}>
+                    <span className="today-v3-schedule-index">{index + 1}</span>
+                    <bdi dir="ltr" className="today-v3-schedule-time">{item.start}</bdi>
+                    <div>
                       <strong>{label}</strong>
-                      <div className="small">حتى {item.end}</div>
+                      <span>حتى <bdi dir="ltr">{item.end}</bdi></span>
                     </div>
                   </div>
                 );
               })}
             </div>
           ) : (
-            <div className="empty-state compact">
-              <strong>لا توجد حصص مسجلة لهذا اليوم.</strong>
-              <span>يمكنك تعديل جدول استعمال الزمن من حسابك.</span>
+            <div className="today-v3-compact-empty">
+              <span className="today-v3-empty-icon" aria-hidden="true"><CalendarDays size={22} /></span>
+              <div>
+                <strong>لا توجد حصص اليوم</strong>
+                <p>يمكنك تعديل جدول استعمال الزمن من حسابك.</p>
+              </div>
+              <Link href="/account" className="today-v3-small-link"><Settings2 size={15} /> الحساب</Link>
             </div>
           )}
-        </div>
-      </section>
+        </article>
 
-      <section className="quick-grid" aria-label="الوصول السريع">
-        <Link className="quick-card" href="/journal">
-          <span className="quick-icon"><NotebookTabs size={26} /></span>
-          <div><strong>الدفتر اليومي</strong><br /><span>إنشاء، معاينة وطباعة</span></div>
-        </Link>
-        <Link className="quick-card" href="/resources">
-          <span className="quick-icon"><BookOpen size={26} /></span>
-          <div><strong>الموارد</strong><br /><span>نصوص، صور وتمارين</span></div>
-        </Link>
-        <Link className="quick-card" href="/planning">
-          <span className="quick-icon"><CalendarDays size={26} /></span>
-          <div><strong>البرنامج</strong><br /><span>المقاطع والأسابيع والتقدم</span></div>
-        </Link>
-        <Link className="quick-card" href="/library">
-          <span className="quick-icon"><Library size={26} /></span>
-          <div><strong>مكتبتي</strong><br /><span>مواردك المحفوظة</span></div>
-        </Link>
-      </section>
-
-      <section className="today-lower-grid">
-        <div className="card progress-card progress-card-v2">
-          <div className="progress-head">
+        <article className="today-v3-support-card today-v3-preparation" aria-labelledby="lesson-preparation-title">
+          <div className="today-v3-section-heading compact">
             <div>
-              <span className="section-kicker">برنامج {gradeCode} • {subjectName}</span>
-              <h3>تقدمك الدراسي</h3>
-            </div>
-            <strong className="progress-number">{progressPercent}%</strong>
-          </div>
-          <div className="progress-line" aria-label={`نسبة التقدم ${progressPercent}%`}>
-            <div className="progress-value" style={{ width: `${Math.max(progressPercent, totalLessons ? 2 : 0)}%` }} />
-          </div>
-          {totalLessons ? (
-            <div className="progress-details">
-              <span>{completedLessons} من {totalLessons} درسًا مكتملًا</span>
-              {nextUnit ? <strong>المقطع الحالي: {nextUnit.title}</strong> : <strong>البرنامج مكتمل</strong>}
-            </div>
-          ) : (
-            <div className="empty-inline">سيبدأ احتساب التقدم تلقائيًا بعد نشر المقاطع والدروس الرسمية لهذا المستوى.</div>
-          )}
-          <Link href="/planning" className="text-link">عرض التخطيط الكامل <ArrowLeft size={15} /></Link>
-        </div>
-
-        <div className="card preparation-preview">
-          <div className="card-title">
-            <div>
-              <span className="section-kicker">وصول سريع</span>
-              <h3>تحضير الحصة</h3>
+              <span className="today-v3-eyebrow">وصول سريع</span>
+              <h2 id="lesson-preparation-title">تحضير الحصة</h2>
             </div>
             <FileText size={20} />
           </div>
+
           {nextCardLesson ? (
-            <>
-              <strong className="preview-title">{nextCardLesson.title}</strong>
-              <div className="prep-tabs" aria-label="أقسام التحضير">
-                <span>المذكرة</span><span>النص</span><span>الوسائل</span><span>الأنشطة</span><span>التقويم</span><span>المعالجة</span>
-              </div>
-              <Link href={`/lessons/${nextCardLesson.id}`} className="secondary-btn wide prep-open">فتح التحضير الكامل</Link>
-            </>
+            <div className="today-v3-preparation-content">
+              <strong>{nextCardLesson.title}</strong>
+              <p>المذكرة، النص، الوسائل، الأنشطة، التقويم والمعالجة في مساحة واحدة.</p>
+              <Link href={`/lessons/${nextCardLesson.id}`} className="today-v3-secondary-action">فتح التحضير <ArrowLeft size={16} /></Link>
+            </div>
           ) : (
-            <div className="empty-state compact"><span>سيظهر تحضير الحصة هنا عند توفر أول درس منشور.</span></div>
+            <div className="today-v3-preparation-empty">
+              <span className="today-v3-preparation-mark" aria-hidden="true"><FileText size={25} /></span>
+              <div>
+                <strong>التحضير غير متاح بعد</strong>
+                <p>سيصبح التحضير متاحًا عند نشر أول درس لهذا المستوى.</p>
+              </div>
+              <Link href="/planning" className="today-v3-small-link">عرض التخطيط <ArrowLeft size={15} /></Link>
+            </div>
           )}
+        </article>
+      </section>
+
+      <section className="today-v3-quick-section" aria-labelledby="quick-access-title">
+        <div className="today-v3-section-heading open">
+          <div>
+            <span className="today-v3-eyebrow">اختصارات العمل</span>
+            <h2 id="quick-access-title">وصول سريع</h2>
+          </div>
+          <p>الأدوات التي تحتاجها أكثر خلال يومك الدراسي.</p>
+        </div>
+
+        <div className="today-v3-quick-grid">
+          <Link href="/journal" className="today-v3-action-card" data-tone="amber">
+            <span className="today-v3-action-icon"><NotebookTabs size={23} /></span>
+            <span className="today-v3-action-copy"><strong>الدفتر اليومي</strong><small>إنشاء، معاينة وطباعة</small></span>
+            <ArrowLeft className="today-v3-action-arrow" size={18} />
+          </Link>
+          <Link href="/resources" className="today-v3-action-card" data-tone="blue">
+            <span className="today-v3-action-icon"><BookOpen size={23} /></span>
+            <span className="today-v3-action-copy"><strong>الموارد</strong><small>نصوص، صور وتمارين</small></span>
+            <ArrowLeft className="today-v3-action-arrow" size={18} />
+          </Link>
+          <Link href="/planning" className="today-v3-action-card" data-tone="green">
+            <span className="today-v3-action-icon"><CalendarDays size={23} /></span>
+            <span className="today-v3-action-copy"><strong>البرنامج</strong><small>المقاطع والأسابيع والتقدم</small></span>
+            <ArrowLeft className="today-v3-action-arrow" size={18} />
+          </Link>
+          <Link href="/library" className="today-v3-action-card" data-tone="violet">
+            <span className="today-v3-action-icon"><Library size={23} /></span>
+            <span className="today-v3-action-copy"><strong>مكتبتي</strong><small>مواردك المحفوظة</small></span>
+            <ArrowLeft className="today-v3-action-arrow" size={18} />
+          </Link>
         </div>
       </section>
     </div>
