@@ -17,7 +17,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          URL="https://miraj-ostadh-elmiraj1.vercel.app/api/health"
+          URL="https://miraj-ostadh.vercel.app/api/health"
           BODY=""
           for attempt in $(seq 1 24); do
             echo "Health attempt ${attempt}/24"
@@ -37,7 +37,7 @@ jobs:
         run: |
           set -euo pipefail
           curl -fsS --max-time 20 \
-            "https://miraj-ostadh-elmiraj1.vercel.app/register" \
+            "https://miraj-ostadh.vercel.app/register" \
             -o /tmp/register.html
           test -s /tmp/register.html
           echo "Registration page returned successfully."
