@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import './flow.css';
+import './teacher-pages.css';
 
 export const metadata: Metadata = {
   title: 'معراج الأستاذ',
