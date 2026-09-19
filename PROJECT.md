@@ -3,19 +3,18 @@
 ## Project Identity
 
 - **Project Name:** Miraj Ostadh / معراج الأستاذ
-- **Purpose:** منصة رقمية لأساتذة التعليم الابتدائي في الجزائر، تبدأ باللغة العربية للسنة الثالثة ابتدائي (3AP).
+- **Purpose:** منصة رقمية لأساتذة التعليم الابتدائي في الجزائر، تبدأ باللغة العربية لجميع سنوات الابتدائي من 1AP إلى 5AP.
 - **Repository:** `salempub1-dotcom/miraj-ostadh`
 - **Default Branch:** `main`
 - **Supabase Project Name:** `Miraj Ostadh`
 - **Supabase Project Ref:** `ltcchvjxgdcdsvgrmtjb`
 - **Supabase Region:** `eu-central-1` (Frankfurt)
-- **Supabase Environment:** Development
 - **Vercel Team:** `EL-miraj`
 - **Vercel Team Slug:** `elmiraj1`
 - **Vercel Team ID:** `team_IhCrW2DUZHDJHOxFDMIGVjL6`
 - **Vercel Project Slug:** `miraj-ostadh`
-- **Current Main App URL:** `https://miraj-ostadh-git-main-elmiraj1.vercel.app`
-- **Vercel Dashboard/Deployment Reference:** `https://vercel.com/elmiraj1/miraj-ostadh/6k2ZpPiHbnexiGbfUqQ7DqUbnvJo`
+- **Canonical Production URL:** `https://miraj-ostadh.vercel.app`
+- **Git Branch URL:** `https://miraj-ostadh-git-main-elmiraj1.vercel.app`
 - **Frontend:** Next.js + TypeScript
 - **Backend:** Supabase (PostgreSQL, Auth, Storage, RLS)
 - **Primary UI:** Arabic RTL, responsive web/PWA
@@ -43,9 +42,10 @@ If any identity check fails, stop before making changes.
 
 ## V1 Scope
 
-- Education stage: Primary school
-- Initial grade: 3AP
+- Education stage: Algerian Primary School
+- Grades: 1AP, 2AP, 3AP, 4AP, 5AP
 - Initial subject: Arabic
+- Arabic RTL interface
 - Teacher authentication and onboarding
 - Today / My Day
 - Planning and progress tracking
@@ -61,7 +61,7 @@ If any identity check fails, stop before making changes.
 - Parents
 - Students
 - Attendance
-- Grades
+- Grades/marks management
 - Chat
 - Marketplace
 - Payments/subscriptions
@@ -72,19 +72,21 @@ If any identity check fails, stop before making changes.
 - Use `.env.example` only for variable names and placeholders.
 - Enable and maintain Row Level Security for teacher-owned data.
 - Official curriculum/content and teacher-private data must remain separated.
+- Public Supabase URL/publishable key may be exposed to the browser; service-role/secret keys must never be public.
 
 ## Current Status
 
 - GitHub repository initialized with Next.js/TypeScript project structure.
-- Supabase identity verified: `Miraj Ostadh` / `ltcchvjxgdcdsvgrmtjb`.
-- Database migrations **001–007** applied successfully.
-- Seed data exists for `2026–2027`, `3AP`, Arabic, 8 Arabic domains, and one published V1 curriculum.
+- Supabase identity verified before the latest migration: `Miraj Ostadh` / `ltcchvjxgdcdsvgrmtjb`.
+- Database migrations **001–009** applied successfully.
+- Seed/reference data exists for `2026–2027`, Arabic, 8 Arabic domains, and **five published primary Arabic curricula** for `1AP` through `5AP`.
 - Core curriculum, lesson content, resources, teacher workspace, progress, library, and daily journal tables exist with RLS.
-- Latest Supabase security advisor check: **0 security warnings**.
-- First real user flow implemented: Register → Login/Confirm → Profile → 3AP Arabic context → Timetable → Progress step → Complete → Today.
-- `/today` now reads the signed-in teacher profile and timetable from Supabase instead of demo data.
-- Teacher routes are protected and redirect incomplete accounts back to onboarding.
-- Placeholder routes exist for Planning, Resources, Library, Journal, and Account so the initial navigation is complete.
-- GitHub/Vercel deployment status for the current flow commit reported **success**.
-- Current main app URL for Auth configuration: `https://miraj-ostadh-git-main-elmiraj1.vercel.app`.
-- Supabase email-confirmation URL/template configuration still needs to be finalized against this app URL before end-to-end signup testing.
+- Auth flow tested successfully: Register → Email confirmation → Login → Profile → Grade → Timetable → Progress → Complete → Today.
+- The first real teacher account completed onboarding and reached `/today` successfully.
+- `/today` V2 is implemented as an Arabic RTL dashboard with dynamic teacher/grade/subject/year data, timetable, next lesson logic, quick actions, curriculum progress, and lesson preparation preview.
+- The teacher shell/sidebar and Account page are grade-aware instead of hardcoded to 3AP.
+- Onboarding now supports choosing any grade from **1AP to 5AP**, with Arabic as the V1 subject.
+- A first `/lessons/[lessonId]` preparation workspace scaffold exists with tabs for memo, text, resources, activities, assessment, and remediation.
+- Current curriculum units/weeks/lessons are still empty; the next implementation stage is importing the official Arabic curriculum content for the five grades.
+- Vercel deployment for the V2 interface build reported success.
+- Supabase Security Advisor currently has one Auth-level warning: leaked-password protection is disabled; this does not block the application flow and can be enabled separately.
