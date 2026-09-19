@@ -1,0 +1,357 @@
+/* QUICK ACCESS — PREMIUM EDUCATIONAL FEATURE CARDS V4
+   Visual-only overrides. Existing links, routes and business logic stay untouched. */
+
+.today-v3-quick-section {
+  margin-top: 2px;
+  padding: 4px 0 8px;
+}
+
+.today-v3-quick-section .today-v3-section-heading.open {
+  position: relative;
+  align-items: end;
+  margin-bottom: 22px;
+  padding-bottom: 14px;
+}
+
+.today-v3-quick-section .today-v3-section-heading.open::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #e3e9e5 16%, #e3e9e5 84%, transparent);
+}
+
+.today-v3-quick-section .today-v3-section-heading.open h2 {
+  margin-top: 4px;
+  font-size: 22px;
+}
+
+.today-v3-quick-section .today-v3-section-heading.open > p {
+  max-width: 420px;
+  color: #7d8983;
+  font-size: 12.5px;
+  line-height: 1.65;
+}
+
+.today-v3-quick-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.today-v3-action-card {
+  --qa-accent: #e7eee9;
+  --qa-accent-strong: #6c8378;
+  --qa-art-position: 0% center;
+
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-height: 164px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 150px;
+  grid-template-rows: auto 1fr auto;
+  gap: 0 20px;
+  padding: 22px 22px 20px;
+  color: #2c463b;
+  background:
+    radial-gradient(circle at 9% 48%, color-mix(in srgb, var(--qa-accent) 62%, transparent) 0, color-mix(in srgb, var(--qa-accent) 26%, transparent) 25%, transparent 46%),
+    linear-gradient(180deg, #fff 0%, #fefefc 100%);
+  border: 1px solid #dfe6e2;
+  border-radius: 22px;
+  box-shadow: 0 9px 24px rgba(31, 69, 53, .035);
+  transition:
+    transform .22s ease,
+    border-color .22s ease,
+    box-shadow .22s ease,
+    background-color .22s ease;
+}
+
+.today-v3-action-card::after {
+  content: "";
+  grid-column: 2;
+  grid-row: 1 / 4;
+  align-self: center;
+  justify-self: center;
+  width: 150px;
+  height: 122px;
+  background-image: url('/illustrations/quick-access/feature-cards.svg');
+  background-repeat: no-repeat;
+  background-size: 400% 100%;
+  background-position: var(--qa-art-position);
+  filter: saturate(.94) contrast(.98);
+  transform-origin: center;
+  transition: transform .24s ease, filter .24s ease;
+  z-index: 1;
+}
+
+.today-v3-action-card:hover {
+  transform: translateY(-3px);
+  border-color: #cbd8d0;
+  box-shadow: 0 16px 34px rgba(31, 69, 53, .075);
+}
+
+.today-v3-action-card:hover::after {
+  transform: translateY(-2px) scale(1.025);
+  filter: saturate(1) contrast(1);
+}
+
+.today-v3-action-card:focus-visible {
+  outline: 3px solid rgba(48, 126, 91, .18);
+  outline-offset: 3px;
+}
+
+.today-v3-action-card[data-tone="amber"] {
+  --qa-accent: #f4e7d1;
+  --qa-accent-strong: #9a6a27;
+  --qa-art-position: 0% center;
+}
+
+.today-v3-action-card[data-tone="blue"] {
+  --qa-accent: #deedf4;
+  --qa-accent-strong: #4d7790;
+  --qa-art-position: 33.333% center;
+}
+
+.today-v3-action-card[data-tone="green"] {
+  --qa-accent: #dfefe5;
+  --qa-accent-strong: #3d745a;
+  --qa-art-position: 66.667% center;
+}
+
+.today-v3-action-card[data-tone="violet"] {
+  --qa-accent: #ebe4f2;
+  --qa-accent-strong: #74668d;
+  --qa-art-position: 100% center;
+}
+
+.today-v3-action-icon {
+  grid-column: 1;
+  grid-row: 1;
+  justify-self: start;
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  color: var(--qa-accent-strong);
+  background: color-mix(in srgb, var(--qa-accent) 72%, #fff);
+  border: 1px solid color-mix(in srgb, var(--qa-accent) 88%, #cbd6d0);
+  border-radius: 12px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.7);
+  z-index: 2;
+}
+
+.today-v3-action-icon svg {
+  width: 20px;
+  height: 20px;
+  stroke-width: 1.85;
+}
+
+.today-v3-action-copy {
+  grid-column: 1;
+  grid-row: 2;
+  align-self: center;
+  min-width: 0;
+  padding: 10px 0 8px;
+  z-index: 2;
+}
+
+.today-v3-action-copy::before {
+  display: block;
+  margin-bottom: 6px;
+  color: color-mix(in srgb, var(--qa-accent-strong) 74%, #6e7c75);
+  font-size: 10.5px;
+  font-weight: 650;
+  line-height: 1.4;
+}
+
+.today-v3-action-card[data-tone="amber"] .today-v3-action-copy::before { content: "أداة الأستاذ اليومية"; }
+.today-v3-action-card[data-tone="blue"] .today-v3-action-copy::before { content: "مكتبة تعليمية"; }
+.today-v3-action-card[data-tone="green"] .today-v3-action-copy::before { content: "خارطة التقدم"; }
+.today-v3-action-card[data-tone="violet"] .today-v3-action-copy::before { content: "محفوظاتك التعليمية"; }
+
+.today-v3-action-copy strong {
+  display: block;
+  color: #263f35;
+  font-size: 19px;
+  font-weight: 760;
+  line-height: 1.35;
+}
+
+.today-v3-action-copy small {
+  display: block;
+  margin-top: 6px;
+  color: #78867f;
+  font-size: 13px;
+  font-weight: 450;
+  line-height: 1.55;
+}
+
+.today-v3-action-arrow {
+  grid-column: 1;
+  grid-row: 3;
+  justify-self: start;
+  width: 36px;
+  height: 36px;
+  padding: 9px;
+  color: #5f746a;
+  background: rgba(255,255,255,.76);
+  border: 1px solid #dce5df;
+  border-radius: 11px;
+  transition: transform .22s ease, color .22s ease, border-color .22s ease, background-color .22s ease;
+  z-index: 2;
+}
+
+.today-v3-action-card:hover .today-v3-action-arrow {
+  color: var(--qa-accent-strong);
+  background: #fff;
+  border-color: color-mix(in srgb, var(--qa-accent) 68%, #c4d2ca);
+  transform: translateX(-3px);
+}
+
+/* Keep the visual support area from competing with text. */
+.today-v3-action-card::before {
+  content: "";
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  width: 138px;
+  height: 112px;
+  transform: translateY(-50%);
+  background:
+    radial-gradient(circle at 26% 30%, rgba(255,255,255,.78) 0 2px, transparent 2.5px) 0 0 / 17px 17px,
+    radial-gradient(circle at 50% 50%, color-mix(in srgb, var(--qa-accent) 72%, transparent), transparent 68%);
+  border-radius: 32px 58px 42px 60px;
+  opacity: .72;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Wide desktop: four cards in one row once each card can keep a real visual zone. */
+@media (min-width: 1700px) {
+  .today-v3-quick-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .today-v3-action-card {
+    min-height: 158px;
+    grid-template-columns: minmax(0, 1fr) 118px;
+    gap: 0 12px;
+    padding: 20px 18px 18px;
+  }
+
+  .today-v3-action-card::after {
+    width: 118px;
+    height: 96px;
+  }
+
+  .today-v3-action-card::before {
+    left: 12px;
+    width: 112px;
+    height: 94px;
+  }
+
+  .today-v3-action-copy strong {
+    font-size: 17.5px;
+  }
+
+  .today-v3-action-copy small {
+    font-size: 11.75px;
+  }
+}
+
+@media (max-width: 1180px) {
+  .today-v3-action-card {
+    grid-template-columns: minmax(0, 1fr) 132px;
+    min-height: 156px;
+  }
+
+  .today-v3-action-card::after {
+    width: 132px;
+    height: 108px;
+  }
+
+  .today-v3-action-card::before {
+    width: 122px;
+    height: 102px;
+  }
+}
+
+@media (max-width: 760px) {
+  .today-v3-quick-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .today-v3-action-card {
+    min-height: 152px;
+    grid-template-columns: minmax(0, 1fr) 132px;
+    padding: 19px 18px 17px;
+    border-radius: 19px;
+  }
+
+  .today-v3-action-card::after {
+    width: 132px;
+    height: 106px;
+  }
+
+  .today-v3-action-card::before {
+    left: 12px;
+    width: 122px;
+    height: 100px;
+  }
+
+  .today-v3-action-copy strong {
+    font-size: 18px;
+  }
+
+  .today-v3-action-copy small {
+    font-size: 12.5px;
+  }
+}
+
+@media (max-width: 440px) {
+  .today-v3-action-card {
+    grid-template-columns: minmax(0, 1fr) 108px;
+    min-height: 146px;
+    gap: 0 10px;
+    padding: 17px 15px 15px;
+  }
+
+  .today-v3-action-card::after {
+    width: 108px;
+    height: 88px;
+  }
+
+  .today-v3-action-card::before {
+    left: 8px;
+    width: 100px;
+    height: 86px;
+  }
+
+  .today-v3-action-copy::before {
+    font-size: 9.5px;
+  }
+
+  .today-v3-action-copy strong {
+    font-size: 17px;
+  }
+
+  .today-v3-action-copy small {
+    max-width: 160px;
+    font-size: 11.5px;
+  }
+
+  .today-v3-action-icon {
+    width: 34px;
+    height: 34px;
+  }
+
+  .today-v3-action-arrow {
+    width: 32px;
+    height: 32px;
+    padding: 8px;
+  }
+}
