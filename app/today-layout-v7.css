@@ -1,0 +1,637 @@
+/* TODAY PAGE — LAYOUT REFINEMENT V7
+   Visual/layout only. No database, Supabase, auth, routes, links, or business-logic changes.
+   Goal: strict separation between text, illustration, and actions to eliminate overlap. */
+
+:root {
+  --v7-title: #123f31;
+  --v7-body: #5f746a;
+  --v7-meta: #7b8b83;
+  --v7-border: #d8e4dd;
+}
+
+/* ------------------------------------------------------------
+   GLOBAL: important content is always above decorative layers.
+------------------------------------------------------------- */
+.today-v3-next > *,
+.today-v3-progress > *,
+.today-v3-support-card > *,
+.today-v3-action-card > * {
+  position: relative;
+  z-index: 2;
+}
+
+.today-v3 h1,
+.today-v3 h2,
+.today-v3 h3,
+.today-v3-action-copy strong {
+  color: var(--v7-title);
+}
+
+.today-v3-next p,
+.today-v3-progress p,
+.today-v3-support-card p,
+.today-v3-action-copy small {
+  color: var(--v7-body);
+}
+
+/* ------------------------------------------------------------
+   NEXT LESSON HERO: dedicated visual column + dedicated text column.
+------------------------------------------------------------- */
+.today-v3-next {
+  display: grid;
+  grid-template-columns: minmax(360px, .85fr) minmax(0, 1.15fr);
+  grid-template-rows: auto 1fr;
+  gap: 0 30px;
+  min-height: 248px;
+  padding: 0;
+  direction: ltr;
+  overflow: hidden;
+  background: linear-gradient(112deg, #f7fbf8 0%, #f1f8f4 38%, #ffffff 39%, #ffffff 100%);
+}
+
+.today-v3-next::before {
+  content: "";
+  position: relative;
+  inset: auto;
+  grid-column: 1;
+  grid-row: 1 / 3;
+  align-self: stretch;
+  width: 100%;
+  height: 100%;
+  min-height: 248px;
+  background:
+    linear-gradient(90deg, rgba(247,251,248,.08), rgba(247,251,248,0)),
+    url('/illustrations/reference-v6/hero_classroom_main.avif') center center / cover no-repeat;
+  border-radius: 21px 0 0 21px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.today-v3-next::after {
+  display: none !important;
+}
+
+.today-v3-next-accent {
+  display: none !important;
+}
+
+.today-v3-next-header,
+.today-v3-next-content,
+.today-v3-next-empty {
+  grid-column: 2;
+  direction: rtl;
+  width: auto !important;
+  max-width: none !important;
+  margin: 0 !important;
+  min-width: 0;
+}
+
+.today-v3-next-header {
+  grid-row: 1;
+  padding: 26px 28px 12px 24px;
+  align-self: start;
+}
+
+.today-v3-next-content,
+.today-v3-next-empty {
+  grid-row: 2;
+  padding: 4px 28px 27px 24px;
+  align-self: stretch;
+}
+
+.today-v3-next-content {
+  min-height: 142px;
+}
+
+.today-v3-next-copy,
+.today-v3-next-empty > div:not(.today-v3-empty-icon) {
+  min-width: 0;
+}
+
+.today-v3-next-copy p,
+.today-v3-next-empty p {
+  max-width: 620px;
+  line-height: 1.75;
+}
+
+.today-v3-next-cta,
+.today-v3-ghost-action {
+  flex: 0 0 auto;
+}
+
+/* ------------------------------------------------------------
+   ACADEMIC PROGRESS: illustration owns a real side column.
+------------------------------------------------------------- */
+.today-v3-progress {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  grid-template-rows: auto 1fr;
+  gap: 0 28px;
+  min-height: 205px;
+  padding: 24px 26px;
+  direction: ltr;
+  overflow: hidden;
+}
+
+.today-v3-progress::before {
+  content: "";
+  position: relative;
+  inset: auto;
+  grid-column: 1;
+  grid-row: 1 / 3;
+  align-self: end;
+  width: 100%;
+  height: 150px;
+  background: url('/illustrations/reference-v6/academic_progress_chart.avif') center bottom / contain no-repeat;
+  opacity: 1;
+  filter: none;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.today-v3-progress::after {
+  display: none !important;
+}
+
+.today-v3-progress > .today-v3-section-heading,
+.today-v3-progress > .today-v3-progress-grid {
+  grid-column: 2;
+  direction: rtl;
+  width: auto !important;
+  margin: 0 !important;
+  min-width: 0;
+}
+
+.today-v3-progress > .today-v3-section-heading {
+  grid-row: 1;
+  margin-bottom: 16px !important;
+}
+
+.today-v3-progress > .today-v3-progress-grid {
+  grid-row: 2;
+  display: flex;
+  flex-direction: row;
+  direction: rtl;
+  align-items: flex-end;
+  gap: 28px;
+}
+
+.today-v3-progress-main {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.today-v3-progress-number {
+  margin-bottom: 8px;
+  color: #0d6046;
+  font-size: clamp(34px, 3vw, 44px);
+  line-height: 1;
+}
+
+.today-v3-progress-track {
+  width: 100%;
+  min-height: 10px;
+  margin-bottom: 10px;
+}
+
+.today-v3-progress-main p {
+  margin: 0;
+  line-height: 1.65;
+}
+
+.today-v3-progress-context {
+  flex: 0 0 270px;
+  min-width: 0;
+  padding-inline-start: 24px;
+  border-inline-start: 1px solid #dce6e0;
+}
+
+.today-v3-progress-context > div {
+  min-width: 0;
+}
+
+.today-v3-progress-context > div + div {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid #e5ece8;
+}
+
+.today-v3-progress-context strong,
+.today-v3-progress-context small {
+  overflow-wrap: anywhere;
+}
+
+/* ------------------------------------------------------------
+   SCHEDULE + PREPARATION: equal-height cards, real media columns.
+------------------------------------------------------------- */
+.today-v3-support-grid {
+  align-items: stretch;
+}
+
+.today-v3-support-card {
+  display: grid;
+  grid-template-columns: 190px minmax(0, 1fr);
+  grid-template-rows: auto 1fr;
+  gap: 8px 24px;
+  min-height: 190px;
+  padding: 22px 24px;
+  direction: ltr;
+  align-content: stretch;
+}
+
+.today-v3-support-card::before {
+  content: "";
+  position: relative;
+  inset: auto;
+  grid-column: 1;
+  grid-row: 1 / 3;
+  align-self: center;
+  justify-self: center;
+  width: 172px;
+  height: 142px;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 1;
+  filter: none;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.today-v3-schedule::before {
+  background-image: url('/illustrations/reference-v6/today_schedule_calendar_clock.avif');
+}
+
+.today-v3-preparation::before {
+  background-image: url('/illustrations/reference-v6/lesson_preparation_papers_pen.avif');
+}
+
+.today-v3-preparation::after,
+.today-v3-schedule::after {
+  display: none !important;
+}
+
+.today-v3-support-card > .today-v3-section-heading,
+.today-v3-support-card > .today-v3-schedule-list,
+.today-v3-support-card > .today-v3-compact-empty,
+.today-v3-support-card > .today-v3-preparation-content,
+.today-v3-support-card > .today-v3-preparation-empty {
+  grid-column: 2;
+  direction: rtl;
+  width: auto !important;
+  margin: 0 !important;
+  min-width: 0;
+}
+
+.today-v3-support-card > .today-v3-section-heading {
+  grid-row: 1;
+  align-self: start;
+}
+
+.today-v3-support-card > .today-v3-schedule-list,
+.today-v3-support-card > .today-v3-compact-empty,
+.today-v3-support-card > .today-v3-preparation-content,
+.today-v3-support-card > .today-v3-preparation-empty {
+  grid-row: 2;
+  align-self: stretch;
+}
+
+.today-v3-schedule-list {
+  display: grid;
+  align-content: start;
+  gap: 8px;
+}
+
+.today-v3-schedule-row {
+  min-width: 0;
+  padding: 10px 12px;
+}
+
+.today-v3-schedule-row > div {
+  min-width: 0;
+}
+
+.today-v3-schedule-row strong {
+  overflow-wrap: anywhere;
+}
+
+.today-v3-compact-empty,
+.today-v3-preparation-empty,
+.today-v3-preparation-content {
+  min-height: 94px !important;
+  align-content: center;
+}
+
+.today-v3-compact-empty p,
+.today-v3-preparation-empty p,
+.today-v3-preparation-content p {
+  max-width: 520px;
+  line-height: 1.65;
+}
+
+/* ------------------------------------------------------------
+   QUICK ACCESS: illustration is a true reserved grid zone.
+------------------------------------------------------------- */
+.today-v3-quick-grid {
+  align-items: stretch;
+}
+
+.today-v3-action-card {
+  display: grid;
+  grid-template-columns: 110px minmax(0, 1fr);
+  grid-template-rows: 1fr;
+  gap: 16px;
+  min-height: 150px;
+  padding: 20px 20px 18px;
+  direction: ltr;
+}
+
+.today-v3-action-card::before {
+  content: "";
+  position: absolute;
+  left: -10px;
+  top: 50%;
+  width: 125px;
+  height: 125px;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,.70), rgba(255,255,255,.16) 58%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.today-v3-action-card::after {
+  content: "";
+  position: relative;
+  inset: auto;
+  grid-column: 1;
+  grid-row: 1;
+  align-self: center;
+  justify-self: center;
+  width: 105px;
+  height: 105px;
+  background-image: var(--qa-art);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 1;
+  filter: drop-shadow(0 8px 14px rgba(41, 71, 60, .08));
+  transform: none;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.today-v3-action-card:hover::after {
+  transform: translateY(-2px) scale(1.02);
+  filter: drop-shadow(0 11px 18px rgba(41, 71, 60, .11));
+}
+
+.today-v3-action-copy {
+  grid-column: 2;
+  grid-row: 1;
+  align-self: center;
+  direction: rtl;
+  width: 100%;
+  max-width: none !important;
+  min-width: 0;
+  padding: 30px 0 34px !important;
+}
+
+.today-v3-action-copy strong {
+  font-size: 18px;
+  line-height: 1.35;
+}
+
+.today-v3-action-copy small {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  max-width: none;
+  margin-top: 6px;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.today-v3-action-copy::after {
+  margin-top: 9px;
+  font-size: 9.8px;
+}
+
+.today-v3-action-icon {
+  position: absolute;
+  top: 14px;
+  right: 15px;
+  left: auto;
+  width: 36px;
+  height: 36px;
+}
+
+.today-v3-action-arrow {
+  position: absolute;
+  left: 14px;
+  right: auto;
+  bottom: 12px;
+  width: 34px;
+  height: 34px;
+  padding: 8px;
+}
+
+/* Four premium cards only when the viewport has enough real width. */
+@media (min-width: 1500px) {
+  .today-v3-quick-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .today-v3-action-card {
+    min-height: 152px;
+    grid-template-columns: 106px minmax(0, 1fr);
+    gap: 12px;
+    padding: 18px 16px 16px;
+  }
+
+  .today-v3-action-card::after {
+    width: 102px;
+    height: 102px;
+  }
+
+  .today-v3-action-copy {
+    padding: 28px 0 31px !important;
+  }
+
+  .today-v3-action-copy strong {
+    font-size: 17px;
+  }
+
+  .today-v3-action-copy small {
+    font-size: 11.35px;
+  }
+}
+
+/* ------------------------------------------------------------
+   TABLET: stack content before illustration. No overlap/absolute media.
+------------------------------------------------------------- */
+@media (max-width: 980px) {
+  .today-v3-next {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    gap: 0;
+    direction: rtl;
+  }
+
+  .today-v3-next::before {
+    grid-column: 1;
+    grid-row: 3;
+    min-height: 205px;
+    border-radius: 0 0 20px 20px;
+    background-position: center 62%;
+  }
+
+  .today-v3-next-header {
+    grid-column: 1;
+    grid-row: 1;
+    padding: 22px 22px 10px;
+  }
+
+  .today-v3-next-content,
+  .today-v3-next-empty {
+    grid-column: 1;
+    grid-row: 2;
+    padding: 4px 22px 22px;
+  }
+
+  .today-v3-progress {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    gap: 0;
+    direction: rtl;
+  }
+
+  .today-v3-progress > .today-v3-section-heading {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .today-v3-progress > .today-v3-progress-grid {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .today-v3-progress::before {
+    grid-column: 1;
+    grid-row: 3;
+    justify-self: start;
+    width: 170px;
+    height: 112px;
+    margin-top: 10px;
+  }
+
+  .today-v3-progress > .today-v3-progress-grid {
+    display: block;
+  }
+
+  .today-v3-progress-context {
+    margin-top: 18px;
+    padding-top: 16px;
+    padding-inline-start: 0;
+    border-inline-start: 0;
+    border-top: 1px solid #dce6e0;
+  }
+
+  .today-v3-quick-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .today-v3-support-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .today-v3-support-card {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    gap: 8px;
+    min-height: 0;
+    padding: 20px;
+    direction: rtl;
+  }
+
+  .today-v3-support-card > .today-v3-section-heading {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .today-v3-support-card > .today-v3-schedule-list,
+  .today-v3-support-card > .today-v3-compact-empty,
+  .today-v3-support-card > .today-v3-preparation-content,
+  .today-v3-support-card > .today-v3-preparation-empty {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .today-v3-support-card::before {
+    grid-column: 1;
+    grid-row: 3;
+    justify-self: start;
+    width: 138px;
+    height: 108px;
+    margin-top: 4px;
+  }
+
+  .today-v3-quick-grid {
+    grid-template-columns: 1fr;
+    gap: 11px;
+  }
+
+  .today-v3-action-card {
+    grid-template-columns: 118px minmax(0, 1fr);
+    min-height: 148px;
+  }
+
+  .today-v3-action-card::after {
+    width: 110px;
+    height: 98px;
+  }
+}
+
+@media (max-width: 440px) {
+  .today-v3-next-header,
+  .today-v3-next-content,
+  .today-v3-next-empty {
+    padding-inline: 17px;
+  }
+
+  .today-v3-next::before {
+    min-height: 175px;
+  }
+
+  .today-v3-progress {
+    padding: 20px 18px;
+  }
+
+  .today-v3-action-card {
+    grid-template-columns: 96px minmax(0, 1fr);
+    min-height: 142px;
+    gap: 10px;
+    padding: 16px 14px 14px;
+  }
+
+  .today-v3-action-card::after {
+    width: 92px;
+    height: 84px;
+  }
+
+  .today-v3-action-copy {
+    padding-top: 27px !important;
+  }
+
+  .today-v3-action-copy strong {
+    font-size: 16.5px;
+  }
+
+  .today-v3-action-copy small {
+    font-size: 11.25px;
+  }
+}
