@@ -1,0 +1,464 @@
+/* TODAY PAGE — REFERENCE MATCH V6
+   Final visual-only alignment pass using the approved original illustration kit.
+   No data, Supabase, auth, route, or business-logic changes. */
+
+:root {
+  --v6-green: #0f6b4d;
+  --v6-green-deep: #0a513b;
+  --v6-line: #d7e3dc;
+  --v6-warm-bg: #fbfcf9;
+}
+
+/* Give the workspace the same generous desktop proportion as the approved reference. */
+.today-v3 {
+  width: 100%;
+  max-width: 1450px;
+  margin-inline: auto;
+}
+
+.today-v3-page-header {
+  margin-bottom: 18px;
+}
+
+/* HERO — actual classroom artwork, clearly visible, not a watermark. */
+.today-v3-next {
+  position: relative;
+  isolation: isolate;
+  min-height: 246px;
+  padding: 28px 30px;
+  overflow: hidden;
+  background: linear-gradient(112deg, #ffffff 0 46%, #f8fbf7 55%, #eff8f2 100%);
+  border: 1px solid #ccdfd4;
+  border-radius: 22px;
+  box-shadow: 0 13px 32px rgba(22, 75, 52, .055);
+}
+
+.today-v3-next::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  inset: 0 auto 0 0;
+  width: 54%;
+  height: 100%;
+  background-image: url('/illustrations/reference-v6/hero_classroom_main.avif');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 1;
+  border-radius: 21px 0 0 21px;
+}
+
+.today-v3-next::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  inset: 0 auto 0 41%;
+  width: 19%;
+  pointer-events: none;
+  background: linear-gradient(90deg, rgba(255,255,255,0), rgba(249,252,249,.84) 52%, #f8fbf8 100%);
+}
+
+.today-v3-next-header,
+.today-v3-next-content,
+.today-v3-next-empty {
+  position: relative;
+  z-index: 3;
+  width: 46%;
+  margin-inline-start: auto;
+  margin-inline-end: 0;
+}
+
+.today-v3-next-header {
+  margin-bottom: 17px;
+}
+
+.today-v3-next-header h2 {
+  font-size: clamp(25px, 2vw, 31px);
+}
+
+.today-v3-next-empty {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 13px;
+  align-items: start;
+  min-height: 116px;
+  padding: 7px 0 0;
+}
+
+.today-v3-next-empty .today-v3-ghost-action {
+  grid-column: 2;
+  justify-self: start;
+  margin-top: 4px;
+}
+
+.today-v3-next-empty p {
+  max-width: 520px;
+  line-height: 1.8;
+}
+
+.today-v3-next .today-v3-time-pill {
+  background: rgba(255,255,255,.9);
+  border-color: #cadbd1;
+  backdrop-filter: blur(4px);
+}
+
+/* ACADEMIC PROGRESS — compact horizontal strip with the approved chart artwork. */
+.today-v3-progress {
+  position: relative;
+  isolation: isolate;
+  min-height: 154px;
+  margin-bottom: 20px;
+  padding: 22px 25px;
+  overflow: hidden;
+  background: linear-gradient(105deg, #f8fcf9 0%, #f1f8f4 66%, #edf7f0 100%);
+  border: 1px solid #d5e4db;
+  border-radius: 20px;
+  box-shadow: 0 7px 22px rgba(31, 69, 53, .03);
+}
+
+.today-v3-progress::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  left: 12px;
+  bottom: -5px;
+  width: 235px;
+  height: 145px;
+  background: url('/illustrations/reference-v6/academic_progress_chart.avif') left bottom / contain no-repeat;
+  opacity: 1;
+  filter: drop-shadow(0 10px 16px rgba(30, 81, 56, .08));
+  pointer-events: none;
+}
+
+.today-v3-progress .today-v3-section-heading,
+.today-v3-progress .today-v3-progress-grid {
+  position: relative;
+  z-index: 2;
+  width: calc(100% - 240px);
+  margin-inline-start: auto;
+  margin-inline-end: 0;
+}
+
+.today-v3-progress .today-v3-section-heading {
+  margin-bottom: 10px;
+}
+
+.today-v3-progress-grid {
+  grid-template-columns: minmax(0, 1fr) 285px;
+  gap: 28px;
+}
+
+.today-v3-progress-number {
+  margin-bottom: 5px;
+  font-size: 34px;
+}
+
+.today-v3-progress-track {
+  height: 9px;
+}
+
+.today-v3-progress-main p {
+  margin-top: 8px;
+}
+
+.today-v3-progress-context {
+  padding-inline-start: 20px;
+}
+
+/* SCHEDULE + PREPARATION — actual kit illustrations get a real visual zone. */
+.today-v3-support-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.today-v3-support-card {
+  position: relative;
+  isolation: isolate;
+  min-height: 170px;
+  padding: 22px 24px;
+  overflow: hidden;
+  border-radius: 20px;
+  box-shadow: 0 8px 22px rgba(31, 69, 53, .035);
+}
+
+.today-v3-schedule {
+  background: linear-gradient(115deg, #fbfdff 0%, #f1f8ff 54%, #e9f5ff 100%);
+  border-color: #cfdfec;
+}
+
+.today-v3-preparation {
+  background: linear-gradient(115deg, #fefcff 0%, #f8f2fc 56%, #f1eafb 100%);
+  border-color: #ded2eb;
+}
+
+.today-v3-schedule::before,
+.today-v3-preparation::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  left: 10px;
+  bottom: 0;
+  width: 38%;
+  height: 94%;
+  background-repeat: no-repeat;
+  background-position: left bottom;
+  background-size: contain;
+  opacity: 1;
+  pointer-events: none;
+}
+
+.today-v3-schedule::before {
+  background-image: url('/illustrations/reference-v6/today_schedule_calendar_clock.avif');
+  filter: drop-shadow(0 9px 15px rgba(58, 103, 136, .09));
+}
+
+.today-v3-preparation::after {
+  background-image: url('/illustrations/reference-v6/lesson_preparation_papers_pen.avif');
+  filter: drop-shadow(0 9px 15px rgba(95, 70, 118, .08));
+}
+
+.today-v3-schedule > .today-v3-section-heading,
+.today-v3-schedule > .today-v3-schedule-list,
+.today-v3-schedule > .today-v3-compact-empty,
+.today-v3-preparation > .today-v3-section-heading,
+.today-v3-preparation > .today-v3-preparation-content,
+.today-v3-preparation > .today-v3-preparation-empty {
+  position: relative;
+  z-index: 2;
+  width: 61%;
+  margin-inline-start: auto;
+  margin-inline-end: 0;
+}
+
+.today-v3-schedule .today-v3-schedule-list {
+  max-height: 110px;
+  overflow: auto;
+  scrollbar-width: thin;
+}
+
+.today-v3-compact-empty,
+.today-v3-preparation-empty {
+  min-height: 92px;
+  padding: 10px 0;
+}
+
+/* QUICK ACCESS — four feature cards in one row on normal desktop, matching reference density. */
+@media (min-width: 1120px) {
+  .today-v3-quick-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 13px;
+  }
+
+  .today-v3-action-card {
+    min-height: 156px;
+    grid-template-columns: minmax(0, 1fr) 112px;
+    gap: 0 10px;
+    padding: 18px 16px 16px;
+    border-radius: 19px;
+  }
+
+  .today-v3-action-card::after {
+    width: 116px !important;
+    height: 102px !important;
+  }
+
+  .today-v3-action-card::before {
+    left: 8px;
+    width: 108px;
+    height: 96px;
+  }
+
+  .today-v3-action-copy strong {
+    font-size: 17px;
+  }
+
+  .today-v3-action-copy small {
+    font-size: 11.5px;
+  }
+
+  .today-v3-action-copy::before {
+    font-size: 9.8px;
+  }
+}
+
+/* SIDEBAR — show the approved mountain landscape as a deliberate branded scene. */
+.sidebar {
+  position: sticky;
+  overflow: hidden;
+}
+
+.sidebar::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  left: 8px;
+  right: 8px;
+  bottom: 104px;
+  height: 190px;
+  background:
+    url('/illustrations/reference-v6/sidebar_mountain_scene.avif') center bottom / contain no-repeat,
+    radial-gradient(circle at 50% 82%, rgba(201, 231, 214, .35), transparent 62%);
+  opacity: .96;
+  pointer-events: none;
+}
+
+.sidebar > * {
+  position: relative;
+  z-index: 2;
+}
+
+.sidebar-footer {
+  padding-top: 18px;
+  background: linear-gradient(180deg, rgba(255,255,255,.80), #fff 38%);
+  backdrop-filter: blur(3px);
+}
+
+/* Prevent navigation from visually colliding with the landscape on medium-height laptops. */
+@media (min-height: 760px) {
+  .nav {
+    padding-bottom: 142px;
+  }
+}
+
+/* Desktop polish around the approved 1440–1920 composition. */
+@media (min-width: 1500px) {
+  .today-v3-next {
+    min-height: 258px;
+  }
+
+  .today-v3-next::before {
+    width: 55%;
+  }
+
+  .today-v3-next-header,
+  .today-v3-next-content,
+  .today-v3-next-empty {
+    width: 45%;
+  }
+
+  .today-v3-progress::before {
+    width: 255px;
+    height: 150px;
+  }
+
+  .today-v3-progress .today-v3-section-heading,
+  .today-v3-progress .today-v3-progress-grid {
+    width: calc(100% - 255px);
+  }
+}
+
+/* Tablet: retain educational imagery but rebalance rather than shrink desktop blindly. */
+@media (max-width: 1119px) {
+  .today-v3-next::before {
+    width: 44%;
+    opacity: .92;
+  }
+
+  .today-v3-next::after {
+    left: 33%;
+    width: 18%;
+  }
+
+  .today-v3-next-header,
+  .today-v3-next-content,
+  .today-v3-next-empty {
+    width: 58%;
+  }
+
+  .today-v3-progress::before {
+    width: 175px;
+    height: 122px;
+    opacity: .8;
+  }
+
+  .today-v3-progress .today-v3-section-heading,
+  .today-v3-progress .today-v3-progress-grid {
+    width: calc(100% - 165px);
+  }
+
+  .today-v3-progress-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .today-v3-progress-context {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    padding-inline-start: 0;
+    border-inline-start: 0;
+  }
+}
+
+@media (max-width: 880px) {
+  .today-v3-next {
+    min-height: 0;
+    padding-bottom: 170px;
+  }
+
+  .today-v3-next::before {
+    inset: auto 0 0 0;
+    width: 100%;
+    height: 155px;
+    border-radius: 0 0 20px 20px;
+    background-size: cover;
+    background-position: center 58%;
+    opacity: .82;
+  }
+
+  .today-v3-next::after {
+    inset: auto 0 118px 0;
+    width: 100%;
+    height: 55px;
+    background: linear-gradient(180deg, #f7fbf8, rgba(247,251,248,0));
+  }
+
+  .today-v3-next-header,
+  .today-v3-next-content,
+  .today-v3-next-empty {
+    width: 100%;
+  }
+
+  .today-v3-progress::before {
+    opacity: .13;
+    width: 145px;
+  }
+
+  .today-v3-progress .today-v3-section-heading,
+  .today-v3-progress .today-v3-progress-grid {
+    width: 100%;
+  }
+
+  .today-v3-support-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .today-v3-next {
+    padding: 22px 19px 150px;
+  }
+
+  .today-v3-support-card {
+    min-height: 155px;
+  }
+
+  .today-v3-schedule::before,
+  .today-v3-preparation::after {
+    width: 118px;
+    height: 94px;
+    opacity: .24;
+  }
+
+  .today-v3-schedule > .today-v3-section-heading,
+  .today-v3-schedule > .today-v3-schedule-list,
+  .today-v3-schedule > .today-v3-compact-empty,
+  .today-v3-preparation > .today-v3-section-heading,
+  .today-v3-preparation > .today-v3-preparation-content,
+  .today-v3-preparation > .today-v3-preparation-empty {
+    width: 100%;
+  }
+
+  .sidebar::after {
+    display: none;
+  }
+}
