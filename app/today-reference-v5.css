@@ -1,0 +1,347 @@
+/* TODAY PAGE — REFERENCE ALIGNMENT V5
+   Visual-only polish based on the approved dashboard reference.
+   No database, auth, route, Supabase or business-logic changes. */
+
+/* Header: give the workspace more warmth without turning it into another card. */
+.today-v3-page-header {
+  position: relative;
+  overflow: hidden;
+  padding: 18px 20px;
+  background:
+    radial-gradient(circle at 12% 20%, rgba(111, 184, 145, .11), transparent 23%),
+    radial-gradient(circle at 32% 0%, rgba(196, 229, 211, .24), transparent 26%),
+    linear-gradient(120deg, rgba(255,255,255,.56), rgba(244,250,246,.78));
+  border: 1px solid rgba(220, 231, 224, .72);
+  border-radius: 22px;
+}
+
+.today-v3-page-header::after {
+  content: "";
+  position: absolute;
+  inset: auto auto -44px 88px;
+  width: 190px;
+  height: 150px;
+  background: url('/illustrations/quick-access/library.png') center / contain no-repeat;
+  opacity: .09;
+  pointer-events: none;
+}
+
+.today-v3-page-heading,
+.today-v3-primary-action {
+  position: relative;
+  z-index: 1;
+}
+
+.today-v3-context-row {
+  gap: 8px;
+}
+
+.today-v3-context-row span {
+  min-height: 32px;
+  padding: 0 11px;
+  background: rgba(247, 252, 249, .92);
+  border: 1px solid #dce9e1;
+  border-radius: 999px;
+  color: #46685a;
+}
+
+/* Level 1: make “next lesson” read like a real educational hero. */
+.today-v3-next {
+  min-height: 224px;
+  padding: 28px 30px;
+  background:
+    linear-gradient(105deg, rgba(255,255,255,.98) 0 47%, rgba(245,251,247,.97) 58%, rgba(232,246,238,.98) 100%);
+  border-color: #d0e3d7;
+  box-shadow: 0 14px 34px rgba(30, 74, 55, .055);
+}
+
+.today-v3-next::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 46%;
+  background:
+    url('/illustrations/quick-access/resources.png') 72% 72% / 205px auto no-repeat,
+    url('/illustrations/quick-access/library.png') 13% 78% / 180px auto no-repeat,
+    radial-gradient(circle at 28% 36%, rgba(214, 237, 224, .9), transparent 32%),
+    linear-gradient(145deg, #f7fbf7 0%, #e9f4ed 100%);
+  border-radius: 22px 0 0 22px;
+  pointer-events: none;
+}
+
+.today-v3-next::after {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 39%;
+  width: 15%;
+  background: linear-gradient(90deg, rgba(248,252,249,0), rgba(249,252,250,.98));
+  pointer-events: none;
+}
+
+.today-v3-next-header,
+.today-v3-next-content,
+.today-v3-next-empty {
+  position: relative;
+  z-index: 2;
+  width: 53%;
+  margin-left: auto;
+}
+
+.today-v3-next-header {
+  margin-bottom: 18px;
+}
+
+.today-v3-next-empty {
+  padding-top: 10px;
+}
+
+.today-v3-next-copy p,
+.today-v3-next-empty p {
+  max-width: 560px;
+}
+
+.today-v3-next-accent {
+  z-index: 3;
+}
+
+/* Supporting cards: introduce the blue and lavender educational surfaces from the reference. */
+.today-v3-support-card {
+  position: relative;
+  overflow: hidden;
+  min-height: 168px;
+  border-radius: 20px;
+}
+
+.today-v3-schedule {
+  background:
+    radial-gradient(circle at 15% 24%, rgba(255,255,255,.88), transparent 24%),
+    linear-gradient(120deg, #f9fcff 0%, #eef7ff 58%, #e7f3ff 100%);
+  border-color: #cfe1f0;
+}
+
+.today-v3-schedule::before {
+  content: "";
+  position: absolute;
+  left: 16px;
+  bottom: 7px;
+  width: 175px;
+  height: 128px;
+  background: url('/illustrations/quick-access/program.png') center / contain no-repeat;
+  filter: drop-shadow(0 10px 18px rgba(64, 105, 130, .08));
+  opacity: .95;
+  pointer-events: none;
+}
+
+.today-v3-preparation {
+  background:
+    radial-gradient(circle at 14% 22%, rgba(255,255,255,.9), transparent 26%),
+    linear-gradient(120deg, #fdfbff 0%, #f6effc 58%, #f2eafd 100%);
+  border-color: #dfd3ed;
+}
+
+.today-v3-preparation::after {
+  content: "";
+  position: absolute;
+  left: 16px;
+  bottom: 6px;
+  width: 176px;
+  height: 130px;
+  background: url('/illustrations/quick-access/daily-notebook.png') center / contain no-repeat;
+  filter: drop-shadow(0 10px 18px rgba(96, 73, 122, .07));
+  opacity: .95;
+  pointer-events: none;
+}
+
+.today-v3-schedule > .today-v3-section-heading,
+.today-v3-schedule > .today-v3-schedule-list,
+.today-v3-schedule > .today-v3-compact-empty,
+.today-v3-preparation > .today-v3-section-heading,
+.today-v3-preparation > .today-v3-preparation-content,
+.today-v3-preparation > .today-v3-preparation-empty {
+  position: relative;
+  z-index: 2;
+  width: calc(100% - 176px);
+  margin-left: auto;
+}
+
+.today-v3-schedule .today-v3-compact-empty,
+.today-v3-preparation .today-v3-preparation-empty {
+  min-height: 90px;
+}
+
+/* Progress: convert the open divider section into a branded academic strip. */
+.today-v3-progress {
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 30px;
+  padding: 24px 26px;
+  background:
+    radial-gradient(circle at 8% 50%, rgba(189, 225, 205, .25), transparent 25%),
+    linear-gradient(105deg, #fbfdfb 0%, #f4faf6 56%, #edf7f1 100%);
+  border: 1px solid #d7e6dd;
+  border-radius: 22px;
+  box-shadow: 0 9px 24px rgba(31, 69, 53, .035);
+}
+
+.today-v3-progress::before {
+  content: "";
+  position: absolute;
+  left: 20px;
+  bottom: 8px;
+  width: 152px;
+  height: 108px;
+  background: url('/illustrations/quick-access/program.png') center / contain no-repeat;
+  opacity: .58;
+  filter: saturate(.88);
+  pointer-events: none;
+}
+
+.today-v3-progress .today-v3-section-heading,
+.today-v3-progress .today-v3-progress-grid {
+  position: relative;
+  z-index: 1;
+  width: calc(100% - 150px);
+  margin-left: auto;
+}
+
+.today-v3-progress-number {
+  font-size: 38px;
+}
+
+/* Quick access: keep the approved cards but make the section spacing closer to the reference. */
+.today-v3-quick-section {
+  padding-top: 0;
+}
+
+.today-v3-quick-section .today-v3-section-heading.open {
+  margin-bottom: 14px;
+}
+
+/* Sidebar: subtle branded educational illustration without clutter. */
+.sidebar {
+  overflow: hidden;
+}
+
+.sidebar::after {
+  content: "";
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  bottom: 106px;
+  height: 158px;
+  background:
+    url('/illustrations/quick-access/library.png') center bottom / 142px auto no-repeat,
+    radial-gradient(circle at 50% 80%, rgba(196, 228, 210, .35), transparent 58%);
+  opacity: .38;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.sidebar > * {
+  position: relative;
+  z-index: 1;
+}
+
+.sidebar-footer {
+  background: linear-gradient(180deg, rgba(255,255,255,.68), rgba(255,255,255,.94));
+  backdrop-filter: blur(2px);
+}
+
+/* Refined vertical rhythm on normal desktop. */
+.today-v3-next,
+.today-v3-progress,
+.today-v3-support-grid {
+  scroll-margin-top: 18px;
+}
+
+@media (max-width: 1180px) {
+  .today-v3-next::before {
+    width: 40%;
+    background-size: 165px auto, 145px auto, auto, auto;
+  }
+
+  .today-v3-next::after {
+    left: 34%;
+  }
+
+  .today-v3-next-header,
+  .today-v3-next-content,
+  .today-v3-next-empty {
+    width: 61%;
+  }
+
+  .today-v3-schedule::before,
+  .today-v3-preparation::after {
+    width: 145px;
+    height: 112px;
+  }
+
+  .today-v3-schedule > .today-v3-section-heading,
+  .today-v3-schedule > .today-v3-schedule-list,
+  .today-v3-schedule > .today-v3-compact-empty,
+  .today-v3-preparation > .today-v3-section-heading,
+  .today-v3-preparation > .today-v3-preparation-content,
+  .today-v3-preparation > .today-v3-preparation-empty {
+    width: calc(100% - 140px);
+  }
+
+  .today-v3-progress::before {
+    width: 128px;
+  }
+
+  .today-v3-progress .today-v3-section-heading,
+  .today-v3-progress .today-v3-progress-grid {
+    width: calc(100% - 118px);
+  }
+}
+
+@media (max-width: 980px) {
+  .today-v3-page-header {
+    padding: 16px;
+  }
+
+  .today-v3-page-header::after,
+  .sidebar::after {
+    display: none;
+  }
+
+  .today-v3-next {
+    min-height: 0;
+  }
+
+  .today-v3-next::before,
+  .today-v3-next::after {
+    display: none;
+  }
+
+  .today-v3-next-header,
+  .today-v3-next-content,
+  .today-v3-next-empty,
+  .today-v3-progress .today-v3-section-heading,
+  .today-v3-progress .today-v3-progress-grid {
+    width: 100%;
+  }
+
+  .today-v3-progress::before {
+    opacity: .16;
+    width: 118px;
+  }
+}
+
+@media (max-width: 760px) {
+  .today-v3-schedule::before,
+  .today-v3-preparation::after {
+    width: 110px;
+    height: 88px;
+    opacity: .26;
+  }
+
+  .today-v3-schedule > .today-v3-section-heading,
+  .today-v3-schedule > .today-v3-schedule-list,
+  .today-v3-schedule > .today-v3-compact-empty,
+  .today-v3-preparation > .today-v3-section-heading,
+  .today-v3-preparation > .today-v3-preparation-content,
+  .today-v3-preparation > .today-v3-preparation-empty {
+    width: 100%;
+  }
+}
