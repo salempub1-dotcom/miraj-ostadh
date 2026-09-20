@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "prebuild": "node scripts/materialize-reference-v6.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
