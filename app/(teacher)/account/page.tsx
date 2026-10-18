@@ -91,6 +91,7 @@ export default async function AccountPage({ searchParams }: { searchParams: Prom
             day:slot.day_of_week,start:slot.start_time.slice(0,5),end:slot.end_time.slice(0,5),note:slot.note??''
           }))} />}
         <div className="miraj-timetable-shortcuts">
+          <a className="text-link" href="/schedule">عرض التوقيت اليومي والأسبوعي</a>
           <a className="text-link" href="/today">معاينة حصص اليوم</a>
           <a className="text-link" href="/planning">عرض التخطيط الدراسي</a>
         </div>
