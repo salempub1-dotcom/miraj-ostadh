@@ -15,7 +15,7 @@ const desktopItems: NavItem[] = [
   { href: '/account', label: 'حسابي', icon: UserRound },
 ];
 
-const mobileItems = desktopItems.filter((item) => ['/today', '/planning', '/library', '/journal', '/account'].includes(item.href));
+const mobileItems = desktopItems.filter((item) => ['/today', '/planning', '/resources', '/library', '/journal', '/account'].includes(item.href));
 
 function isActive(pathname: string, href: string) {
   return pathname === href || pathname.startsWith(`${href}/`);
