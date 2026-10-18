@@ -16,12 +16,12 @@ export function ThemeToggle() {
   useEffect(() => {
     const stored = window.localStorage.getItem(KEY);
     const preference: Preference = stored === 'dark' || stored === 'light' ? stored : 'system';
-    setMode(preference);
     setTheme(preference);
+    const frame = window.requestAnimationFrame(() => setMode(preference));
     const media = window.matchMedia('(prefers-color-scheme: dark)');
     const listener = () => { if (window.localStorage.getItem(KEY) !== 'light' && window.localStorage.getItem(KEY) !== 'dark') setTheme('system'); };
     media.addEventListener('change', listener);
-    return () => media.removeEventListener('change', listener);
+    return () => { window.cancelAnimationFrame(frame); media.removeEventListener('change', listener); };
   }, []);
   const cycle = () => {
     const next = mode === 'system' ? 'dark' : mode === 'dark' ? 'light' : 'system';
