@@ -10,9 +10,9 @@ const fail=(message:string):never=>redirect('/account?timetable_error='+encodeUR
 
 export async function saveCurrentTimetableAction(formData:FormData) {
   const {supabase}=await requireCompletedTeacherContext();
-  const raw=formData.get('slots');
-  if(typeof raw!=='string'||raw.length>12000) fail('بيانات الحصص غير صالحة.');
-  let slots:Slot[];
+  const raw=String(formData.get('slots') ?? '');
+  if(!raw||raw.length>12000) fail('بيانات الحصص غير صالحة.');
+  let slots:Slot[]=[];
   try {
     const parsed:unknown=JSON.parse(raw);
     if(!Array.isArray(parsed)||parsed.length<1||parsed.length>30) fail('أضف من 1 إلى 30 حصة.');
