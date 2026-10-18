@@ -342,7 +342,8 @@ export default async function TodayPage() {
                 <strong>لا توجد حصص اليوم</strong>
                 <p>يمكنك تعديل جدول استعمال الزمن من حسابك.</p>
               </div>
-              <Link href="/account" className="today-v3-small-link"><Settings2 size={15} /> الحساب</Link>
+              <Link href="/schedule" className="today-v3-small-link"><CalendarDays size={15} /> عرض الجدول الأسبوعي</Link>
+              <Link href="/account#my-timetable" className="today-v3-small-link"><Settings2 size={15} /> تعديل الجدول</Link>
             </div>
           )}
         </article>
