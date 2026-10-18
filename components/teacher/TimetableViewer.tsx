@@ -152,6 +152,27 @@ export default function TimetableViewer({
         </div>
       )}
 
+      <div className="miraj-schedule-print-only" aria-hidden="true">
+        <h2>التوقيت الأسبوعي — {gradeName}</h2>
+        <table>
+          <thead><tr><th>اليوم</th><th>الحصة</th><th>من</th><th>إلى</th><th>المدة</th></tr></thead>
+          <tbody>
+            {WEEKDAYS.flatMap((weekday, index) => {
+              const entries = slots.filter(slot => slot.day_of_week === index);
+              return entries.map((slot, entryIndex) => (
+                <tr key={slot.id}>
+                  {entryIndex === 0 ? <th scope="rowgroup" rowSpan={entries.length}>{weekday}</th> : null}
+                  <td>{slot.note || subjectFor(slot.note).name}</td>
+                  <td dir="ltr">{timeOf(slot.start_time)}</td>
+                  <td dir="ltr">{timeOf(slot.end_time)}</td>
+                  <td>{durationLabel(minutesBetween(slot.start_time, slot.end_time))}</td>
+                </tr>
+              ));
+            })}
+          </tbody>
+        </table>
+        <p>مجموع الحصص: {slots.length} — المدة الأسبوعية: {durationLabel(weeklyMinutes)}</p>
+      </div>
       <div className="miraj-schedule-legend" aria-label="دليل ألوان المواد">
         {SUBJECTS.map(subject => <span key={subject.key} className={`subject-${subject.key}`}>{subject.name}</span>)}
       </div>
