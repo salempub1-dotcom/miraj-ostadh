@@ -176,12 +176,13 @@ export default async function TodayPage() {
     const start = compactTime(slot.start_time);
     const end = compactTime(slot.end_time);
     const state = currentTime >= start && currentTime < end ? 'current' : currentTime < start ? 'upcoming' : 'finished';
-    const lesson = pendingLessons[index] ?? null;
+    // Time slots are not curriculum mappings. Never attach a lesson by array index.
+    const lesson = null as (typeof pendingLessons)[number] | null;
     return { ...slot, start, end, state, lesson };
   });
 
   const nextScheduleItem = schedule.find((item) => item.state === 'current') ?? schedule.find((item) => item.state === 'upcoming');
-  const nextCardLesson = nextScheduleItem?.lesson ?? nextLesson;
+  const nextCardLesson = nextLesson;
   const nextWeek = nextCardLesson ? weekById.get(nextCardLesson.week_id) : null;
   const nextUnit = nextWeek ? unitById.get(nextWeek.unit_id) : null;
   const nextDomainName = nextCardLesson?.domain_id ? domainById.get(nextCardLesson.domain_id) : null;
@@ -233,7 +234,7 @@ export default async function TodayPage() {
         <div className="today-v3-next-header">
           <div>
             <span className="today-v3-eyebrow">خطوتك الأهم الآن</span>
-            <h2 id="next-lesson-title">{dayIsOver ? 'حضّر حصة الغد' : 'حصتك القادمة'}</h2>
+            <h2 id="next-lesson-title">{nextCardLesson ? 'الدرس التالي في البرنامج' : dayIsOver ? 'انتهت حصص اليوم' : 'حصتك القادمة في الجدول'}</h2>
           </div>
           {nextScheduleItem ? (
             <span className="today-v3-time-pill"><Clock3 size={16} /> <bdi dir="ltr">{nextScheduleItem.start} – {nextScheduleItem.end}</bdi></span>
@@ -262,11 +263,11 @@ export default async function TodayPage() {
           <div className="today-v3-next-empty">
             <div className="today-v3-empty-icon" aria-hidden="true"><BookOpenText size={24} /></div>
             <div>
-              <strong>{totalLessons ? 'أكملت الدروس المنشورة لهذا المستوى' : 'برنامج هذا المستوى قيد الإعداد'}</strong>
-              <p>{totalLessons ? 'يمكنك مراجعة التخطيط الكامل أو العودة إلى مواردك المحفوظة.' : 'ستظهر حصتك القادمة هنا فور نشر البرنامج والدروس الرسمية.'}</p>
+              <strong>{nextScheduleItem?.note ?? (totalLessons ? 'أكملت الدروس المنشورة لهذا المستوى' : 'برنامج هذا المستوى قيد الإعداد')}</strong>
+              <p>{nextScheduleItem ? 'هذه الحصة من جدولك الأسبوعي. ستظهر المذكرة بعد ربطها بدرس معتمد.' : totalLessons ? 'يمكنك مراجعة التخطيط الكامل أو العودة إلى مواردك المحفوظة.' : 'ستظهر الدروس هنا بعد مراجعة البرنامج الرسمي ونشره.'}</p>
               {nextScheduleItem ? <span className="today-v3-empty-note">لديك حصة مسجلة في الجدول عند <bdi dir="ltr">{nextScheduleItem.start}</bdi>.</span> : null}
             </div>
-            <Link href="/planning" className="today-v3-ghost-action">عرض التخطيط <ArrowLeft size={16} /></Link>
+            <Link href={nextScheduleItem ? '/schedule' : '/planning'} className="today-v3-ghost-action">{nextScheduleItem ? 'عرض جدولي' : 'عرض التخطيط'} <ArrowLeft size={16} /></Link>
           </div>
         )}
       </section>
