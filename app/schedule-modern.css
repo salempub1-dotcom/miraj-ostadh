@@ -105,3 +105,17 @@
   .miraj-schedule-session { break-inside:avoid; }
   .miraj-schedule-hero,.miraj-schedule-stats > div,.miraj-schedule-session,.miraj-schedule-week-day { box-shadow:none; }
 }
+
+/* A print-specific complete week, independent from the selected interactive tab. */
+.miraj-schedule-print-only { display:none; }
+@media print {
+  @page { size:A4 portrait; margin:12mm; }
+  .miraj-schedule > :not(.miraj-schedule-print-only) { display:none!important; }
+  .miraj-schedule-print-only { display:block!important; }
+  .miraj-schedule-print-only h2 { font-size:21px; text-align:center; margin:0 0 12px; }
+  .miraj-schedule-print-only table { border-collapse:collapse; width:100%; font-size:12px; direction:rtl; }
+  .miraj-schedule-print-only th,.miraj-schedule-print-only td { border:1px solid #777; padding:5px 7px; text-align:right; }
+  .miraj-schedule-print-only thead th { background:#eaf0f7!important; color:#172d50; font-weight:800; }
+  .miraj-schedule-print-only tbody tr { break-inside:avoid; }
+  .miraj-schedule-print-only p { font-size:13px; font-weight:700; }
+}
