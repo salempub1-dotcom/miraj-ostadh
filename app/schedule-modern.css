@@ -209,3 +209,79 @@ html[data-theme='dark'] .miraj-schedule-week-entry {
     box-shadow: none !important;
   }
 }
+
+/* Compact teacher schedule / consistent material colors across every similar lesson. */
+.miraj-schedule { max-width: 1040px; font-size: 15px; line-height: 1.55; }
+.miraj-schedule-hero { padding: 16px 20px; border-radius: 17px; gap: 12px; }
+.miraj-schedule h1 { font-size: clamp(23px, 2.5vw, 29px); margin: 3px 0; line-height: 1.4; }
+.miraj-schedule-hero p { font-size: 13px; }
+.miraj-schedule-kicker { font-size: 13px; }
+.miraj-schedule-actions > * { padding: 8px 12px; font-size: 13px; border-radius: 10px; }
+.miraj-schedule-stats { gap: 8px; margin: 9px 0; }
+.miraj-schedule-stats > div { padding: 8px; border-radius: 11px; }
+.miraj-schedule-stats strong { font-size: 21px; }
+.miraj-schedule-stats span { font-size: 12px; }
+.miraj-schedule-view-tabs { margin: 12px 0; padding: 3px; }
+.miraj-schedule-view-tabs button { font-size: 14px; padding: 8px 15px; }
+.miraj-schedule-days { gap: 7px; margin-bottom: 11px; }
+.miraj-schedule-days button { padding: 9px 5px; border-radius: 10px; font-size: 14px; border-bottom-width: 3px; }
+.miraj-schedule-days button small { font-size: 11px; }
+.miraj-schedule-day-heading { margin-bottom: 9px; }
+.miraj-schedule-day-heading h2 { font-size: 19px; }
+.miraj-schedule-day-list { gap: 7px; }
+.miraj-schedule-session {
+  grid-template-columns: 70px 36px minmax(0,1fr);
+  gap: 11px;
+  padding: 9px 12px;
+  border-radius: 12px;
+  border-bottom-width: 3px;
+  background: color-mix(in srgb,var(--subject-color) 11%,var(--surface));
+  box-shadow: 0 3px 0 color-mix(in srgb,var(--subject-color) 30%,var(--border)),
+              0 6px 11px rgba(8,28,55,.07);
+}
+.miraj-schedule-session:hover { transform: none; box-shadow: 0 3px 0 color-mix(in srgb,var(--subject-color) 35%,var(--border)),0 8px 13px rgba(8,28,55,.12); }
+.miraj-schedule-time { padding: 7px 3px; border-radius: 9px; font-size: 14px; line-height:1.25; box-shadow: 0 2px 0 #071b37; }
+.miraj-schedule-time span { font-size: 10px; }
+.miraj-schedule-symbol { width: 36px; height: 36px; border-radius: 9px; }
+.miraj-schedule-description h3 { font-size: 17px; margin: 0; line-height: 1.35; }
+.miraj-schedule-description span { font-size: 12px; }
+.miraj-schedule-description small { font-size: 11px; }
+.miraj-schedule-break { font-size: 12px; padding: 5px; margin-bottom: 6px; }
+.miraj-schedule-week-list { gap: 8px; }
+.miraj-schedule-week-day header { padding: 9px; }
+.miraj-schedule-week-day h2 { font-size: 15px; }
+.miraj-schedule-week-sessions { padding: 7px; gap: 5px; }
+.miraj-schedule-week-entry {
+  padding: 7px;
+  background: color-mix(in srgb,var(--subject-color) 13%,var(--surface));
+  border-radius: 8px;
+  border-bottom-width: 2px;
+  box-shadow: 0 2px 5px rgba(10,29,50,.06);
+}
+.miraj-schedule-week-entry strong { font-size: 13px; line-height: 1.35; }
+.miraj-schedule-week-entry bdi { font-size: 11px; }
+html[data-theme='dark'] .miraj-schedule-session {
+  background: color-mix(in srgb,var(--subject-color) 15%,#192941);
+  box-shadow: 0 3px 0 rgba(0,0,0,.27),0 5px 11px rgba(0,0,0,.12);
+}
+html[data-theme='dark'] .miraj-schedule-week-entry {
+  background: color-mix(in srgb,var(--subject-color) 19%,#192941);
+}
+@media (max-width:980px) {
+  .mobile-nav { display:flex; align-items:stretch; justify-content:space-around; gap:2px; }
+  .mobile-nav a { flex:1 1 0; min-width:0; font-size:10px; text-align:center; }
+  .mobile-nav a span { white-space:nowrap; }
+}
+@media(max-width:640px) {
+  .miraj-schedule-hero { padding:13px; }
+  .miraj-schedule-days { gap:4px; }
+  .miraj-schedule-days button { font-size:11px; padding:8px 2px; }
+  .miraj-schedule-days button small { font-size:9px; }
+  .miraj-schedule-session { grid-template-columns:60px 30px minmax(0,1fr); padding:8px 7px; gap:7px; }
+  .miraj-schedule-time { font-size:12px; padding:6px 2px; }
+  .miraj-schedule-symbol { width:30px; height:32px; }
+  .miraj-schedule-description h3 { font-size:15px; }
+  .miraj-schedule-description span { font-size:11px; }
+  .miraj-schedule-week-entry strong { font-size:15px; }
+  .mobile-nav a { font-size:9px; }
+}
