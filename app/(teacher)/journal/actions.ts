@@ -18,7 +18,7 @@ export async function saveDailyJournalAction(formData: FormData) {
     failure('التاريخ غير صالح.');
   }
   if (teacherNote.length > 2000 || raw.length > 130000) failure('حجم البيانات كبير جدًا.');
-  let entries: Array<{ start: string; end: string; subject: string; title: string; activities: string }>;
+  let entries: Array<{ start: string; end: string; subject: string; title: string; activities: string }> = [];
   try {
     const parsed: unknown = JSON.parse(raw);
     if (!Array.isArray(parsed) || parsed.length > 35) failure('عدد الحصص غير صالح.');
