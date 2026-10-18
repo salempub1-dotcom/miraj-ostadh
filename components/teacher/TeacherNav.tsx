@@ -1,13 +1,14 @@
 'use client';
 
 import Link from 'next/link';
-import { BookOpen, CalendarDays, Home, Library, NotebookTabs, UserRound, type LucideIcon } from 'lucide-react';
+import { BookOpen, CalendarDays, Home, Library, NotebookTabs, CalendarRange, UserRound, type LucideIcon } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 
 type NavItem = { href: string; label: string; icon: LucideIcon };
 
 const desktopItems: NavItem[] = [
   { href: '/today', label: 'يومي', icon: Home },
+  { href: '/schedule', label: 'جدولي', icon: CalendarRange },
   { href: '/planning', label: 'التخطيط', icon: CalendarDays },
   { href: '/resources', label: 'الموارد', icon: BookOpen },
   { href: '/library', label: 'مكتبتي', icon: Library },
@@ -15,7 +16,7 @@ const desktopItems: NavItem[] = [
   { href: '/account', label: 'حسابي', icon: UserRound },
 ];
 
-const mobileItems = desktopItems.filter((item) => ['/today', '/planning', '/library', '/journal', '/account'].includes(item.href));
+const mobileItems = desktopItems.filter((item) => ['/today', '/schedule', '/planning', '/resources', '/account'].includes(item.href));
 
 function isActive(pathname: string, href: string) {
   return pathname === href || pathname.startsWith(`${href}/`);
