@@ -3,7 +3,7 @@ on:
   pull_request:
     branches: [main]
   push:
-    branches: [feature/first-grade-resources-dark-mode]
+    branches: [feature/first-grade-resources-dark-mode, feature/edit-teacher-grade-profile]
 permissions:
   contents: read
 jobs:
