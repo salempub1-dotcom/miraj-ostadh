@@ -1,3 +1,5 @@
+'use server';
+
 import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
 import { requireCompletedTeacherContext } from '@/lib/auth';
@@ -6,7 +8,6 @@ const dayPattern = /^\d{4}-\d{2}-\d{2}$/;
 const clockPattern = /^([01]\d|2[0-3]):[0-5]\d$/;
 
 export async function saveDailyJournalAction(formData: FormData) {
-  'use server';
   const { supabase } = await requireCompletedTeacherContext();
   const date = String(formData.get('date') ?? '');
   const teacherNote = String(formData.get('teacher_note') ?? '');
