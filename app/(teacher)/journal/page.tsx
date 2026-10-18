@@ -30,11 +30,12 @@ export default async function JournalPage({ searchParams }: {
   }).format(new Date(date + 'T12:00:00Z'));
   const dayNumber = weekdayNumbers[weekday];
 
-  const [{data:profile}, {data:timetable}, curriculum, {data:journal}] = await Promise.all([
+  const [{data:profile}, {data:timetable}, curriculum, {data:journal}, {data:professional}] = await Promise.all([
     supabase.from('profiles').select('full_name,display_name,school_name').eq('id',userId).single(),
     supabase.from('teacher_timetables').select('id').eq('teacher_context_id',context.id).eq('is_active',true).maybeSingle(),
     getCurriculumContext(supabase,context.curriculum_id),
     supabase.from('daily_journals').select('id,teacher_note,status').eq('teacher_context_id',context.id).eq('journal_date',date).maybeSingle(),
+    supabase.from('teacher_professional_cards').select('teacher_name,school_name').eq('user_id',userId).maybeSingle(),
   ]);
 
   const [{data:slots, error:slotError},{data:existingEntries,error:entryError}] = await Promise.all([
@@ -63,8 +64,8 @@ export default async function JournalPage({ searchParams }: {
   return <JournalEditor key={context.id+'-'+date}
     date={date}
     gradeName={curriculum?.grade.name_ar??'التعليم الابتدائي'}
-    teacherName={profile?.display_name??profile?.full_name??'الأستاذ'}
-    schoolName={profile?.school_name??''}
+    teacherName={professional?.teacher_name??profile?.display_name??profile?.full_name??'الأستاذ'}
+    schoolName={professional?.school_name??profile?.school_name??''}
     className={context.class_name}
     initialEntries={initialEntries}
     initialNote={journal?.teacher_note??''}
