@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { ArrowRight, BookOpenText, ClipboardCheck, FileText, Layers3, Sparkles } from 'lucide-react';
+import { ArrowRight, BookOpenText, ClipboardCheck, ExternalLink, FileText, Layers3, Sparkles } from 'lucide-react';
 import { notFound } from 'next/navigation';
 import { requireCompletedTeacherContext } from '@/lib/auth';
 
@@ -58,6 +58,20 @@ export default async function LessonPage({
       .maybeSingle(),
   ]);
 
+  const [{ data: linkedFiles }, { data: activities }] = await Promise.all([
+    supabase.from('lesson_resources')
+      .select('category,order_index,resources(id,title,resource_type,external_url,status,review_status)')
+      .eq('lesson_id', lesson.id).order('order_index'),
+    supabase.from('lesson_activities')
+      .select('id,title,instructions,activity_type').eq('lesson_id',lesson.id).order('order_index'),
+  ]);
+  type LinkedResource = { id: string; title: string; resource_type: string; external_url: string | null; status: string; review_status: string };
+  const visibleFiles = (linkedFiles ?? []).flatMap((link) => {
+    const source = link.resources as unknown as LinkedResource | null;
+    if (!source || source.status !== 'published' || source.review_status !== 'verified') return [];
+    return [source];
+  });
+
   const activeTab = tabs.some((item) => item.key === tab) ? tab : 'plan';
 
   return (
@@ -93,6 +107,23 @@ export default async function LessonPage({
               <div className="empty-state"><strong>مذكرة هذا الدرس قيد الإعداد.</strong><span>سيظهر المحتوى المنظم هنا فور نشره.</span></div>
             )}
           </>
+        ) : activeTab === 'resources' ? (
+          <div className="miraj-resource-page">
+            <h2>وسائل وملفات الحصة</h2>
+            {visibleFiles.length ? <div className="miraj-resource-grid">
+              {visibleFiles.map(file => <article className="miraj-resource-item" key={file.id}>
+                <FileText size={22}/><h3>{file.title}</h3>
+                {file.external_url ? <a href={file.external_url} target="_blank" rel="noopener noreferrer">عرض المورد <ExternalLink size={15}/></a> : <span>غير متاح للعرض حاليًا</span>}
+              </article>)}
+            </div> : <div className="empty-state"><strong>لا توجد وسائل معتمدة مرتبطة بهذه الحصة حاليًا.</strong><span>تظهر الملفات هنا بعد المراجعة والربط بالدرس.</span></div>}
+          </div>
+        ) : activeTab === 'activities' ? (
+          <div className="miraj-resource-page">
+            <h2>أنشطة الحصة</h2>
+            {activities?.length ? <div className="miraj-resource-grid">{activities.map(activity =>
+              <article className="miraj-resource-item" key={activity.id}><Sparkles size={22}/><h3>{activity.title}</h3><p>{activity.instructions ?? 'تعليمات النشاط قيد الإعداد.'}</p></article>
+            )}</div> : <div className="empty-state"><strong>لا توجد أنشطة مدرجة حاليًا.</strong><span>ستظهر الأنشطة هنا بعد إعدادها.</span></div>}
+          </div>
         ) : (
           <div className="empty-state">
             <strong>قسم {tabs.find((item) => item.key === activeTab)?.label} جاهز للربط بالمحتوى.</strong>
