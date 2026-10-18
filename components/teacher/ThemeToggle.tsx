@@ -19,7 +19,7 @@ export function ThemeToggle() {
     setMode(preference);
     setTheme(preference);
     const media = window.matchMedia('(prefers-color-scheme: dark)');
-    const listener = () => { if (preference === 'system') setTheme('system'); };
+    const listener = () => { if (window.localStorage.getItem(KEY) !== 'light' && window.localStorage.getItem(KEY) !== 'dark') setTheme('system'); };
     media.addEventListener('change', listener);
     return () => media.removeEventListener('change', listener);
   }, []);
