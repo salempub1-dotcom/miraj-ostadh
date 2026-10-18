@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import './resource-theme.css';
 import './flow.css';
 import './teacher-pages.css';
 import './v2.css';
@@ -24,7 +25,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="ar" dir="rtl">
+    <html lang="ar" dir="rtl" suppressHydrationWarning>
       <body>{children}</body>
     </html>
   );
