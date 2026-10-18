@@ -3,6 +3,7 @@ import { LogOut, UserRound } from 'lucide-react';
 import { requireCompletedTeacherContext } from '@/lib/auth';
 import { getCurriculumContext } from '@/lib/v1';
 import { TeacherNav } from '@/components/teacher/TeacherNav';
+import { ThemeSwitch } from '@/components/teacher/ThemeSwitch';
 
 export default async function TeacherLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const { supabase, userId, context } = await requireCompletedTeacherContext();
@@ -41,6 +42,7 @@ export default async function TeacherLayout({ children }: Readonly<{ children: R
         </div>
 
         <TeacherNav />
+        <ThemeSwitch />
 
         <div className="sidebar-footer">
           <strong><bdi dir="ltr">{gradeCode}</bdi> • {subjectName}</strong>
