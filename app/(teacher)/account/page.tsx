@@ -2,8 +2,9 @@ import { Mail, MapPin, School, UserRound } from 'lucide-react';
 import { requireCompletedTeacherContext } from '@/lib/auth';
 import { getCurriculumContext, getPrimaryArabicCurricula } from '@/lib/v1';
 import { changeTeachingGradeAction } from './actions';
+import CurrentTimetableForm from './CurrentTimetableForm';
 
-export default async function AccountPage({ searchParams }: { searchParams: Promise<{updated?:string;error?:string}> }) {
+export default async function AccountPage({ searchParams }: { searchParams: Promise<{updated?:string;error?:string;timetable_saved?:string;timetable_error?:string}> }) {
   const feedback = await searchParams;
   const { supabase, userId, context } = await requireCompletedTeacherContext();
   const [{ data: profile }, { data: timetable }, curriculumContext, availableGrades] = await Promise.all([
@@ -25,6 +26,13 @@ export default async function AccountPage({ searchParams }: { searchParams: Prom
   const { count } = timetable
     ? await supabase.from('timetable_slots').select('id', { count: 'exact', head: true }).eq('timetable_id', timetable.id)
     : { count: 0 };
+
+  const {data: currentSlots, error: slotsError} = timetable ? await supabase
+    .from('timetable_slots')
+    .select('day_of_week,start_time,end_time,note')
+    .eq('timetable_id',timetable.id)
+    .order('day_of_week')
+    .order('start_time') : {data:[],error:null};
 
   const gradeCode = curriculumContext?.grade.code ?? 'ابتدائي';
   const gradeName = curriculumContext?.grade.name_ar ?? 'التعليم الابتدائي';
@@ -72,6 +80,20 @@ export default async function AccountPage({ searchParams }: { searchParams: Prom
           <div className="info-strip">السنة الدراسية: <strong>{academicYear}</strong> — المادة: <strong>{subjectName}</strong></div>
           <button className="primary-btn" type="submit" disabled={!availableGrades?.options.length}>حفظ المستوى الجديد</button>
         </form>
+      </section>
+
+      <section className="card grade-profile-settings" id="my-timetable">
+        <h2>جدول استعمال الزمن — {gradeName}</h2>
+        {feedback.timetable_saved === '1' ? <div role="status" className="form-alert">تم حفظ الجدول بنجاح. انتقل إلى «يومي» لعرض حصص اليوم.</div> : null}
+        {feedback.timetable_error ? <div role="alert" className="form-alert error">{feedback.timetable_error}</div> : null}
+        {slotsError ? <div role="alert" className="form-alert error">تعذر قراءة الجدول. أعد تحميل الصفحة.</div> :
+          <CurrentTimetableForm key={context.id} gradeName={gradeName} initialSlots={(currentSlots ?? []).map(slot=>({
+            day:slot.day_of_week,start:slot.start_time.slice(0,5),end:slot.end_time.slice(0,5),note:slot.note??''
+          }))} />}
+        <div className="miraj-timetable-shortcuts">
+          <a className="text-link" href="/today">معاينة حصص اليوم</a>
+          <a className="text-link" href="/planning">عرض التخطيط الدراسي</a>
+        </div>
       </section>
 
       <form action="/auth/signout" method="post" className="card">
