@@ -18,6 +18,7 @@ import './today-layout-v7.css';
 import './quick-access-v8.css';
 import './resource-library-theme.css';
 import './schedule-modern.css';
+import './daily-journal.css';
 
 export const metadata: Metadata = {
   title: 'معراج الأستاذ',
