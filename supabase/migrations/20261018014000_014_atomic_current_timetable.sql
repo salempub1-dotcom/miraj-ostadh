@@ -14,6 +14,7 @@ declare
   v_end time;
   v_count integer;
   v_idx integer := 0;
+  v_item_record record;
 begin
   if v_user is null then raise exception 'Authentication required'; end if;
   if jsonb_typeof(p_slots) is distinct from 'array' then raise exception 'Slots must be an array'; end if;
@@ -34,14 +35,20 @@ begin
     v_start := (v_slot->>'start')::time;
     v_end := (v_slot->>'end')::time;
     if v_end <= v_start then raise exception 'Session must end after it starts'; end if;
-    if exists (select 1 from jsonb_array_elements(p_slots) other
-      where other is distinct from v_slot
-        and other->>'day'=v_slot->>'day'
-        and (other->>'start') ~ '^([01][0-9]|2[0-3]):[0-5][0-9]$'
-        and (other->>'end') ~ '^([01][0-9]|2[0-3]):[0-5][0-9]$'
-        and (other->>'start')::time < v_end
-        and (other->>'end')::time > v_start
-    ) then raise exception 'Overlapping sessions in the same day'; end if;
+    if length(coalesce(v_slot->>'note','')) > 120 then raise exception 'Session note too long'; end if;
+    end loop;
+
+  -- Compare pairs by array position, including identical JSON objects.
+  for v_item_record in
+    select a.value as first_slot,b.value as second_slot
+    from jsonb_array_elements(p_slots) with ordinality a(value,position)
+    join jsonb_array_elements(p_slots) with ordinality b(value,position)
+      on a.position < b.position
+  loop
+    if v_item_record.first_slot->>'day'=v_item_record.second_slot->>'day'
+      and (v_item_record.first_slot->>'start')::time < (v_item_record.second_slot->>'end')::time
+      and (v_item_record.second_slot->>'start')::time < (v_item_record.first_slot->>'end')::time
+    then raise exception 'Overlapping sessions in the same day'; end if;
   end loop;
 
   select id into v_timetable from public.teacher_timetables
