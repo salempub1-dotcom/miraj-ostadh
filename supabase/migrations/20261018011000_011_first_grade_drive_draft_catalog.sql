@@ -106,3 +106,8 @@ values
 ('تعبير_شفوي_سنة_اولى.pdf','مجلد المصدر: مرحلة تمهيدية. مصنف آليًا، يحتاج مراجعة نوع المورد وتوافقه مع البرنامج.','pdf','google_drive','1ciF-yelQWCSBFGjJCC4fS5EVdHX7iItJ','https://drive.google.com/file/d/1ciF-yelQWCSBFGjJCC4fS5EVdHX7iItJ/view','1AP','AR',null,null,'lesson_plan','draft',false),
 ('الفترة التمهيدية سنة أولى 1.pdf','مجلد المصدر: مرحلة تمهيدية. مصنف آليًا، يحتاج مراجعة نوع المورد وتوافقه مع البرنامج.','pdf','google_drive','1l-rG_wkQ87EnSyIsSGpxaipmmK8BB4nx','https://drive.google.com/file/d/1l-rG_wkQ87EnSyIsSGpxaipmmK8BB4nx/view','1AP','AR',null,null,'lesson_plan','draft',false)
 on conflict do nothing;
+
+-- Additional file at the root of the lesson-plan folder.
+insert into public.resources (title,description,resource_type,external_source,external_file_id,external_url,curriculum_grade_code,curriculum_subject_code,educational_category,status,source_verified)
+values ('الألعاب الرياضياتية جميع المقاطع','ملف ألعاب جامع يحتاج الربط بدروس محددة بعد المراجعة','worksheet','google_drive','1bjxxmXv7MKLkVB-jIpeCUoc9f0hePmw0','https://drive.google.com/file/d/1bjxxmXv7MKLkVB-jIpeCUoc9f0hePmw0/view','1AP','MATHEMATICS','game','draft',false)
+on conflict do nothing;
