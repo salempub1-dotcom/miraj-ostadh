@@ -1,0 +1,49 @@
+/* Miraj Ostadh theme overrides: appended last to preserve existing brand tokens. */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg:#101a2c;--surface:#192840;--surface-soft:#22344d;
+  --border:#344760;--text:#eef4ff;--muted:#b4c4d9;
+  --brand:#d4af37;--brand-dark:#f0ca59;--brand-soft:#293955;
+  --sand:#273650;--blue-soft:#23374e;
+  --shadow:0 12px 32px rgba(0,0,0,.22);
+}
+:root[data-theme="dark"] body, :root[data-theme="dark"] .main {background:var(--bg);color:var(--text)}
+:root[data-theme="dark"] .sidebar,
+:root[data-theme="dark"] .card,
+:root[data-theme="dark"] .teacher-chip,
+:root[data-theme="dark"] .search,
+:root[data-theme="dark"] .quick-card,
+:root[data-theme="dark"] .mobile-nav {background:var(--surface);color:var(--text);border-color:var(--border)}
+:root[data-theme="dark"] .hero,
+:root[data-theme="dark"] .next-lesson {background:linear-gradient(110deg,#22344d,#1b2b43);border-color:var(--border)}
+:root[data-theme="dark"] .hero p, :root[data-theme="dark"] .nav a,
+:root[data-theme="dark"] .time, :root[data-theme="dark"] .quick-card span {color:var(--muted)}
+:root[data-theme="dark"] .nav a.active {background:var(--brand-soft);color:var(--brand-dark)}
+:root[data-theme="dark"] .nav a:hover {background:#293955}
+:root[data-theme="dark"] .quick-card:nth-child(n) {background:var(--surface-soft)}
+:root[data-theme="dark"] input, :root[data-theme="dark"] select, :root[data-theme="dark"] textarea {background:var(--surface);color:var(--text);border-color:var(--border)}
+.miraj-theme-switch {display:flex;gap:4px;margin:14px 0;padding:5px;border:1px solid var(--border);border-radius:14px;background:var(--surface-soft)}
+.miraj-theme-switch button {flex:1;display:grid;place-items:center;min-height:36px;border:0;border-radius:10px;color:var(--muted);background:transparent}
+.miraj-theme-switch button[aria-pressed="true"]{background:var(--surface);color:var(--brand-dark);box-shadow:0 2px 9px rgba(0,0,0,.08)}
+.miraj-resource-page {display:grid;gap:18px}
+.miraj-resource-hero {display:flex;gap:18px;align-items:center;padding:22px;background:var(--surface);border:1px solid var(--border);border-radius:22px}
+.miraj-resource-hero h1 {margin:4px 0;font-size:clamp(23px,3vw,32px)}
+.miraj-resource-hero p {margin:0;color:var(--muted)}
+.miraj-resource-hero-icon {display:grid;place-items:center;flex:0 0 60px;height:60px;border-radius:18px;background:var(--brand-soft);color:var(--brand-dark)}
+.miraj-resource-filters {display:flex;gap:10px;flex-wrap:wrap}
+.miraj-resource-filters label {display:flex;align-items:center;gap:8px;flex:1 1 220px;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:0 12px}
+.miraj-resource-filters input {flex:1;min-width:0;border:0;outline-offset:3px;padding:13px 4px;background:transparent;color:var(--text)}
+.miraj-resource-filters select {border:1px solid var(--border);border-radius:14px;background:var(--surface);color:var(--text);padding:12px}
+.miraj-resource-filters button {background:var(--brand);color:#10244a;border:0;border-radius:14px;padding:12px 24px;font-weight:700}
+.miraj-resource-grid {display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
+.miraj-resource-item {display:flex;flex-direction:column;align-items:flex-start;gap:9px;padding:18px;background:var(--surface);border:1px solid var(--border);border-radius:18px}
+.miraj-resource-item>svg {color:var(--brand-dark)}
+.miraj-resource-item h3 {margin:0;font-size:17px}.miraj-resource-item p {margin:0;color:var(--muted);line-height:1.65}
+.miraj-resource-item span {font-size:12px;color:var(--muted)}
+.miraj-resource-item a {display:flex;align-items:center;gap:8px;margin-top:auto;color:var(--brand-dark);font-weight:700}
+.miraj-resource-draft {font-size:12px;color:var(--muted)}
+.miraj-resource-section-title {display:flex;align-items:center;gap:8px;font-size:19px;margin:8px 0 14px}
+.miraj-resource-hint,.miraj-resource-footer {color:var(--muted)}
+.miraj-resource-empty {text-align:center;display:grid;justify-items:center}
+.miraj-resource-notice {color:#cf4141}
+@media(max-width:650px){.miraj-resource-hero{padding:16px}.miraj-resource-hero-icon{flex-basis:45px;height:45px}.miraj-resource-filters select,.miraj-resource-filters button{flex:1}}
