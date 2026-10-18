@@ -17,6 +17,8 @@ alter table public.resources
   add constraint resources_file_location_check
     check ((storage_bucket is not null and storage_path is not null)
        or (external_url is not null and external_url ~ '^https://'));
+alter table public.resources add constraint resources_external_publication_review_check
+  check (external_source is null or status <> 'published' or source_verified = true);
 create unique index if not exists resources_external_source_file_idx
   on public.resources (external_source,external_file_id)
   where external_source is not null and external_file_id is not null;
