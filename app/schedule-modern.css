@@ -285,3 +285,14 @@ html[data-theme='dark'] .miraj-schedule-week-entry {
   .miraj-schedule-week-entry strong { font-size:15px; }
   .mobile-nav a { font-size:9px; }
 }
+
+/* Five essential tabs on narrow screens: no cramped seven-item navigation. */
+@media (max-width:980px) {
+  .mobile-nav { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:5px; }
+  .mobile-nav a { min-width:0; width:100%; font-size:11px; font-weight:700; padding:3px 1px; }
+  .mobile-nav a span { font-size:11px; line-height:1.4; }
+}
+@media (max-width:360px) {
+  .mobile-nav { gap:2px; }
+  .mobile-nav a,.mobile-nav a span { font-size:10px; }
+}
