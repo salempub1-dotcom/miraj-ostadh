@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;600;700;800&display=swap');
+
+/* Timetable typography: Arabic text at readable sizes with robust system fallbacks. */
+.miraj-schedule {
+  --schedule-arabic: #2b63aa;
+  --schedule-math: #087f7a;
+  --schedule-islamic: #9c6814;
+  --schedule-sport: #7651aa;
+  --schedule-art: #b24b80;
+  font-family: 'Tajawal', 'Cairo', 'Noto Sans Arabic', system-ui, sans-serif;
+  color: var(--text);
+  max-width: 1180px;
+  margin-inline: auto;
+  line-height: 1.75;
+  font-size: 17px;
+}
+.miraj-schedule * { min-width: 0; }
+.miraj-schedule button,.miraj-schedule a { font-family: inherit; }
+.miraj-schedule button:focus-visible,.miraj-schedule a:focus-visible {
+  outline: 3px solid var(--brand); outline-offset: 3px;
+}
+.miraj-schedule-hero {
+  display:flex; justify-content:space-between; align-items:center; gap:18px;
+  padding:28px 30px; background:linear-gradient(115deg,var(--surface),var(--brand-soft));
+  border:1px solid var(--border); border-radius:23px;
+}
+.miraj-schedule-kicker { display:inline-flex; align-items:center; gap:8px; color:var(--brand-dark); font-weight:800; font-size:16px; }
+.miraj-schedule h1 { margin:8px 0 4px; font-size:clamp(28px,3vw,37px); line-height:1.5; font-weight:800; }
+.miraj-schedule-hero p { margin:0; color:var(--muted); font-size:16px; }
+.miraj-schedule-actions { display:flex; flex-wrap:wrap; gap:10px; }
+.miraj-schedule-actions > * { display:flex; align-items:center; justify-content:center; gap:8px; border-radius:12px; font-size:15px; font-weight:800; padding:11px 15px; border:1px solid var(--border); }
+.miraj-schedule-edit { background:var(--brand); color:#fff; }
+.miraj-schedule-print { background:var(--surface); color:var(--text); }
+.miraj-schedule-stats { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; margin:16px 0; }
+.miraj-schedule-stats > div { display:grid; justify-items:center; gap:1px; background:var(--surface); border:1px solid var(--border); border-radius:15px; padding:14px; }
+.miraj-schedule-stats strong { font-size:29px; line-height:1.3; font-weight:800; font-variant-numeric:tabular-nums; }
+.miraj-schedule-stats span { font-size:14px; color:var(--muted); font-weight:700; }
+.miraj-schedule-view-tabs { display:flex; background:var(--surface-soft); border:1px solid var(--border); border-radius:15px; padding:5px; gap:5px; width:fit-content; margin:20px 0; }
+.miraj-schedule-view-tabs button { background:transparent; border:0; border-radius:11px; padding:11px 22px; color:var(--muted); font-size:16px; font-weight:800; }
+.miraj-schedule-view-tabs button.active { background:var(--brand); color:#fff; box-shadow:0 4px 14px rgba(0,0,0,.1); }
+.miraj-schedule-days { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:9px; margin:0 0 20px; }
+.miraj-schedule-days button { display:grid; justify-items:center; gap:2px; padding:14px 7px; border:1px solid var(--border); background:var(--surface); color:var(--text); border-radius:15px; font-size:16px; font-weight:800; }
+.miraj-schedule-days button small { font-size:12px; color:var(--muted); font-weight:700; }
+.miraj-schedule-days button.active { background:#183e75; color:#fff; border-color:#183e75; }
+.miraj-schedule-days button.active small { color:#e8c875; }
+.miraj-schedule-day-heading { display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:12px; }
+.miraj-schedule-day-heading h2 { margin:0; font-size:24px; font-weight:800; }
+.miraj-schedule-day-heading > span { color:var(--muted); font-size:15px; }
+.miraj-schedule-day-list { display:grid; gap:10px; }
+.miraj-schedule-session { --subject-color:var(--schedule-arabic); display:grid; grid-template-columns:80px 53px minmax(0,1fr); align-items:center; gap:15px; border:1px solid var(--border); background:var(--surface); border-inline-start:5px solid var(--subject-color); border-radius:15px; padding:14px 18px; }
+.miraj-schedule-session.subject-math,.miraj-schedule-week-entry.subject-math { --subject-color:var(--schedule-math); }
+.miraj-schedule-session.subject-islamic,.miraj-schedule-week-entry.subject-islamic { --subject-color:var(--schedule-islamic); }
+.miraj-schedule-session.subject-sport,.miraj-schedule-week-entry.subject-sport { --subject-color:var(--schedule-sport); }
+.miraj-schedule-session.subject-art,.miraj-schedule-week-entry.subject-art { --subject-color:var(--schedule-art); }
+.miraj-schedule-session.current { outline:2px solid var(--brand); outline-offset:1px; }
+.miraj-schedule-time { display:grid; gap:0; justify-items:center; font-weight:800; color:var(--text); font-size:17px; line-height:1.45; font-variant-numeric:tabular-nums; }
+.miraj-schedule-time span { color:var(--muted); font-size:12px; font-weight:500; }
+.miraj-schedule-symbol { display:grid; place-items:center; background:var(--surface-soft); color:var(--subject-color); border-radius:14px; height:50px; width:50px; }
+.miraj-schedule-description span { color:var(--subject-color); font-weight:700; font-size:15px; display:flex; align-items:center; flex-wrap:wrap; gap:8px; }
+.miraj-schedule-description span em { font-size:12px; color:var(--brand-dark); border:1px solid var(--border); border-radius:6px; font-style:normal; padding:0 7px; }
+.miraj-schedule-description h3 { margin:1px 0 0; font-size:20px; font-weight:800; line-height:1.5; }
+.miraj-schedule-description small { font-size:14px; font-weight:600; color:var(--muted); }
+.miraj-schedule-break { display:flex; align-items:center; justify-content:center; gap:7px; color:var(--muted); font-size:14px; padding:12px; background:var(--surface-soft); border-radius:10px; margin-bottom:10px; }
+.miraj-schedule-week-list { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:10px; align-items:stretch; }
+.miraj-schedule-week-day { min-width:0; border:1px solid var(--border); border-radius:17px; background:var(--surface); overflow:hidden; }
+.miraj-schedule-week-day header { display:flex; justify-content:space-between; align-items:center; gap:4px; padding:14px 12px; background:var(--surface-soft); border-bottom:1px solid var(--border); }
+.miraj-schedule-week-day h2 { font-size:17px; font-weight:800; margin:0; }
+.miraj-schedule-week-day header span { font-size:12px; color:var(--muted); white-space:nowrap; }
+.miraj-schedule-week-sessions { display:grid; gap:7px; padding:9px; }
+.miraj-schedule-week-entry { --subject-color:var(--schedule-arabic); display:grid; gap:2px; padding:10px 8px; border-radius:9px; background:var(--surface-soft); border-inline-start:3px solid var(--subject-color); }
+.miraj-schedule-week-entry strong { font-size:14px; line-height:1.6; font-weight:700; overflow-wrap:anywhere; }
+.miraj-schedule-week-entry bdi { font-size:12px; color:var(--muted); font-weight:600; font-variant-numeric:tabular-nums; }
+.miraj-schedule-legend { display:flex; flex-wrap:wrap; gap:12px; margin:20px 0 10px; }
+.miraj-schedule-legend > span { display:inline-flex; align-items:center; gap:6px; font-weight:700; font-size:13px; }
+.miraj-schedule-legend > span::before { content:""; display:inline-block; width:10px; height:10px; background:var(--schedule-arabic); border-radius:3px; }
+.miraj-schedule-legend > span.subject-math::before { background:var(--schedule-math); }
+.miraj-schedule-legend > span.subject-islamic::before { background:var(--schedule-islamic); }
+.miraj-schedule-legend > span.subject-sport::before { background:var(--schedule-sport); }
+.miraj-schedule-legend > span.subject-art::before { background:var(--schedule-art); }
+.miraj-schedule-hint { color:var(--muted); font-size:14px; margin:6px 0; }
+.miraj-schedule-empty { padding:28px; border:1px dashed var(--border); border-radius:16px; background:var(--surface); font-size:17px; }
+.miraj-schedule-empty a { color:var(--brand-dark); font-weight:800; }
+@media(max-width:1000px){.miraj-schedule-week-list{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:640px){
+  .miraj-schedule { font-size:16px; }
+  .miraj-schedule-hero { padding:18px; display:grid; }
+  .miraj-schedule-hero p { font-size:15px; }
+  .miraj-schedule-actions > * { flex:1; }
+  .miraj-schedule-days { gap:5px; }
+  .miraj-schedule-days button { padding:11px 2px; font-size:12px; border-radius:10px; }
+  .miraj-schedule-days button small { font-size:10px; }
+  .miraj-schedule-session { grid-template-columns:65px 39px minmax(0,1fr); gap:10px; padding:12px 9px; }
+  .miraj-schedule-time { font-size:14px; }
+  .miraj-schedule-symbol { width:38px; height:40px; border-radius:10px; }
+  .miraj-schedule-description h3 { font-size:18px; }
+  .miraj-schedule-description span { font-size:13px; }
+  .miraj-schedule-week-list { grid-template-columns:1fr; }
+  .miraj-schedule-week-day h2 { font-size:18px; }
+  .miraj-schedule-week-entry strong { font-size:17px; }
+}
+@media print {
+  .sidebar,.mobile-nav,.miraj-theme-mobile,.miraj-schedule-actions,.miraj-schedule-view-tabs,.miraj-schedule-days,.miraj-schedule-hint { display:none!important; }
+  .app-shell { display:block; } .main { max-width:none; padding:0; }
+  .miraj-schedule { font-size:14px; } .miraj-schedule-week-list { grid-template-columns:repeat(5,minmax(0,1fr)); }
+  .miraj-schedule-session { break-inside:avoid; }
+  .miraj-schedule-hero,.miraj-schedule-stats > div,.miraj-schedule-session,.miraj-schedule-week-day { box-shadow:none; }
+}
