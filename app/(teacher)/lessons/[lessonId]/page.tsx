@@ -58,6 +58,23 @@ export default async function LessonPage({
       .maybeSingle(),
   ]);
 
+  const [{ data: relatedLinks }, { data: lessonActivities }] = await Promise.all([
+    supabase.from('lesson_resources')
+      .select('resource_id,category,order_index,resources(id,title,description,resource_type,external_url,status)')
+      .eq('lesson_id', lesson.id)
+      .order('order_index'),
+    supabase.from('lesson_activities')
+      .select('id,title,instructions,activity_type')
+      .eq('lesson_id', lesson.id).order('order_index'),
+  ]);
+
+  type RelatedResource = { id:string; title:string; description:string|null; resource_type:string; external_url:string|null; status:string };
+  const linkedResources = (relatedLinks ?? []).flatMap((link) => {
+    const resource = link.resources as unknown as RelatedResource | RelatedResource[] | null;
+    const item = Array.isArray(resource) ? resource[0] : resource;
+    return item?.status === 'published' ? [item] : [];
+  });
+
   const activeTab = tabs.some((item) => item.key === tab) ? tab : 'plan';
 
   return (
@@ -93,6 +110,32 @@ export default async function LessonPage({
               <div className="empty-state"><strong>مذكرة هذا الدرس قيد الإعداد.</strong><span>سيظهر المحتوى المنظم هنا فور نشره.</span></div>
             )}
           </>
+        ) : activeTab === 'resources' ? (
+          linkedResources.length > 0 ? (
+            <div className="miraj-resource-grid">
+              {linkedResources.map((resource) => (
+                <article key={resource.id} className="miraj-resource-card">
+                  <div className="miraj-resource-card-body">
+                    <h2>{resource.title}</h2>
+                    <p>{resource.description || 'مورد مرفق بهذا الدرس'}</p>
+                  </div>
+                  {resource.external_url?.startsWith('https://') ? (
+                    <a href={resource.external_url} target="_blank" rel="noopener noreferrer" className="miraj-resource-open">معاينة المورد</a>
+                  ) : <span className="miraj-resource-card-meta">المورد متاح داخل مكتبة المنصة</span>}
+                </article>
+              ))}
+            </div>
+          ) : <div className="empty-state"><strong>لا توجد وسائل منشورة لهذا الدرس بعد.</strong><span>سيتم ربط الوسائل التعليمية بعد مراجعتها.</span></div>
+        ) : activeTab === 'activities' ? (
+          (lessonActivities ?? []).length > 0 ? (
+            <div className="miraj-resource-grid">
+              {(lessonActivities ?? []).map((activity) => (
+                <article key={activity.id} className="miraj-resource-card">
+                  <div className="miraj-resource-card-body"><h2>{activity.title}</h2><p>{activity.instructions || 'نشاط مرتبط بالدرس'}</p></div>
+                </article>
+              ))}
+            </div>
+          ) : <div className="empty-state"><strong>لا توجد أنشطة مضافة بعد.</strong></div>
         ) : (
           <div className="empty-state">
             <strong>قسم {tabs.find((item) => item.key === activeTab)?.label} جاهز للربط بالمحتوى.</strong>
