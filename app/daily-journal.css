@@ -68,3 +68,19 @@
 .miraj-journal-print-only th:nth-child(3){width:25%}
 .miraj-journal-print-only tr{break-inside:avoid}
 }
+
+/* Teacher's private professional card */
+.miraj-professional-back {display:flex;align-items:center;gap:7px;padding:10px 13px;border-radius:10px;border:1px solid var(--border);background:var(--surface);font-weight:800;font-size:14px;color:var(--text)}
+.miraj-professional-form {display:grid;gap:16px;margin:18px 0}
+.miraj-professional-group {padding:22px;border-radius:16px;border:1px solid var(--border);background:var(--surface)}
+.miraj-professional-group h2 {font-size:21px;font-weight:800;margin:0 0 7px}
+.miraj-professional-group>p {font-size:14px;color:var(--muted)}
+.miraj-professional-fields {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px;margin-top:17px}
+.miraj-professional-fields label {display:grid;gap:7px;font-weight:800;font-size:14px}
+.miraj-professional-fields input,.miraj-professional-fields textarea {width:100%;border-radius:10px;border:1px solid var(--border);padding:12px;background:var(--surface);color:var(--text);font:inherit;font-weight:500}
+.miraj-professional-fields textarea {resize:vertical}
+.miraj-professional-fixed {grid-column:1/-1;background:var(--brand-soft);padding:13px;border-radius:10px;font-size:14px}
+.miraj-professional-fixed p {margin:4px 0 0;color:var(--muted)}
+.miraj-professional-fixed a {font-weight:800;color:var(--brand-dark);text-decoration:underline}
+.miraj-professional-actions {display:flex;justify-content:flex-end}
+@media(max-width:640px) {.miraj-professional-group{padding:15px}.miraj-professional-fields{grid-template-columns:1fr}.miraj-professional-actions .miraj-journal-save{width:100%;justify-content:center}}
