@@ -54,7 +54,7 @@ export default async function TeacherLayout({ children }: Readonly<{ children: R
         </div>
       </aside>
 
-      <main className="main">{children}</main>
+      <main className="main"><div className="miraj-theme-mobile"><ThemeToggle /></div>{children}</main>
 
       <TeacherNav mobile />
     </div>
