@@ -24,8 +24,8 @@ export async function changeTeachingGradeAction(formData: FormData) {
     .from('curricula')
     .select('academic_year_id,subject_id').eq('id', context.curriculum_id).single();
   if (currentError || !currentCurriculum
-    || currentCurriculum.academic_year_id !== selected.curriculum.academic_year_id
-    || currentCurriculum.subject_id !== selected.curriculum.subject_id) {
+    || currentCurriculum.academic_year_id !== selected.year.id
+    || currentCurriculum.subject_id !== selected.subject.id) {
     redirect(errorUrl('لا يمكن التبديل إلى برنامج مختلف عن السنة أو المادة الحالية.'));
   }
 
