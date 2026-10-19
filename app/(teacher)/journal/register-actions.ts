@@ -36,9 +36,11 @@ export async function saveRegisterRecord(formData:FormData) {
  if(!title||title.length>180||notes.length>2000||place.length>180||
    (event_date&&(!datePattern.test(event_date)||Number.isNaN(Date.parse(event_date+'T12:00:00Z'))||
     new Date(event_date+'T12:00:00Z').toISOString().slice(0,10)!==event_date))) go(section,'invalid');
- const {error}=await supabase.from('teacher_register_records').insert({
-   teacher_context_id:context.id,record_type,title,event_date:event_date||null,place:place||null,notes:notes||null
- });
+ const id=safe(formData.get('id'),40);
+ const values={teacher_context_id:context.id,record_type,title,event_date:event_date||null,place:place||null,notes:notes||null};
+ const {error}=id
+  ? await supabase.from('teacher_register_records').update(values).eq('id',id).eq('teacher_context_id',context.id)
+  : await supabase.from('teacher_register_records').insert(values);
  if(error)go(section,'save');
  revalidatePath('/journal/'+section);revalidatePath('/journal');redirect('/journal/'+section+'?saved=1');
 }
