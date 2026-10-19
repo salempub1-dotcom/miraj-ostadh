@@ -1,0 +1,69 @@
+
+/* Integrated journal dashboard */
+.register-home{max-width:1120px;margin:0 auto;font-family:'Tajawal','Cairo',system-ui,sans-serif;color:var(--text)}
+.register-home *{min-width:0;box-sizing:border-box}
+.register-home-hero{display:flex;align-items:center;justify-content:space-between;gap:20px;background:linear-gradient(120deg,var(--surface),var(--brand-soft));border:1px solid var(--border);border-radius:22px;padding:23px 27px}
+.register-eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:800;color:var(--brand-dark)}
+.register-home-hero h1{font-size:34px;font-weight:800;margin:3px 0;line-height:1.5}
+.register-home-hero p{font-size:15px;color:var(--muted);margin:2px 0 12px}
+.register-identity{display:flex;gap:10px;flex-wrap:wrap;font-size:13px;font-weight:700}
+.register-identity span{display:inline-flex;align-items:center;gap:6px;padding:5px 9px;border:1px solid var(--border);background:var(--surface);border-radius:9px}
+.register-hero-mark{color:var(--brand-dark);background:var(--surface);padding:20px;border-radius:22px}
+.register-tabs{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0;align-items:center}
+.register-tabs>a{display:inline-flex;align-items:center;gap:6px;padding:10px 11px;border:1px solid var(--border);border-radius:10px;background:var(--surface);color:var(--text);font-size:13px;font-weight:800}
+.register-tabs>a.selected{background:#173967;color:#fff;border-color:#173967;box-shadow:0 3px 0 #0e2548}
+.register-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:12px 0 24px}
+.register-summary>div{display:grid;gap:1px;padding:15px;text-align:center;border:1px solid var(--border);border-radius:13px;background:var(--surface)}
+.register-summary strong{font-size:27px;font-weight:800;color:var(--brand-dark)}
+.register-summary span{font-size:13px;color:var(--muted)}
+.register-home-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:13px}
+.register-home-heading h2{font-size:23px;margin:0;font-weight:800}
+.register-home-heading span{font-size:13px;color:var(--muted)}
+.register-home-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.register-card{--card-accent:#2b63aa;position:relative;display:grid;grid-template-columns:54px minmax(0,1fr) 22px;align-items:center;gap:13px;border:1px solid color-mix(in srgb,var(--card-accent) 35%,var(--border));border-inline-start:5px solid var(--card-accent);border-bottom:3px solid color-mix(in srgb,var(--card-accent) 35%,var(--border));border-radius:15px;padding:17px;background:color-mix(in srgb,var(--card-accent) 8%,var(--surface));color:var(--text);text-decoration:none;box-shadow:0 5px 14px rgba(10,27,48,.06)}
+.register-card-1{--card-accent:#087f7a}.register-card-2{--card-accent:#a36e23}.register-card-3{--card-accent:#7751aa}.register-card-4{--card-accent:#ab5185}
+.register-card-icon{display:grid;place-items:center;height:48px;width:48px;border-radius:14px;background:color-mix(in srgb,var(--card-accent) 16%,var(--surface));color:var(--card-accent)}
+.register-card h3{font-size:18px;font-weight:800;margin:0 0 4px}.register-card p{margin:0;color:var(--muted);font-size:13px;line-height:1.55}
+.register-card-arrow{color:var(--card-accent)}
+.register-card:hover{border-color:var(--card-accent);box-shadow:0 8px 17px rgba(10,27,48,.12)}
+.register-home-footer{display:flex;gap:10px;align-items:center;margin:22px 0;padding:14px;border:1px solid var(--border);border-radius:12px;background:var(--surface)}
+.register-home-footer p{margin:0;flex:1;color:var(--muted);font-size:13px}
+.register-home-footer a{font-weight:800;color:var(--brand-dark);white-space:nowrap}
+.register-section-head{background:linear-gradient(120deg,var(--surface),var(--brand-soft));border:1px solid var(--border);padding:19px 23px;border-radius:19px}
+.register-section-head h1{font-size:28px;font-weight:800;margin:0 0 5px}
+.register-section-head p{margin:0;color:var(--muted);line-height:1.7;font-size:14px}
+.register-panel{background:var(--surface);border:1px solid var(--border);border-radius:15px;padding:19px;margin:14px 0}
+.register-panel h2{font-size:21px;margin:0 0 15px;font-weight:800}
+.register-form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;align-items:end}
+.register-form label{display:grid;gap:6px;font-size:14px;font-weight:800}
+.register-form label.wide{grid-column:1/-1}
+.register-form input,.register-form select,.register-form textarea{width:100%;padding:10px;border-radius:9px;border:1px solid var(--border);background:var(--surface);color:var(--text);font:inherit;font-weight:500}
+.register-form textarea{resize:vertical}
+.register-submit{font:inherit;font-weight:800;background:#173967;color:#fff;border:0;border-radius:10px;padding:11px 15px;justify-self:start}
+.register-danger{font:inherit;color:#a42c2c;border:1px solid #d7a8a8;border-radius:8px;padding:7px 12px;background:transparent;font-size:12px;font-weight:800}
+.register-title-row{display:flex;align-items:center;justify-content:space-between}
+.register-title-row strong{color:var(--muted);font-size:14px}
+.register-empty{padding:25px;text-align:center;border:1px dashed var(--border);border-radius:11px;color:var(--muted);font-size:14px}
+.register-student-list,.register-records{display:grid;gap:8px}
+.register-student,.register-record{border:1px solid var(--border);background:var(--surface-soft);border-radius:11px;padding:13px}
+.register-student summary{display:flex;align-items:center;gap:13px;cursor:pointer;list-style:none}
+.register-student summary b{background:#173967;color:#fff;border-radius:8px;padding:6px 8px;font-size:13px}
+.register-student summary strong{flex:1}.register-student summary>span{color:var(--muted);font-size:12px}
+.register-student .register-form{margin:15px 0}
+.register-record{display:flex;justify-content:space-between;align-items:start;gap:10px}
+.register-record h3{margin:4px 0;font-size:17px}.register-record small{color:var(--muted);font-size:12px}.register-record p{font-size:13px;color:var(--muted);margin:4px 0;white-space:pre-wrap}
+.register-reference-note{padding:12px 14px;border-inline-start:4px solid #a36e23;background:var(--surface);border-radius:10px;color:var(--muted);font-size:13px}
+.register-home a:focus-visible,.register-home button:focus-visible,.register-home input:focus-visible{outline:3px solid var(--brand);outline-offset:2px}
+@media(max-width:720px){
+ .register-home-hero{padding:16px}.register-hero-mark{display:none}
+ .register-home-hero h1{font-size:28px}
+ .register-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+ .register-tabs>a{padding:9px 6px;justify-content:center;font-size:11px;gap:5px}
+ .register-tabs>a svg{width:15px}
+ .register-home-grid{grid-template-columns:1fr}
+ .register-card{grid-template-columns:43px minmax(0,1fr) 17px;padding:12px;gap:10px}
+ .register-card-icon{width:40px;height:40px}.register-card h3{font-size:16px}
+ .register-summary>div{padding:10px 5px}.register-summary strong{font-size:22px}.register-summary span{font-size:11px}
+ .register-home-heading span{display:none}.register-home-footer{align-items:start;flex-wrap:wrap}
+ .register-form{grid-template-columns:1fr}.register-form label.wide{grid-column:auto}.register-submit{width:100%;justify-self:stretch}
+}
