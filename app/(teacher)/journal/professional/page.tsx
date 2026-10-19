@@ -22,7 +22,13 @@ export default async function ProfessionalLogPage({searchParams}:{searchParams:P
  </form></section>
  <section className="register-panel"><h2>السجل المهني ({records?.length??0})</h2>
  {!records?.length?<p className="register-empty">لم تضف أي زيارة أو تربص بعد.</p>:<div className="register-records">{records.map(r=>
- <article className="register-record" key={r.id}><div><small>{names[r.record_type]} · {r.event_date??'دون تاريخ'}</small><h3>{r.title}</h3><p>{r.place?('المكان: '+r.place):''}</p><p>{r.notes}</p></div>
+ <article className="register-record" key={r.id}><div><small>{names[r.record_type]} · {r.event_date??'دون تاريخ'}</small><h3>{r.title}</h3><p>{r.place?('المكان: '+r.place):''}</p><p>{r.notes}</p><details className="register-record-editor"><summary>تعديل السجل</summary><form action={saveRegisterRecord} className="register-form">
+   <input type="hidden" name="id" value={r.id}/><input type="hidden" name="record_type" value={r.record_type}/>
+   <label>التاريخ<input type="date" name="event_date" defaultValue={r.event_date??''}/></label>
+   <label>المكان<input name="place" maxLength={180} defaultValue={r.place??''}/></label>
+   <label className="wide">الموضوع<input name="title" required maxLength={180} defaultValue={r.title}/></label>
+   <label className="wide">ملاحظات<textarea name="notes" maxLength={2000} rows={2} defaultValue={r.notes??''}/></label>
+   <button type="submit" className="register-submit">حفظ التعديل</button></form></details></div>
  <form action={removeRegisterRecord}><input type="hidden" name="id" value={r.id}/><input type="hidden" name="section" value="professional"/><button className="register-danger" type="submit">حذف</button></form>
  </article>)}</div>}</section></main>;
 }
