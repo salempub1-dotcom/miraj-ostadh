@@ -19,7 +19,12 @@ export default async function CalendarPage({searchParams}:{searchParams:Promise<
  <button className="register-submit" type="submit">إضافة إلى الرزنامة</button></form></section>
  <section className="register-panel"><h2>المناسبات المسجلة ({records?.length??0})</h2>
  {!records?.length?<p className="register-empty">لا توجد مناسبات محفوظة حتى الآن.</p>:<div className="register-records">{records.map(r=>
-  <article className="register-record" key={r.id}><div><small>{r.record_type==='holiday'?'عطلة مدرسية':'مناسبة دينية أو وطنية'} · {r.event_date??'دون تاريخ'}</small><h3>{r.title}</h3><p>{r.notes}</p></div>
+  <article className="register-record" key={r.id}><div><small>{r.record_type==='holiday'?'عطلة مدرسية':'مناسبة دينية أو وطنية'} · {r.event_date??'دون تاريخ'}</small><h3>{r.title}</h3><p>{r.notes}</p><details className="register-record-editor"><summary>تعديل الموعد</summary><form action={saveRegisterRecord} className="register-form">
+   <input type="hidden" name="id" value={r.id}/><input type="hidden" name="record_type" value={r.record_type}/>
+   <label>التاريخ<input type="date" name="event_date" defaultValue={r.event_date??''}/></label>
+   <label className="wide">العنوان<input name="title" required maxLength={180} defaultValue={r.title}/></label>
+   <label className="wide">ملاحظات<textarea name="notes" maxLength={2000} rows={2} defaultValue={r.notes??''}/></label>
+   <button type="submit" className="register-submit">حفظ التعديل</button></form></details></div>
   <form action={removeRegisterRecord}><input type="hidden" name="id" value={r.id}/><input type="hidden" name="section" value="calendar"/><button className="register-danger" type="submit">حذف</button></form>
   </article>)}</div>}</section></main>;
 }
