@@ -39,7 +39,7 @@ export default async function TeacherProfessionalProfile({
         <h1>بطاقتي الشخصية والمهنية</h1>
         <p>مستوحاة من أقسام الدفتر اليومي الورقي. يمكنك تحديثها وطباعتها متى شئت.</p>
       </div>
-      <Link href="/journal" className="miraj-professional-back"><ArrowRight size={17}/> العودة إلى الدفتر اليومي</Link>
+      <Link href="/journal" className="miraj-professional-back"><ArrowRight size={17}/> العودة إلى دفتري</Link>
     </header>
     {params.saved==='1'&&<p className="miraj-journal-message" role="status">حُفظت بطاقتك المهنية بنجاح.</p>}
     {errorText&&<p className="miraj-journal-message error" role="alert">{errorText}</p>}
