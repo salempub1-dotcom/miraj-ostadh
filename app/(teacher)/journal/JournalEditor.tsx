@@ -51,13 +51,14 @@ export default function JournalEditor({
         <p>تُجلب الحصص من جدول مستواك تلقائيًا، ويمكنك كتابة عنوان كل درس وأنشطته.</p>
       </div>
       <div className="miraj-journal-heading-actions">
+        <Link href="/journal">دفتري</Link>
         <Link href="/journal/profile">بطاقتي المهنية</Link>
         <Link href="/schedule">جدولي</Link>
         <button type="button" onClick={() => window.print()}><Printer size={17}/> طباعة A4</button>
       </div>
     </header>
     <div className="miraj-journal-switch">
-      <form action="/journal" method="get">
+      <form action="/journal/day" method="get">
         <label htmlFor="journal-date"><CalendarDays size={17} /> تاريخ الدفتر</label>
         <input id="journal-date" name="date" type="date" required defaultValue={date}/>
         <button type="submit">عرض اليوم</button>
