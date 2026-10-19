@@ -13,7 +13,7 @@ export async function saveDailyJournalAction(formData: FormData) {
   const teacherNote = String(formData.get('teacher_note') ?? '');
   const raw = String(formData.get('entries') ?? '');
   const failure = (msg: string): never =>
-    redirect('/journal?date=' + encodeURIComponent(date) + '&error=' + encodeURIComponent(msg));
+    redirect('/journal/day?date=' + encodeURIComponent(date) + '&error=' + encodeURIComponent(msg));
 
   if (!dayPattern.test(date) || !Number.isFinite(Date.parse(date + 'T12:00:00Z'))) {
     failure('التاريخ غير صالح.');
@@ -44,6 +44,7 @@ export async function saveDailyJournalAction(formData: FormData) {
     p_entries: entries,
   });
   if (error) failure('تعذر حفظ الدفتر. لم تُغيّر أي بيانات؛ حاول مجددًا.');
+  revalidatePath('/journal/day');
   revalidatePath('/journal');
-  redirect('/journal?date=' + encodeURIComponent(date) + '&saved=1');
+  redirect('/journal/day?date=' + encodeURIComponent(date) + '&saved=1');
 }
