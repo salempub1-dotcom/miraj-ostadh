@@ -1,6 +1,7 @@
 import { requireCompletedTeacherContext } from '@/lib/auth';
 import { getCurriculumContext } from '@/lib/v1';
 import JournalEditor, { type JournalEntry } from '../JournalEditor';
+import { JournalSectionNav } from '../JournalSectionNav';
 
 const weekdayNumbers: Record<string, number> = { Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6 };
 const validDate = /^\d{4}-\d{2}-\d{2}$/;
@@ -61,7 +62,7 @@ export default async function JournalPage({ searchParams }: {
       activities:'',
     }));
 
-  return <JournalEditor key={context.id+'-'+date}
+  return <><JournalSectionNav active="/journal/day"/><JournalEditor key={context.id+'-'+date}
     date={date}
     gradeName={curriculum?.grade.name_ar??'التعليم الابتدائي'}
     teacherName={professional?.teacher_name??profile?.display_name??profile?.full_name??'الأستاذ'}
@@ -71,5 +72,5 @@ export default async function JournalPage({ searchParams }: {
     initialNote={journal?.teacher_note??''}
     saved={params.saved==='1'}
     error={params.error?.slice(0,200)??null}
-  />;
+  /></>;
 }
