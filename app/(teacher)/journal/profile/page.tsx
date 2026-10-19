@@ -3,6 +3,7 @@ import { ArrowRight, BriefcaseBusiness, Save } from 'lucide-react';
 import { requireCompletedTeacherContext } from '@/lib/auth';
 import { getCurriculumContext } from '@/lib/v1';
 import { saveProfessionalCard } from './actions';
+import { JournalSectionNav } from '../JournalSectionNav';
 
 const textFields = [
   { key:'teacher_name',label:'اسم الأستاذ ولقبه',max:120 },
@@ -32,7 +33,7 @@ export default async function TeacherProfessionalProfile({
   const errorText=params.error==='date'?'يرجى إدخال تاريخ صحيح.':
     params.error==='length'?'النص طويل جدًا في أحد الحقول.':
     params.error==='save'?'تعذر حفظ البطاقة. لم تُغيّر بياناتك.':null;
-  return <section className="miraj-journal miraj-professional">
+  return <><JournalSectionNav active="/journal/profile"/><section className="miraj-journal miraj-professional">
     <header className="miraj-journal-heading">
       <div>
         <span className="miraj-journal-eyebrow"><BriefcaseBusiness size={18}/> دفتر الأستاذ الرقمي</span>
@@ -76,5 +77,5 @@ export default async function TeacherProfessionalProfile({
       </div>
       <div className="miraj-professional-actions"><button type="submit" className="miraj-journal-save"><Save size={18}/> حفظ البطاقة المهنية</button></div>
     </form>
-  </section>;
+  </section></>;
 }
