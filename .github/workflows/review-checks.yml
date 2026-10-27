@@ -3,7 +3,7 @@ on:
   pull_request:
     branches: [main]
   push:
-    branches: [feature/first-grade-resources-dark-mode, feature/edit-teacher-grade-profile, feature/edit-first-grade-timetable, feature/timetable-visual-refresh, feature/schedule-release-qa, feature/daily-journal-workspace, feature/teacher-professional-card, feature/journal-integrated-home]
+    branches: [feature/first-grade-resources-dark-mode, feature/edit-teacher-grade-profile, feature/edit-first-grade-timetable, feature/timetable-visual-refresh, feature/schedule-release-qa, feature/daily-journal-workspace, feature/teacher-professional-card, feature/journal-integrated-home, feature/neon-migration-preflight]
 permissions:
   contents: read
 jobs:
