@@ -1,0 +1,20 @@
+-- Miraj Ostadh public triggers from source, trial only
+CREATE TRIGGER assessments_set_updated_at BEFORE UPDATE ON public.assessments FOR EACH ROW EXECUTE FUNCTION private.set_updated_at();
+CREATE TRIGGER curricula_set_updated_at BEFORE UPDATE ON public.curricula FOR EACH ROW EXECUTE FUNCTION private.set_updated_at();
+CREATE TRIGGER daily_journal_entries_set_updated_at BEFORE UPDATE ON public.daily_journal_entries FOR EACH ROW EXECUTE FUNCTION private.set_updated_at();
+CREATE TRIGGER daily_journals_set_updated_at BEFORE UPDATE ON public.daily_journals FOR EACH ROW EXECUTE FUNCTION private.set_updated_at();
+CREATE TRIGGER lesson_activities_set_updated_at BEFORE UPDATE ON public.lesson_activities FOR EACH ROW EXECUTE FUNCTION private.set_updated_at();
+CREATE TRIGGER lesson_plan_stages_set_updated_at BEFORE UPDATE ON public.lesson_plan_stages FOR EACH ROW EXECUTE FUNCTION private.set_updated_at();
+CREATE TRIGGER lesson_plans_set_updated_at BEFORE UPDATE ON public.lesson_plans FOR EACH ROW EXECUTE FUNCTION private.set_updated_at();
+CREATE TRIGGER lesson_texts_set_updated_at BEFORE UPDATE ON public.lesson_texts FOR EACH ROW EXECUTE FUNCTION private.set_updated_at();
+CREATE TRIGGER lessons_set_updated_at BEFORE UPDATE ON public.lessons FOR EACH ROW EXECUTE FUNCTION private.set_updated_at();
+CREATE TRIGGER profiles_set_updated_at BEFORE UPDATE ON public.profiles FOR EACH ROW EXECUTE FUNCTION private.set_updated_at();
+CREATE TRIGGER remediation_activities_set_updated_at BEFORE UPDATE ON public.remediation_activities FOR EACH ROW EXECUTE FUNCTION private.set_updated_at();
+CREATE TRIGGER resources_set_updated_at BEFORE UPDATE ON public.resources FOR EACH ROW EXECUTE FUNCTION private.set_updated_at();
+CREATE TRIGGER teacher_contexts_set_updated_at BEFORE UPDATE ON public.teacher_academic_contexts FOR EACH ROW EXECUTE FUNCTION private.set_updated_at();
+CREATE TRIGGER teacher_lesson_customizations_set_updated_at BEFORE UPDATE ON public.teacher_lesson_customizations FOR EACH ROW EXECUTE FUNCTION private.set_updated_at();
+CREATE TRIGGER teacher_lesson_progress_set_updated_at BEFORE UPDATE ON public.teacher_lesson_progress FOR EACH ROW EXECUTE FUNCTION private.set_updated_at();
+CREATE TRIGGER teacher_timetables_set_updated_at BEFORE UPDATE ON public.teacher_timetables FOR EACH ROW EXECUTE FUNCTION private.set_updated_at();
+CREATE TRIGGER timetable_slots_set_updated_at BEFORE UPDATE ON public.timetable_slots FOR EACH ROW EXECUTE FUNCTION private.set_updated_at();
+CREATE TRIGGER units_set_updated_at BEFORE UPDATE ON public.units FOR EACH ROW EXECUTE FUNCTION private.set_updated_at();
+CREATE TRIGGER weeks_set_updated_at BEFORE UPDATE ON public.weeks FOR EACH ROW EXECUTE FUNCTION private.set_updated_at();

@@ -1,10 +1,13 @@
 import { Mail, MapPin, School, UserRound } from 'lucide-react';
 import { requireCompletedTeacherContext } from '@/lib/auth';
-import { getCurriculumContext } from '@/lib/v1';
+import { getCurriculumContext, getPrimaryArabicCurricula } from '@/lib/v1';
+import { changeTeachingGradeAction } from './actions';
+import CurrentTimetableForm from './CurrentTimetableForm';
 
-export default async function AccountPage() {
+export default async function AccountPage({ searchParams }: { searchParams: Promise<{updated?:string;error?:string;timetable_saved?:string;timetable_error?:string}> }) {
+  const feedback = await searchParams;
   const { supabase, userId, context } = await requireCompletedTeacherContext();
-  const [{ data: profile }, { data: timetable }, curriculumContext] = await Promise.all([
+  const [{ data: profile }, { data: timetable }, curriculumContext, availableGrades] = await Promise.all([
     supabase
       .from('profiles')
       .select('full_name, display_name, email, province, school_name')
@@ -17,11 +20,19 @@ export default async function AccountPage() {
       .eq('is_active', true)
       .maybeSingle(),
     getCurriculumContext(supabase, context.curriculum_id),
+    getPrimaryArabicCurricula(supabase),
   ]);
 
   const { count } = timetable
     ? await supabase.from('timetable_slots').select('id', { count: 'exact', head: true }).eq('timetable_id', timetable.id)
     : { count: 0 };
+
+  const {data: currentSlots, error: slotsError} = timetable ? await supabase
+    .from('timetable_slots')
+    .select('day_of_week,start_time,end_time,note')
+    .eq('timetable_id',timetable.id)
+    .order('day_of_week')
+    .order('start_time') : {data:[],error:null};
 
   const gradeCode = curriculumContext?.grade.code ?? 'ابتدائي';
   const gradeName = curriculumContext?.grade.name_ar ?? 'التعليم الابتدائي';
@@ -47,6 +58,44 @@ export default async function AccountPage() {
         <div><School size={18} /><span><strong>المؤسسة</strong>{profile?.school_name || 'غير محددة'}</span></div>
         <div><span className="detail-count">{count ?? 0}</span><span><strong>جدول استعمال الزمن</strong>حصة أسبوعية مسجلة</span></div>
       </div>
+
+      <section className="card grade-profile-settings" id="change-grade">
+        <h2>تغيير المستوى الدراسي</h2>
+        <p>إذا أصبحت تدرّس سنة أخرى، اختر المستوى الجديد. سنحتفظ بتقدمك وجدولك ومكتبتك في المستوى السابق، ويمكنك العودة إليه لاحقًا.</p>
+        {feedback.updated === '1' ? <div className="form-alert" role="status">تم تغيير المستوى الدراسي بنجاح.</div> : null}
+        {feedback.error ? <div className="form-alert error" role="alert">{feedback.error}</div> : null}
+        <form action={changeTeachingGradeAction} className="form-stack">
+          <label>
+            <span>السنة التي تدرسها حاليًا</span>
+            <select name="grade_code" defaultValue={gradeCode} required>
+              {(availableGrades?.options ?? []).map(({grade}) => (
+                <option key={grade.code} value={grade.code}>{grade.name_ar}</option>
+              ))}
+            </select>
+          </label>
+          <label>
+            <span>اسم القسم (اختياري)</span>
+            <input name="class_name" type="text" maxLength={100} defaultValue={context.class_name ?? ''} placeholder="مثال: الفوج 02" />
+          </label>
+          <div className="info-strip">السنة الدراسية: <strong>{academicYear}</strong> — المادة: <strong>{subjectName}</strong></div>
+          <button className="primary-btn" type="submit" disabled={!availableGrades?.options.length}>حفظ المستوى الجديد</button>
+        </form>
+      </section>
+
+      <section className="card grade-profile-settings" id="my-timetable">
+        <h2>جدول استعمال الزمن — {gradeName}</h2>
+        {feedback.timetable_saved === '1' ? <div role="status" className="form-alert">تم حفظ الجدول بنجاح. انتقل إلى «يومي» لعرض حصص اليوم.</div> : null}
+        {feedback.timetable_error ? <div role="alert" className="form-alert error">{feedback.timetable_error}</div> : null}
+        {slotsError ? <div role="alert" className="form-alert error">تعذر قراءة الجدول. أعد تحميل الصفحة.</div> :
+          <CurrentTimetableForm key={context.id} gradeName={gradeName} initialSlots={(currentSlots ?? []).map(slot=>({
+            day:slot.day_of_week,start:slot.start_time.slice(0,5),end:slot.end_time.slice(0,5),note:slot.note??''
+          }))} />}
+        <div className="miraj-timetable-shortcuts">
+          <a className="text-link" href="/schedule">عرض التوقيت اليومي والأسبوعي</a>
+          <a className="text-link" href="/today">معاينة حصص اليوم</a>
+          <a className="text-link" href="/planning">عرض التخطيط الدراسي</a>
+        </div>
+      </section>
 
       <form action="/auth/signout" method="post" className="card">
         <button className="secondary-btn wide" type="submit">تسجيل الخروج</button>
